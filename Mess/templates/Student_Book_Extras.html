@@ -1,0 +1,64 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Book Extras</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th
+            colspan="10"
+            class="main_head"
+          >
+            Extras Menu and Booking
+          </th>
+        </tr>
+        <tr>
+          <th>S. No.</th>
+          <th>Item</th>
+          <th>Meal Date</th>
+          <th>Meal</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Orders Left</th>
+          <th>Rate</th>
+          <th>Quantity</th>
+          <th>Status</th>
+        </tr>
+        {%for item in extra_items%}
+        <tr>
+          <form method="post" action="Student_Book_Extras">
+            {% csrf_token %}
+            <td>{{ forloop.counter }}</td>
+            <td>{{item.Item_Name}}</td>
+            <td>{{item.Meal_Date}}</td>
+            <td>{{item.Meal}}</td>
+            <td>{{item.Start_Time}}</td>
+            <td>{{item.End_Time}}</td>
+            <td>{{item.Available_Orders}}</td>
+            <td>{{item.Price}}</td>
+            <td><input style="max-width: 3.2em;" type = "number" min = "1" value = "1" name = "quantity" required></td>
+            <td><button type="submit"><input type="hidden" name = "identity" value = "{{item.id}}" required>Book</button></td>
+          </form>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

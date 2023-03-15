@@ -1,0 +1,60 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>New Orders</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+         <th colspan = "9" class="main_head">Incoming Orders</th>
+         </tr>
+         <tr>
+          <th>S. No.</th>
+           <th>Order Time</th>
+           <th>Name</th>
+           <th>Item Name</th>
+           <th>Quantity</th>
+           <th>Price</th>
+           <th>Amount</th>
+           <th>Accept</th>
+           <th>Reject</th>
+         </tr>
+          {% for item in pending_orders reversed%}
+         <form method="POST" action="Owner_New_Order">
+           {% csrf_token %}
+         <tr>
+          <td>{{ forloop.counter }}</td>
+           <td>{{item.Order_Date_Time}}</td>
+           <td>{{item.Name}}</td>
+           <td>{{item.Item_Name}}</td>
+           <td>{{item.Quantity}}</td>
+           <td>{{item.Price}}</td>
+           <td>{{item.Amount}}</td>
+           <td><button type = "submit" name = "accepted" value = "{{item.id}}">Accept</button></td>
+           <td><button type = "submit" name = "rejected" value = "{{item.id}}">Reject</button></td>
+         </tr>
+         </form>
+         {% endfor %}
+       </table>
+     </div>
+   </body>
+ </html>
+ 

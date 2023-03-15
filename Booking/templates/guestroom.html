@@ -1,0 +1,123 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Student Guestroom</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+      .btn-sm{
+        padding=10% 0;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Guestroom Booking</th></tr>
+      <tr>
+        <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Check in Date</th>
+        <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Price per day</th>
+        <th style="text-align: center;">Availability</th>
+      </tr>
+      <tr>
+        <form method="post" action='guestroom'>
+          {% csrf_token %}
+        <td>1
+          <input type='hidden' name='room' value='1'></input>
+        </td>
+
+        <td><input type="date"
+          id="test" name="checkin_date"></td>
+
+        <td><input type="date"
+          id="test" name="checkout_date"></input></td>
+        <td>Rs.900
+          <input type="hidden" name="price" value="Rs.900"></input>
+        </td>
+        <td><input type="submit" name="submit" value="Book" ></input></td>
+        </form>
+      </tr>
+
+      <tr>
+        <form method="post" action='guestroom'>
+          {% csrf_token %}
+        <td>2
+          <input type='hidden' name='room' value='2'></input>
+        </td>
+
+        <td><input type="date"
+          id="test" name="checkin_date"></td>
+
+        <td><input type="date"
+          id="test" name="checkout_date"></input></td>
+        <td>Rs.1200
+          <input type="hidden" name="price" value="Rs.1200"></input>
+        </td>
+        <td><input type="submit" name="submit" value="Book" ></input></td>
+        </form>
+      </tr>
+
+      <tr>
+        <form method="post" action='guestroom'>
+          {% csrf_token %}
+        <td>3
+          <input type='hidden' name='room' value='3'></input>
+        </td>
+
+        <td><input type="date"
+          id="test" name="checkin_date"></td>
+
+        <td><input type="date"
+          id="test" name="checkout_date"></input></td>
+        <td>Rs.500
+          <input type="hidden" name="price" value="Rs.500"></input>
+        </td>
+        <td><input type="submit" name="submit" value="Book" ></input></td>
+        </form>
+      </tr>
+
+      <tr>
+        <form method="post" action='guestroom'>
+          {% csrf_token %}
+        <td>4
+          <input type='hidden' name='room' value='4'></input>
+        </td>
+
+        <td><input type="date"
+          id="test" name="checkin_date"></td>
+
+        <td><input type="date"
+          id="test" name="checkout_date"></input></td>
+        <td>Rs.1500
+          <input type="hidden" name="price" value="Rs.1500"></input>
+        </td>
+        <td>
+          <input type="submit" name="submit" value="Book" ></input></td>
+        </form>
+      </tr>
+      
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

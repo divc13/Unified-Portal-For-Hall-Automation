@@ -1,0 +1,56 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Order History</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th colspan = "7" class="main_head">Order History</th>
+        </tr>
+        <tr>
+          <th>S. No.</th>
+          <th>Date</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+        {% for item in ordering reversed%}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{item.Order_Date_Time.date}}</td>
+          <td>{{item.Item_Name}}</td>
+          <td>{{item.Quantity}}</td>
+          <td>{{item.Price}}</td>
+          <td>{{item.Amount}}</td>
+          {% if item.Accepted_Status == True%}
+          <td>Sucessful</td>
+          {% else %}
+          <td>Failed</td>
+          {% endif %}
+        </tr>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

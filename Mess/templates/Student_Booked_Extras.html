@@ -1,0 +1,54 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Booked Extras</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th colspan = "6" class="main_head">Extras Menu and Booking</th>
+        </tr>
+        <tr>
+          <th>S. No.</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Meal</th>
+          <th>Order Received?</th>
+        </tr>
+        {% for item in pending_orders %}
+        <form method="POST" action="Student_Booked_Extras">
+          {% csrf_token %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{item.Item_Name}}</td>
+          <td>{{item.Quantity}}</td>
+          <td>{{item.Meal_Date}}</td>
+          <td>{{item.Meal}}</td>
+          <td><button type = "submit" name = "order_validation" value = "{{item.id}}">Ok</button></td>
+        </tr>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,79 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Pending Order</title>
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th colspan="9" class="main_head">Pending Orders</th>
+        </tr>
+        <tr>
+          <th>S. No.</th>
+          <th>Name</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Amount</th>
+          <th>Served?</th>
+          <th>Paid?</th>
+          <th>Remove</th>
+        </tr>
+        {% for item in pending_order %}
+        <form method="POST" action="Owner_Pending_Order">
+          {% csrf_token %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.Item_Name}}</td>
+            <td>{{item.Quantity}}</td>
+            <td>{{item.Price}}</td>
+            <td>{{item.Amount}}</td>
+            <td>
+              {% if item.Served_Status == 0 %}
+              <button type="submit" name="served" value="{{item.id}}">
+                Served
+              </button>
+              {% else %}
+              Served
+              {% endif %}
+            </td>
+            <td>
+              {% if item.Payment_Status == 0 %}
+              <button type="submit" name="paid" value="{{item.id}}">
+                Payment Done
+              </button>
+              {% else %}
+              Paid
+              {% endif %}
+            </td>
+            <td>
+              <button type="submit" name="remove" value="{{item.id}}">
+                Remove Order
+              </button>
+            </td>
+          </tr>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

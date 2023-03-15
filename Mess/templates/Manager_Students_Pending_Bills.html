@@ -1,0 +1,67 @@
+{%include "staff_base.html"%}
+{%load static%}
+<html lang="en">
+<head>
+
+  <title>Student Pending Bill</title>
+
+  <link rel="stylesheet" href="{%static 'styles.css'%}">
+  
+  <style>
+    body {background: #E5E5E5; }
+  </style>
+
+</head>
+
+<body>
+  <div class="main_div">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="{{message.tags}}">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <form method="POST" action ="Students_Pending_Bills">
+          {% csrf_token %}
+        <tr>
+        <th colspan = "8" class="main_head">Students' Pending Bills</th>
+        </tr>
+        </form>
+
+        <tr>
+          <th>S. No.</th>
+          <th>Username</th>
+          <th>Month</th>
+          <th>Basic Amount</th>
+          <th>Extra Messing</th>
+          <th>Rebate Days</th>
+          <th>Dues</th>
+          <th>Clear Dues</th>
+        </tr>
+
+        {% for bill in bills %}
+        <tr>
+          <form method="POST" action="Manager_Students_Bills">
+            {%csrf_token%}
+          <td>{{ forloop.counter }}</td>
+          <td>{{bill.User_Name}}</td>
+          <td>{{bill.Month_Name}}</td>
+          <td>{{bill.Basic_Amount}}</td>
+          <td>{{bill.Extras_Amount}}</td>
+          <td>{{bill.rebate_days}}</td>
+          <td>{{bill.Mess_Bill}}</td>
+          <td><button type="submit" name = "clear_dues" value = "{{bill.id}}">Clear Dues</button></td>
+        </form>
+        </tr>
+        
+        {% endfor %}
+      </table>
+    </div>
+    
+
+    </body>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Feedback</title>
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      <table cellspacing="0" cellpadding="5em">
+        <tr><th colspan = "6" class="main_head">Ratings and Feedback</th></tr>
+        <tr>
+          <th>S.No.</th>
+          <th>Day</th>
+          <th>Meal</th>
+          <th>Items</th>
+          <th>Rating</th>
+        </tr>
+        {% for items in regular_menu %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{items.Day}}</td>
+          <td>{{items.Meal}}</td>
+          <td>{{items.Items}}</td>
+          <td>☆ {{items.Rating}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

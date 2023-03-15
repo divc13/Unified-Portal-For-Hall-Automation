@@ -1,0 +1,169 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Extra Items</title>
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <form method="POST" action="Manager_Extra_Items">
+          {% csrf_token %} {% if status_check%}
+          <tr>
+            <th colspan="7" class="main_head">Modify/Update Extra Items</th>
+            <th class="main_head">
+              <button type="submit" name="submit">Submit</button>
+            </th>
+            <th class="main_head">
+              <button type="submit" name="add_hidden_item">
+                <input type="hidden" name="editable_mode" />Add New Item
+              </button>
+            </th>
+          </tr>
+          <tr>
+            <th>S. No.</th>
+            <th>Meal Date</th>
+            <th>Meal</th>
+            <th>Item</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Delete</th>
+          </tr>
+
+          {% for items in extra_item %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+              <input
+                required
+                type="date"
+                name="meal_date{{items.id}}"
+                value="{{items.Meal_Date|date:'Y-m-d'}}"
+              />
+            </td>
+            <td>
+              <select
+                name="meal{{items.id}}"
+                value="{{items.Meal}}"
+                style="width: 105%"
+              >
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+              </select>
+            </td>
+            <td>
+              <input
+                required
+                type="text"
+                name="item{{items.id}}"
+                value="{{items.Item_Name}}"
+                placeholder="Enter New Item"
+                style="text-align: center"
+                autofocus
+              />
+            </td>
+            <td>
+              <input
+                required
+                type="number"
+                name="capacity{{items.id}}"
+                value="{{items.Capacity}}"
+                min="1"
+                style="width: 35%; text-align: center"
+              />
+            </td>
+            <td>
+              <input
+                required
+                type="number"
+                name="price{{items.id}}"
+                value="{{items.Price}}"
+                min="1"
+                style="width: 35%; text-align: center"
+              />
+            </td>
+            
+            <td>
+              <input
+                required
+                type="datetime-local"
+                name="start_time{{items.id}}"
+                value="{{items.Start_Time|date:'Y-m-d H:i'}}"
+              />
+            </td>
+            <td>
+              <input
+                required
+                type="datetime-local"
+                name="end_time{{items.id}}"
+                value="{{items.End_Time|date:'Y-m-d H:i'}}"
+              />
+            </td>
+            <td>
+              <button type="submit" name="delete" value="{{items.id}}">
+                <input type="hidden" name="editable_mode" />Delete
+              </button>
+            </td>
+            
+          </tr>
+          {% endfor %} {% else %}
+          <tr>
+            <th colspan="7" class="main_head">Modify/Update Extra Items</th>
+            <th class="main_head">
+              <button type="submit" name="edit">Edit</button>
+            </th>
+            <th class="main_head">
+              <button type="submit" name="add_hidden_item">Add New Item</button>
+            </th>
+          </tr>
+          <tr>
+            <th>S. No.</th>
+            <th>Meal Date</th>
+            <th>Meal</th>
+            <th>Item</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Delete</th>
+          </tr>
+          {% for items in extra_item %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{items.Meal_Date}}</td>
+            <td>{{items.Meal}}</td>
+            <td>{{items.Item_Name}}</td>
+            <td>{{items.Capacity}}</td>
+            <td>{{items.Price}}</td>
+            <td>{{items.Start_Time}}</td>
+            <td>{{items.End_Time}}</td>
+            <td>
+              <button type="submit" name="delete" value="{{items.id}}">
+                Delete
+              </button>
+            </td>
+          </tr>
+          {% endfor %} {% endif %}
+        </form>
+      </table>
+    </div>
+  </body>
+</html>

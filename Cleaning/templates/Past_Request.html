@@ -1,0 +1,47 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Past Requests</title>
+    
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Request History</th></tr>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Place</th>
+      </tr>
+      {% for i in lodging reversed%}
+      {% if i.Done == True %}
+      <tr>
+        <form method="post" action="Past_Request">
+          {% csrf_token %}
+        <td>{{i.Cleaning_DateTime.date}}</td>
+        <td>{{i.Cleaning_DateTime.time}}</td>
+        <td>{{i.Place}}</td>
+      </form>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+      </div>
+    </div>
+  </body> 
+</html>

@@ -1,0 +1,70 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Place Orders</title>
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th colspan="4" class="main_head">Place Your Orders Here</th>
+        </tr>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Add to Cart</th>
+        </tr>
+        {% for n in menu %}
+        <form
+          method="post"
+          action="{% url 'Student_Place_Order'%}"
+          role="form"
+        >
+        {% csrf_token %}
+        <tr>
+          <td>{{n.Item_Name}}</td>
+          <td>{{n.Price}}</td>
+            <td>
+              <input
+              required
+                type="number"
+                value="1"
+                name="quantity"
+                style="width: 15%"
+                min="1"
+              />
+            </td>
+            <td>
+              <button
+                type="submit"
+                name="submit"
+                value="{{n.id}}"
+              >
+                Add Item to Cart
+              </button>
+            </td>
+          </tr>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

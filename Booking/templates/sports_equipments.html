@@ -1,0 +1,237 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Student Sports Equipment</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Sports Equipments</th></tr>
+      <tr>
+        <th style="text-align: center;">Equipment</th>
+        <th style="text-align: center;">Available Quantity</th>
+        <th style="text-align: center;">Book Status</th>
+      </tr>
+
+      <!--Cricket Bat-->
+      <tr>
+        <form method='post' action='sports_equipments'>
+          {% csrf_token %}
+        <td>Cricket Bat
+          <input type='hidden' name='equipment_selected' value='CB'></input>
+        </td>
+          {% if cricket_item.quantity > 0 %}
+          <td>{{cricket_item.quantity}}</td>
+          <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+      </form>
+      </tr>
+
+      <!--Basketball-->
+      <tr>
+        <form method='post' action='sports_equipments'>
+        {% csrf_token %}
+        <td>Basketball
+            <input type='hidden' name='equipment_selected' value='BB'></input>
+        </td>
+          {% if basketball_item.quantity > 0 %}
+          <td>{{basketball_item.quantity}}</td>
+          <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+        </form>
+      </tr>
+
+      <!--Hockey-->
+      <tr>
+        <form method='post' action='sports_equipments'>
+        {% csrf_token %}
+        <td>Hockey
+            <input type='hidden' name='equipment_selected' value='HK'></input>
+        </td>
+          {% if hockey_item.quantity > 0 %}
+          <td>{{hockey_item.quantity}}</td>
+          <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+        </form>
+      </tr>
+
+      <!--Table Tennis-->
+      <tr>
+        <form method='post' action='sports_equipments'>
+        {% csrf_token %}
+        <td>Table Tennis
+            <input type='hidden' name='equipment_selected' value='TT'></input>
+        </td>
+          {% if table_tennis_item.quantity > 0 %}
+          <td>{{table_tennis_item.quantity}}</td>
+          <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+    </form>
+      </tr>
+
+      <!--Football-->
+      <tr>
+        <form method='post' action='sports_equipments'>
+          {% csrf_token %}
+        <td>Football
+          <input type='hidden' name='equipment_selected' value='FB'></input>
+        </td> 
+          {% if football_item.quantity > 0 %}
+            <td>{{football_item.quantity}}</td>
+            <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+    </form>
+  </tr>
+  <tr>
+    <form method='post' action='sports_equipments'>
+      {% csrf_token %}
+    <td>Badminton
+      <input type='hidden' name='equipment_selected' value='BM'></input>
+    </td> 
+      {% if badminton_item.quantity > 0 %}
+        <td>{{badminton_item.quantity}}</td>
+        <td><input type='submit' name='submit'  value="Request Booking"></input></td>
+          {% else %}
+          <td><font color='grey'><i>Not available</i></font></td>
+          <td><input type='submit' name='submit'  value="Item is booked"></input></td>
+          {% endif %}
+</form>
+  </tr>
+
+    </table>
+  
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "3" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Pending Equipment Requests</th></tr>
+      <tr>
+        <th style="text-align: center;">Equipment Requested</th>
+        <th style="text-align: center;">Book Status</th>
+      </tr>
+
+      <!--Fetching pending status-->
+      {% for item in request_querry %}
+      <tr>
+      <td> {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}</td>
+      <td><font color='grey'><i>Pending...</i></font></td>
+      </tr>
+      {% endfor %}
+    </table>
+   
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "3" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Items you issued</th></tr>
+      <tr>
+        <th style="text-align: center;">Equipment Requested</th>
+        <th style="text-align: center;">Initiate Return</th>
+      </tr>
+
+      <!--Fetching pending status-->
+      {% for item in validated_request_querry %}
+      <form method='post' action='sports_equipments'>
+        {% csrf_token %}
+      <tr>
+      <td> {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+            <input type='hidden' name='return_equipment' value='CB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+            <input type='hidden' name='return_equipment' value='BB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+            <input type='hidden' name='return_equipment' value='TT'></input>
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+            <input type='hidden' name='return_equipment' value='FB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+            <input type='hidden' name='return_equipment' value='HK'></input>
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+            <input type='hidden' name='return_equipment' value='BM'></input>
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}</td>
+      <td><input type='submit' name='submit' value="Return Item"></input></td> <!--"Return item"-->
+      </tr>
+    </form>
+      {% endfor %}
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

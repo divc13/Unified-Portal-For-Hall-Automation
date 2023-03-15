@@ -1,0 +1,68 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Secy Request Validation</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Sports Equipment Requests</th></tr>
+      <tr>
+        <th style="text-align: center;">Name</th>
+        <th style="text-align: center;">Username</th>
+        {% comment %} <th style="text-align: center;">Room no.</th> {% endcomment %}
+        <th style="text-align: center;">Sports-equipment</th>
+        <th style="text-align: center;"> Choose action</th>
+        <th style="text-align: center;"> Confirm</th>
+      </tr>
+
+      <!---->
+          {% for item in querry %}
+          <tr>
+            <form method='post' action='secy_request_validation'id='request_tackle'>
+            {% csrf_token %}
+          <td>{{item.name}}
+            <input type='hidden' name='requester_name' value={{item.name}}></input>
+          </td>
+          <td>{{item.username}}</td>
+          <input type='hidden' name='requester_username' value={{item.username}}></input>
+          <td>{{item.equipment_selected}}</td>
+          <input type='hidden' name='item_requested' value={{item.equipment_selected}}></input> <!-- {{item.equipment_selected}} -->
+          <td><select class="form-select" aria-label="Default select example" form = 'request_tackle' name = 'action'>
+            <option selected >Choose action</option>
+            <option value="validated">Validate</option>
+            <option value="rejected">Reject</option>
+          </select></td>
+          <td><input type='submit' value='Submit' name='submit'></input></td>
+        </form>
+        </tr>
+          {% endfor %}  
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

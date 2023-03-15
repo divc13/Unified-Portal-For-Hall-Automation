@@ -1,0 +1,42 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Apply Rebate</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <tr><th colspan = "4" class="main_head">Apply for Rebate</th></tr>
+        <form method="POST" action="Student_Apply_For_Rebate">
+        {% csrf_token %}
+        <tr>
+          <td><b>From</b></td>
+          <td><b>To</b></td>
+        </tr>
+        <tr>
+          <td><input type="date" min ="{{currentdate|date:'Y-m-d'}}" placeholder="dd-mm-yyyy" name = "from" value="{{from_date|date:'Y-m-d'}}" required></td>
+          <td><input type="date" min ="{{currentdate|date:'Y-m-d'}}" placeholder="dd-mm-yyyy" name = "to" value="{{to_date|date:'Y-m-d'}}" required></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><button type="submit">Apply</button></td>
+        </tr>
+      </form>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Modify Menu</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <tr>  
+          <form method="POST">
+            {% csrf_token %} {% if status_check%}
+            <tr>
+              <th colspan="2" class="main_head">Modify/Update Extra Items</th>
+              <th class="main_head">
+                <button type="submit" name="submit">Submit</button>
+              </th>
+              <th class="main_head">
+                <button type="submit" name="add_hidden_item">
+                  <input type="hidden" name="editable_mode" />Add New Item
+                </button>
+              </th>
+            </tr>
+            <tr>
+              <th>S. No.</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Delete</th>
+            </tr>
+
+            {% for items in extra_item reversed %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>
+                <input
+                  required
+                  type="text"
+                  name="item{{items.id}}"
+                  value="{{items.Item_Name}}"
+                  placeholder="Enter New Item"
+                  style="text-align: center"
+                  autofocus
+                />
+              </td>
+              <td>
+                <input
+                  required
+                  type="number"
+                  name="price{{items.id}}"
+                  value="{{items.Price}}"
+                  min="1"
+                  style="width: 35%; text-align: center"
+                />
+              </td>
+              <td>
+                <button type="submit" name="delete" value="{{items.id}}">
+                  <input type="hidden" name="editable_mode" />Delete
+                </button>
+              </td>
+            </tr>
+
+            {% endfor %} {% else %}
+            <tr>
+              <th colspan="2" class="main_head">Modify/Update Extra Items</th>
+              <th class="main_head">
+                <button type="submit" name="edit">Edit</button>
+              </th>
+              <th class="main_head">
+                <button type="submit" name="add_hidden_item">
+                  Add New Item
+                </button>
+              </th>
+            </tr>
+            <tr>
+              <th>S. No.</th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Delete</th>
+            </tr>
+            {% for items in extra_item reversed %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{items.Item_Name}}</td>
+              <td>{{items.Price}}</td>
+              <td>
+                <button type="submit" name="delete" value="{{items.id}}">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            {% endfor %} {% endif %}
+          </form>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

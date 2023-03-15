@@ -1,0 +1,53 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Student Bills</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <table cellspacing="0" cellpadding="5em">
+        <tr>
+          <th colspan="7" class="main_head">Incoming Orders</th>
+        </tr>
+        <tr>
+          <th>S. No.</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Amount</th>
+          <th>Clear Amount</th>
+          <th>Submit</th>
+        </tr>
+        {% for item in billing reversed%}
+        <form method="POST" action="Owner_Students_Bill">
+          {% csrf_token %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.User_Name}}</td>
+            <td>{{item.Amount}}</td>
+            <td><input type="number" required name="order_validation1"></td>
+            <td><button type="submit" name="submit" value="{{item.User_Name}}">Submit</button></td>
+            </td>
+          </tr>
+        </form>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

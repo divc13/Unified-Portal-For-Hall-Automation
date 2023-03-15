@@ -1,0 +1,50 @@
+{%include "staff_base.html"%}
+{%load static%}
+<html lang="en">
+<head>
+  <title>Rebate Requests</title>
+  <link rel="stylesheet" href="{%static 'styles.css'%}">
+  <style>
+    body {background: #E5E5E5; }
+  </style>
+</head>
+
+<body>
+  <div class="main_div">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="{{message.tags}}">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
+  <table cellspacing="0" cellpadding="5em">
+    <tr><th colspan = "6" class="main_head">Rebate Requests</th></tr>
+    <tr>
+      <th>S. No.</th>
+      <th>Username</th>
+      <th>Starting Date</th>
+      <th>Ending Date</th>
+      <th>No. of Days</th>
+      <th>Approve/Reject Requests</th>
+    </tr>
+    {%for i in req reversed%}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{i.User_Name}}</td>
+      <td id = "fromdate{{i.id}}">{{i.Date_From}}</td>
+      <td id = "todate{{i.id}}">{{i.Date_To}}</td>
+      <td id = "dayscount{{i.id}}">{{i.Rebate_Days}}</td>
+      <form method="POST" action="Manager_Rebate_Requests">
+        {% csrf_token %}
+      <td>
+        <button type="submit" name = "accept" value="{{i.id}}">Accept</button>
+        <button type="submit" name = "reject" value="{{i.id}}">Reject</button></td>
+        </form>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+</body>
+</html>

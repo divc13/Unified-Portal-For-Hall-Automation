@@ -1,0 +1,65 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator" />
+    <meta name="author" content="htmlGenerator" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="0" cellpadding="5em">
+      <tr>
+        <th colspan = "8" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Cleaning Request
+    </th>
+    
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Date Requested</th>
+        <th>Room no.</th>
+        <th>Requested Area</th>
+        
+        <th>Comments</th>
+      </tr>
+      {% for i in lodging reversed%}
+      <tr>
+        <form method="post" action="Past_Request">
+          {% csrf_token %}
+          <td>{{i.username}}</td>
+          <td>{{i.Cleaning_DateTime.date}}</td>
+          <td>{{i.Room}}</td>
+          <td>{{i.Place}}</td>
+        <!-- <td><div class="rating"><input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label></div></div></td> -->
+          <td>{{i.comments}}</td>
+      </form>
+      </tr>
+      {% endfor %}
+      
+    </table>
+  </div>
+
+        
+      </div>
+    </div>
+  </body> 
+</html>

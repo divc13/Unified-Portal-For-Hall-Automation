@@ -1,0 +1,82 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Student Courts</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+    {% comment %} Below ones are for time {% endcomment %}
+    
+    
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Courts Booking</th></tr>
+      <tr>
+        <th style="text-align: center;">Sports</th>
+        <th style="text-align: center;">Start time</th>
+        <th style="text-align: center;">End time</th>
+        <th style="text-align: center;" >Day</th>
+        <th style="text-align: center;" >Book Status</th>
+
+      </tr>
+      <tr>
+        <form method = 'post' action='courts' id='courts'>
+        {% csrf_token %}
+          <td><select class="form-select" aria-label="Default select example" form = 'courts' name = 'sport'>
+              <option selected>Select a sport</option>
+              <option value="BM">Badminton</option>
+              <option value="CB">Cricket</option>
+              <option value="TT">Table Tennis</option>
+              <option value="BB">Basketball</option>
+              <option value="FB">Football</option>
+              <option value="HK">Hockey</option>
+            </select></td>
+
+          <td>
+              <input type='time' placeholder= '12:00' name='checkin_time'></input> 
+          </td>
+          <td>
+              <input type='time' placeholder= '12:00' name = 'checkout_time'></input>
+          </td>
+          <td>
+                <input type='date' placeholder= '09-03-2023' name='date'></input>
+          </td>
+          <td><input type='submit' name='submit' value="Book court"></input></td>
+
+        </form>
+      </tr>
+    </table>
+  </div>
+
+      </div>
+    </div>
+    <script>
+ 
+        // Below code sets format to the
+        // datetimepicker having id as
+        // datetime
+        $('#datetime').datetimepicker({
+            format: 'hh:mm a'
+        });
+    </script>
+  </body> 
+</html>

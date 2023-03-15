@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+    <head>
+        <title>Sign up</title>
+        <style>
+            .body{
+                background-color: skyblue;
+            }
+            .input_text{
+                height: 2em;
+                width: 12em;
+                font-size: 0.7em;
+                border-radius: 0.4em;
+                padding-left: 0.3em;
+            }
+            .input_text:focus{
+                outline:double lightskyblue;
+                border-width: 0.1em;
+                outline-width: 0.2em;
+            }
+            .submit_btn{
+                height: 2em;
+                width: 14em;
+                font-size: 0.9em;
+                border-radius: 0.2em;
+                background-color: lightsalmon;
+            }
+            .submit_btn:hover{
+                background-color: lightgreen;
+            }
+            .outer_table{
+                border-style: double;
+                border-color: black;
+                border-width: 0.4em;
+                border-radius: 1em;
+                background-color: beige;
+            }
+            td{
+                padding:0.5em;
+                padding-left: 0.3em;
+                padding-right: 0.3em;
+                font-size: 1.5em;
+            }
+            .link{
+                text-align: right;
+            }
+            .error{
+                text-align: center;
+                color: rgb(248, 6, 6);
+                font-size: 0.8em;
+            }
+        </style>
+    </head>
+    <body style="background-color: lightblue;">
+        <table align="center" class="outer_table">
+            <tr>
+                <td>
+                    <table align="center" style="width:100%">
+                        <tr>
+                            <td align="center">
+                                <img src="{%static 'Login/vector.png' %}" width="100em">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="{%static 'Login/upha.png' %}" width="500em">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr><td>{% if messages %}
+                {% for message in messages %}
+                <div class="{{message.tags}}">
+                  {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}</td></tr>
+            <tr>
+                <td>
+                    <form method="post"> {% csrf_token %}
+                        <table align="center">
+                            <tr>
+                                <td>Name:</td>
+                                <td><input type="text" name="name" class="input_text" placeholder="Name" required></td>
+                            </tr>
+                            <tr>
+                                <td>CC Username:</td>
+                                <td><input type="text" name="username" class="input_text" placeholder="IITK username" required></td>
+                            </tr>
+                            <tr>
+                                <td>Designation:</td>
+                                <td align="center">
+                                    <select name="designation" id="designation" class="input_text" required>
+                                        {% if options1 == 1 %}<option value="Hall Manager">Hall Manager</option>{%endif%}
+                                        {% if options2 == 1 %}<option value="Mess Manager">Mess Manager</option>{%endif%}
+                                        {% if options3 == 1 %}<option value="Canteen Manager">Canteen Manager</option>{%endif%}
+                                        {% if options4 == 1 %}<option value="Sports Secy">Sports Secy</option>{%endif%}
+                                        <option value="Student">Student</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td colspan="2" align="center"><input type="submit" class="submit_btn"></td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

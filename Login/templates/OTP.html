@@ -1,0 +1,90 @@
+{% load static %}
+<html>
+    <head>
+        <title>OTP</title>
+        <style>
+            .input_text{
+                height: 2em;
+                width: 13em;
+                font-size: 0.7em;
+                border-radius: 0.4em;
+                padding-left: 0.3em;
+            }
+            .input_text:focus{
+                outline:double lightskyblue;
+                border-width: 0.1em;
+                outline-width: 0.2em;
+            }
+            .submit_btn{
+                height: 2em;
+                width: 14em;
+                font-size: 0.9em;
+                border-radius: 0.2em;
+                background-color: lightsalmon;
+            }
+            .submit_btn:hover{
+                background-color: lightgreen;
+            }
+            .outer_table{
+                border-style: double;
+                border-color: black;
+                border-width: 0.4em;
+                border-radius: 1em;
+                background-color: beige;
+            }
+            td{
+                padding:0.7em;
+                padding-left: 1em;
+                padding-right: 1em;
+                font-size: 1.5em;
+            }
+            .error{
+                text-align: center;
+                color: rgb(248, 6, 6);
+                font-size: 1.2em;
+            }
+        </style>
+    </head>
+    <body style="background-color: lightblue;">
+        <table align="center" class="outer_table">
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td align="center"><img src="{%static 'Login/vector.png' %}" width="100em"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><img src="{%static 'Login/upha.png' %}" width="500em"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr><td>{% if messages %}
+                {% for message in messages %}
+                <div class="{{message.tags}}">
+                  {{message}}
+                </div>
+                {% endfor %}
+                {% endif %}</td></tr>
+            <tr><td>
+                <form method="post"> {% csrf_token %}
+                    <table align="center">
+                        <tr align="center">
+                            <td><label for="otp">OTP:</label></td>
+                            <td><input type="text" name="OTP" class="input_text" placeholder="Enter OTP" id="otp" required></td>
+                        </tr>
+                        <tr>
+                            <td align="left" colspan="2" style="font-size: 1em; padding-top: 0em; padding-left: 2em; padding-bottom: 1em;">OTP has been sent to your email, valid only for 5 minutes</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><button type="submit" class="submit_btn">Submit</td>
+                        </tr>
+                        <tr align="right">
+                            <td colspan="2" style="font-size: 1em; padding-top: 0em; padding-right: 3em; padding-bottom: 0.1em;">Did not recieve OTP ? <a href="">Resend OTP</a></td>
+                        </tr>
+                    </table>
+                </form>
+            </td></tr>
+        </table>
+    </body>
+</html>

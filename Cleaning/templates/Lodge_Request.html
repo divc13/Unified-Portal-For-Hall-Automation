@@ -1,0 +1,168 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Lodge Requests</title>
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+      .main_div {
+  width:85%;
+  height: 70%;
+  top:25%;
+  left:15%;
+  overflow-y: auto;
+  position: absolute;
+}
+.success{
+    text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    font-size: 1.2em;
+}
+
+.error{
+  text-align: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    color: #000000;
+    border-color: rgb(244, 157, 157);
+    font-size: 1.2em;
+    background-color: rgb(244, 157, 157);
+}
+.room_text { 
+
+	text-align: left;
+	letter-spacing: 0;
+	font-family: Inter;
+}
+.what_to_clean { 
+	width: 90%;
+	height: 10%;
+	position: absolute;
+	left: 4.8%;
+	top: 19.6%;
+	font-family: Inter;
+	font-size: 97%;
+}
+.what_to_clean_text { 
+	position:absolute;
+	text-align:left;
+	letter-spacing:0;
+	top: 0%;
+}
+.what_to_clean div {
+	top: 7%;
+}
+.room { 
+position: absolute;
+/*left: 23%;*/
+}
+.toilet { 
+	position:absolute;
+	/*left: 35%;*/
+}
+.corridor { 
+	position:absolute;
+	/*left:47%;*/
+}
+.other { 
+	/*left: 59%;*/
+	position:absolute;
+}
+.comments { 
+	width: 90%;
+	height: 25%;
+	position: absolute;
+	/*left: 5%;
+	/*top: 31%;*/
+}
+.comments_text { 
+position: absolute;
+font-family: Inter;
+text-align: left;
+
+}
+.comments_rec { 
+	background-color: rgba(217.0000022649765, 217.0000022649765, 217.0000022649765, 1);
+	/*left: 23%;*/
+	position: absolute;
+	/*top: 0%;*/
+	resize: none;
+	font-size: 1vw;
+	width: 72%;
+	height: 250%;
+}
+.submit_rec { 
+	width: 13%;
+	height: 7%;
+	position: absolute;
+	left: 77%;
+	top: 75%;
+	font-size: 80%;
+	font-family: Inter;
+}
+.submit_text {
+	width: 100%;
+	position: absolute;
+	top: 24%;
+	font-family: Inter;
+	text-align: center;
+	font-size: 100%;
+	letter-spacing: 0;
+}
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+    {% for message in messages %}
+    <div class="{{message.tags}}">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+      <form id="main_form" method="POST" formmethod="POST" action="Lodge_Request">
+      {% csrf_token %}
+      <table class="what_to_clean" style="top:11.4%">
+        <tr>
+          <td style="width: 18.8%; height: 5%;"><span  class="room_text"> Your Room:</span></td>
+          <td><input type="text" class="room_text" style="left: 25.7%; padding: 0.4%;" placeholder="Ex: B-320" name="room" required>
+          </td><td></td><td></td><td></td>
+        </tr>
+        </table><table class="what_to_clean">
+        <tr>
+          <td>What to clean:</td>
+          <td>
+            <input type="radio" name="place" id="room" value="Room" checked>
+            <label for="room">Room</label>
+          </td>
+          <td>
+            <input type="radio" name="place" id="toilet" value="Toilet">
+            <label for="toilet">Toilet</label>             
+          </td>
+          <td>
+            <input type="radio" name="place" id="corridor" value="Corridor">
+            <label for="corridor">Corridor</label>  
+          </td>
+          <td>
+            <input type="radio" name="place" id="other" value="Others">
+            <label for="other">Other (Mention in Comments)</label>    
+          </td>
+        </tr>
+        <tr>
+          <td><span  class="comments_text">Comments:</span></td>
+          <td><textarea class="comments_rec" id="comment" name="comment" placeholder=""></textarea>
+          </td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+        <input type="submit"   class="submit_rec" value="Submit">
+      </form>
+    </div>
+  </body> 
+</html>

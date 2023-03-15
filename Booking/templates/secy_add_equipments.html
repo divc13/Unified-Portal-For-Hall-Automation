@@ -1,0 +1,64 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Secy Add Equipment</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "3" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Add Equipments</th></tr>
+      <tr>
+        <th style="text-align: center;">Sports</th>
+        <th style="text-align: center;">Quantity</th>
+        <th style="text-align: center;" >Confirmation</th>
+
+      </tr>
+      <tr>
+        <form method = 'post' action='secy_add_equipment' id='add_equipment'>
+        {% csrf_token %}
+          <td><select class="form-select" aria-label="Default select example" form = 'add_equipment' name = 'sport'>
+              <option selected>Select a sport</option>
+              <option value="BM">Badminton</option>
+              <option value="CB">Cricket</option>
+              <option value="TT">Table Tennis</option>
+              <option value="BB">Basketball</option>
+              <option value="FB">Football</option>
+              <option value="HK">Hockey</option>
+            </select></td>
+
+          <td>
+              <input type='number' placeholder= '0' name='equipment_quantity'></input> 
+          </td>
+          <td><input type='submit' name='submit' value="submit"></input></td>
+
+        </form>
+      </tr>
+
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

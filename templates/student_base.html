@@ -1,0 +1,204 @@
+{%load static%}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>UPHA</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'student_base.css' %}">
+
+  <style>
+    body {
+      background: #E5E5E5;
+    }
+  </style>
+
+</head>
+
+<body scroll="no" style="overflow: hidden">
+  <div class=e1_141>
+    <div class=e1_222>
+      <div class="e1_223"></div>
+      <span class="e1_225">© The Tech Titans</span>
+    </div>
+    <div class=e2_6>
+      {% if request.path != "/Home" %}
+      <div class="e1_220"></div>
+      {% endif %}
+      
+
+      {% comment %} Mess begins {% endcomment %}
+
+      {% if request.path == "/Mess/Student_Regular_Menu" or request.path == "/Mess/Student_Book_Extras" or request.path == "/Mess/Student_Booked_Extras" or request.path == "/Mess/Student_Apply_For_Rebate" or request.path == "/Mess/Student_Order_History" %}
+        
+      <a href ="/Mess/Student_Regular_Menu">
+            <button class="e2_3 button3" {% if request.path == "/Mess/Student_Regular_Menu" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Regular Menu
+            </button>
+        </a>
+        <a href ="/Mess/Student_Book_Extras">
+        <button class="e2_5 button3" {% if request.path == "/Mess/Student_Book_Extras" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Extras
+        </button>
+        </a>
+        <a href ="/Mess/Student_Booked_Extras">
+        <button class="e2_9 button3" {% if request.path == "/Mess/Student_Booked_Extras" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Validate Order
+        </button>
+        </a>
+        <a href ="/Mess/Student_Apply_For_Rebate">
+        <button class="e2_8 button3"{% if request.path == "/Mess/Student_Apply_For_Rebate" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+        Apply for Rebate
+        </button>
+        </a>
+        <a href ="/Mess/Student_Order_History">
+        <button class="e2_4 button3"{% if request.path == "/Mess/Student_Order_History" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Order History
+        </button>
+        </a>
+        {% endif %}
+
+    {% comment %} Mess ends {% endcomment %}
+
+    {% comment %} Canteen Begins {% endcomment %}
+
+    {% if request.path == "/Canteen/Student_Place_Order" or request.path == "/Canteen/Student_Cart" or request.path == "/Canteen/Student_Pending_Order" or request.path == "/Canteen/Student_Orders_History" %}
+        <a href="/Canteen/Student_Place_Order">
+            <button class="e2_3 button3" {% if request.path == "/Canteen/Student_Place_Order" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Place Order
+            </button>
+        </a>
+        <a href="/Canteen/Student_Cart">
+            <button class="e2_5 button3" {% if request.path == "/Canteen/Student_Cart" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Cart
+            </button>
+        </a>
+        <a href="/Canteen/Student_Pending_Order">
+        <button class="e2_9 button3" {% if request.path == "/Canteen/Student_Pending_Order" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Pending Orders
+        </button>
+        </a>
+        <a href="/Canteen/Student_Orders_History">
+        <button class="e2_4 button3"  {% if request.path == "/Canteen/Student_Orders_History" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+            Order History
+        </button>
+        </a>
+      {% endif %}
+      {% comment %} </div> {% endcomment %}
+      {% comment %} Canteen ends {% endcomment %}
+      
+    {% if request.path == "/Booking/guestroom" or request.path == "/Booking/sports_equipments" or request.path == "/Booking/courts" %}
+      <a href ="/Booking/guestroom">
+        <button class="e2_3 button3" {% if request.path == "/Booking/guestroom" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+        Guest Rooms
+        </button>
+      </a>
+      <a href ="/Booking/sports_equipments">
+      <button class="e2_5 button3" {% if request.path == "/Booking/sports_equipments" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Sport Equipments
+      </button>
+      </a>
+      <a href ="/Booking/courts">
+      <button class="e2_9 button3" {% if request.path == "/Booking/courts" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Sport Courts
+      </button>
+      </a>
+      {% endif %}
+    {% comment %} </div> {% endcomment %}
+    {% if request.path == "/My_Account/Mess" or request.path == "/My_Account/Canteen" %}
+      <a href ="/My_Account/Mess">
+          <button class="e2_3 button3" {% if request.path == "/My_Account/Mess" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Mess
+          </button>
+      </a>
+      <a href ="/My_Account/Canteen">
+      <button class="e2_5 button3" {% if request.path == "/My_Account/Canteen" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Canteen
+      </button>
+      </a>
+      {% endif %}
+    {% comment %} </div> {% endcomment %}
+
+    {% if request.path == "/Cleaning/Lodge_Request" or request.path == "/Cleaning/Pending_Request" or request.path == "/Cleaning/Past_Request"%}
+      <a href ="/Cleaning/Lodge_Request">
+        <button class="e2_3 button3" {% if request.path == "/Cleaning/Lodge_Request" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+        Lodge Request
+        </button>
+      </a>
+      <a href ="/Cleaning/Pending_Request">
+      <button class="e2_5 button3" {% if request.path == "/Cleaning/Pending_Request" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Pending Requests
+      </button>
+      </a>
+      <a href ="/Cleaning/Past_Request">
+      <button class="e2_9 button3" {% if request.path == "/Cleaning/Past_Request" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Past Requests
+      </button>
+      </a>
+      {% endif %}
+    </div>
+
+
+      <div class=e2_7>
+        <a href = "/Logout">
+        <button class="e1_226 button2">
+          <div class="e1_219"></div>
+          <div class="e1_227"></div><span class="e1_228">Log Out</span>
+          <div class="e1_229"></div>
+        </button>
+        </a>
+        <a href ="../../My_Account/Mess">
+          <button class="e1_230 button2">
+            <div class="e1_231" {% if request.path == "/My_Account/Mess" or request.path == "/My_Account/Canteen" %} 
+            style="	background-color:rgb(56, 108, 185);" {% endif %}></div><span class="e1_232">My Account</span>
+            <div class="e1_233"></div>
+          </button>
+        </a>
+        <a href = "../../Cleaning/Lodge_Request">  
+          <button class="e1_238 button2">
+            <div class="e1_239" {% if request.path == "/Cleaning/Lodge_Request" or request.path == "/Cleaning/Pending_Request" or request.path == "/Cleaning/Past_Request" %}  style="	background-color:rgb(56, 108, 185);" {% endif %}></div>
+            <div class="e1_240"></div><span class="e1_241">Cleaning</span>
+          </button>
+        </a>
+        <a href = "../../Booking/guestroom">
+          <button class="e1_234 button2">
+            <div class="e1_235" {% if request.path == "/Booking/guestroom" or request.path == "/Booking/sports_equipments" or request.path == "/Booking/courts" %}  style="	background-color:rgb(56, 108, 185);" {% endif %}></div>
+            <div class="e1_236"></div><span class="e1_237">Booking</span>
+          </button>
+        </a>
+        <a href = "../../Canteen/Student_Place_Order">
+          <button class="e1_242 button2">
+            <div class="e1_243" {% if request.path == "/Canteen/Student_Place_Order" or request.path == "/Canteen/Student_Cart" or request.path == "/Canteen/Student_Pending_Order" or request.path == "/Canteen/Student_Orders_History" %}  style="	background-color:rgb(56, 108, 185);" {% endif %}></div>
+            <div class="e1_244"></div><span class="e1_245">Canteen</span>
+          </button>
+        </a>
+        <a href = "../../Mess/Student_Regular_Menu">
+          <button class="e1_246 button2">
+            <div class="e1_247" {% if request.path == "/Mess/Student_Regular_Menu" or request.path == "/Mess/Student_Book_Extras" or request.path == "/Mess/Student_Booked_Extras" or request.path == "/Mess/Student_Apply_For_Rebate" or request.path == "/Mess/Student_Order_History" %}  style="	background-color:rgb(56, 108, 185);" {% endif %}></div><span class="e1_248">Mess</span>
+            <div class="e1_249"></div>
+          </button>
+        </a>
+        <a href="../../Home">  
+          <button class="e1_250 button2">
+            <div class="e1_251" {% if request.path == "/Home" %}  style="	background-color:rgb(56, 108, 185) {% endif %}"></div><span class="e1_252">Home</span>
+            <div class="e1_272"></div>
+          </button>
+          <div class="e1_221"></div>
+        </a>
+      </div>
+      <div class=e1_254><span class="e1_255">{{ request.user.designation }}</span><span class="e1_256">Welcome, {{ request.user.name}}</span></div>
+    <div class=e1_258>
+      <div class="e1_259"></div>
+      <div class="e1_260"></div>
+      <a href="../../Home">
+      <button class="e1_261 button3">Unified Portal<br>
+        For Hall Automation</button>
+      </a>
+      <a href = "https://iitk.ac.in/">
+      <button class="e1_262 button3"></button></a>
+    </div> 
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+{%include "student_base.html"%}
+{%load static%}
+<html lang="en">
+
+<head>
+
+  <title>Mess Bills</title>
+
+  <link rel="stylesheet" href="{%static 'styles.css'%}">
+
+  <style>
+    body {
+      background: #E5E5E5;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="main_div">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{message.tags}}">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <table cellspacing="0" cellpadding="5em">
+      <form method="POST" action="Students_Pending_Bills">
+        {% csrf_token %}
+        <tr>
+          <th colspan="6" class="main_head">Mess Bills</th>
+        </tr>
+      </form>
+
+      <tr>
+        <th>S. No.</th>
+        <th>Month</th>
+        <th>Basic Amount</th>
+        <th>Extra Messing</th>
+        <th>Rebate Days</th>
+        <th>Dues</th>
+      </tr>
+
+      {% for bill in bills %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{bill.Month_Name}}</td>
+        <td>{{bill.Basic_Amount}}</td>
+        <td>{{bill.Extras_Amount}}</td>
+        <td>{{bill.rebate_days}}</td>
+        <td>{{bill.Mess_Bill}}</td>
+      </tr>
+
+      {% endfor %}
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><a href="https://www.onlinesbi.sbi/sbicollect/icollecthome.htm"><button>Make Payment</button></a>
+      </td>
+    </table>
+  </div>
+
+
+</body>
+</div>
+</body>
+
+</html>

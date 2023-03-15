@@ -1,0 +1,73 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+
+<head>
+
+  <title>Regular Menu</title>
+  <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+  <style>
+    body {
+      background: #e5e5e5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main_div">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{message.tags}}">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <table cellspacing="0" cellpadding="5em">
+      <tr>
+        <th colspan="6" class="main_head">Regular Menu</th>
+      </tr>
+      <tr>
+        <th>S. No.</th>
+        <th>Day</th>
+        <th>Meal</th>
+        <th>Items</th>
+        <th>Average Rating</th>
+        <th>Please Rate</th>
+      </tr>
+      {%for item in menu%}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{item.Day}}</td>
+        <td>{{item.Meal}}</td>
+        <td>{{item.Items}}</td>
+          <td>
+            {%if item.Rating%}
+             ☆ {{item.Rating}}
+            {% else %} 
+            Be the first one to rate
+            {% endif %}
+          </td>
+        <form method="POST" action="Student_Regular_Menu">
+          {% csrf_token %}
+          <td>
+            <div class="rating">
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="5"
+                id="5_{{item.id}}"><label for="5_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="4"
+                id="4_{{item.id}}"><label for="4_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="3"
+                id="3_{{item.id}}"><label for="3_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="2"
+                id="2_{{item.id}}"><label for="2_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="1"
+                id="1_{{item.id}}"><label for="1_{{item.id}}">☆</label>
+            </div>
+          </td>
+        </form>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+
+</html>

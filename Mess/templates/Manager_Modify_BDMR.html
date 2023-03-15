@@ -1,0 +1,46 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>BDMR</title>
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      <table cellspacing="0" cellpadding="5em">
+        <form method="post" action="Manager_Modify_BDMR">
+          {% csrf_token %}
+          <tr>
+            <th colspan="4" class="main_head">Enter or Modify BDMR</th>
+          </tr>
+          <tr>
+            <td>Enter Date</td>
+            <td>
+              <input type="date" placeholder="dd-mm-yyyy" name="BDMR_Date" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Enter BDMR</td>
+            <td>
+              <input type="floatformat" placeholder="BDMR in Rs." name="BDMR" required />
+              <button type="submit">Submit</button>
+            </td>
+          </tr>
+        </form>
+      </table>
+    </div>
+  </body>
+</html>

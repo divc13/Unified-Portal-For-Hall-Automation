@@ -1,0 +1,53 @@
+{%include "staff_base.html"%}
+{%load static%}
+<html lang="en">
+<head>
+  <title>Menu</title>
+  <link rel="stylesheet" href="{%static 'styles.css'%}">
+  <style>
+    body {background: #E5E5E5; }
+  </style>
+</head>
+
+<body>
+  <div class='main_div'>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="{{message.tags}}">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
+    
+    <table cellspacing="0" cellpadding="5em">
+      <form method="post" action = "Manager_Modify_Menu">
+      <tr><th colspan = "5" class="main_head">Modify/Update Menu</th></tr>
+      <tr>
+        <th>S. No.</th>
+        <th>Day</th>
+        <th>Meal</th>
+        <th>Menu</th>
+        <th>Modify</th>
+      </tr>
+
+      {% for items in menu %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{items.Day}}</td>
+        <td>{{items.Meal}}</td>
+        <form method="POST">
+        {% csrf_token %}
+        {% if status_check %}
+        <td><input type = "text" value="{{items.Items}}" name="content" style="width: 70%; input"></td>
+        <td><button type="submit" name="submit" value={{items.id}}>Submit</button></td>
+        {% else %}
+        <td>{{items.Items}}</td>
+        <td><button type="submit"name="edit">Edit</button></td>
+        {% endif %}
+      </tr>
+    </form>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+</html>
