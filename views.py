@@ -199,15 +199,6 @@ def courts_book(request): #student
     else:
         return render(request,"Error.html")
 
-def booking_manager(request): #hall manager
-    if request.user.designation == "Hall Manager":
-        context = {
-            'query_results' : Guestroom.objects.all()
-        }
-        
-        return render(request,'booking_manager.html',context)
-    else:
-        return render(request,"Error.html")
 #sports secy functions
 def secy_request_validation(request):
     if request.user.is_authenticated:
@@ -274,18 +265,43 @@ def secy_add_equipment(request):
                 sport_selected =request.POST.get('sport')
                 equipment_quantity = request.POST.get('equipment_quantity')
 
-                sport_store = sports_equipmnents_store.objects.get(equipments_store=sport_selected)
-                sport_store.quantity_store = sport_store.quantity_store+ int(equipment_quantity)
-                sport_store.save()
+                if (equipment_quantity >0):
+                    sport_store = sports_equipmnents_store.objects.get(equipments_store=sport_selected)
+                    sport_store.quantity_store = sport_store.quantity_store+ int(equipment_quantity)
+                    sport_store.save()
 
-                sport_reg = sports_equipments_registered.objects.get(equipments=sport_selected)
-                sport_reg.quantity = sport_reg.quantity+ int(equipment_quantity)
-                sport_reg.save()
-
-                messages.success(request, 'The equipment has been added successfully')
+                    sport_reg = sports_equipments_registered.objects.get(equipments=sport_selected)
+                    sport_reg.quantity = sport_reg.quantity+ int(equipment_quantity)
+                    sport_reg.save()
+                    messages.success(request, 'The equipment has been added successfully')
+                else:
+                    messages.error(request, 'The quantity of equipment should be greater than 0')
             return render(request,'secy_add_equipments.html',context)
         else:
             return render(request,"Error.html")
     else:
         return render(request,"Error.html")
 
+def booking_manager(request): #hall manager
+    if request.user.is_authenticated:
+        if request.user.designation == "Hall Manager":
+            context = {
+                'query_results' : Guestroom.objects.all()
+            }
+            if request.method =="POST":
+                username = request.POST.get('username')
+                room = request.POST.get('room')
+                action = request.POST.get('action')
+
+                get_booking = Guestroom.objects.get(username=username,room=room)
+                if action == "approve":
+                    messages.success(request, 'The booking has been validated')
+                else:
+                    messages.success(request, 'The booking has been rejected')
+                    get_booking.delete()
+
+            return render(request,'booking_manager.html',context)
+        else:
+            return render(request,"Error.html")
+    else:
+        return render(request,"Error.html")
