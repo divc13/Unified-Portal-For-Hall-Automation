@@ -270,43 +270,84 @@ def Manager_Modify_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Mess Manager":
 
-            regular_menu = (
-                Regular_menu.objects.all()
-            )  # QuerySet containing the entire menu
+            regularmenu = Regular_menu.objects.all()
 
             if request.method == "POST":
 
-                if "submit" in request.POST:
-                    # Saves changes to menu of all days at once
+                if (
+                    ("submit" in request.POST)
+                    or (
+                        "add_hidden_item" in request.POST
+                        and "editable_mode" in request.POST
+                    )
+                    or ("delete" in request.POST and "editable_mode" in request.POST)
+                ):
+                    # Commits changes to the database
 
-                    idt = request.POST.get("submit")
-                    items = request.POST.get(
-                        "content"
-                    )  # "items" stores the items in the modified menu
-                    RegularMenu = Regular_menu.objects.filter(id=idt)[0]
-                    RegularMenu.Items = items
-                    RegularMenu.save()
-                    messages.success(request, "Menu Modified Successfully")
+                    for obj in Regular_menu.objects.all():  
+                        day = request.POST.get("day" + str(obj.id))
+                        meal = request.POST.get("meal" + str(obj.id))
+                        item = request.POST.get("item" + str(obj.id))
+
+                        menu = Regular_menu.objects.filter(id=obj.id)[0]
+                        menu.Day = day
+                        menu.Items = item
+                        menu.Meal = meal
+                        menu.save()
+
+                if "add_hidden_item" in request.POST:
+
+                    obj = Regular_menu()
+                    obj.save()
+                    return render(
+                        request,
+                        "Manager_Modify_Menu.html",
+                        context={"regularmenu": regularmenu, "status_check": 1},
+                    )
+
+                elif "submit" in request.POST:
+
+                    messages.success(request, "Changes made successfully.")
                     return render(
                         request,
                         "Manager_Modify_Menu.html",
                         context={
-                            "menu": regular_menu,
+                            "regularmenu": regularmenu,
                             "status_check": 0,
                             "messages": messages.get_messages(request),
                         },
                     )
 
-                else:
+                elif "edit" in request.POST:
+
+                    idt = request.POST.get("edit")
                     return render(
                         request,
                         "Manager_Modify_Menu.html",
-                        context={"menu": regular_menu, "status_check": 1},
+                        context={"regularmenu": regularmenu, "status_check": 1},
+                    )
+
+                elif "delete" in request.POST:
+                    idt = request.POST.get(
+                        "delete"
+                    ) 
+                    menu_del = Regular_menu.objects.filter(id=idt)[0]
+                    menu_del.delete()
+
+                    messages.success(request, "Deleted Successfully")
+                    return render(
+                        request,
+                        "Manager_Modify_Menu.html",
+                        context={
+                            "regularmenu": regularmenu,
+                            "status_check": 0,
+                            "messages": messages.get_messages(request),
+                        },
                     )
 
             else:
                 return render(
-                    request, "Manager_Modify_Menu.html", context={"menu": regular_menu}
+                    request, "Manager_Modify_Menu.html", context={"regularmenu": regularmenu}
                 )
         else:
             return render(request, "Error.html")

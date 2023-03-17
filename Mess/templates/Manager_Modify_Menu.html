@@ -20,33 +20,106 @@
     {% endif %}
     
     <table cellspacing="0" cellpadding="5em">
-      <form method="post" action = "Manager_Modify_Menu">
-      <tr><th colspan = "5" class="main_head">Modify/Update Menu</th></tr>
+    <form method="POST" action="Manager_Modify_Menu">
+      {% csrf_token %} {% if status_check%}
+      <tr>
+        <th colspan="3" class="main_head">Modify/Update Menu</th>
+        <th class="main_head">
+          <button type="submit" name="submit">Submit</button>
+        </th>
+        <th class="main_head">
+          <button type="submit" name="add_hidden_item">
+            <input type="hidden" name="editable_mode" />Add New Item
+          </button>
+        </th>
+      </tr>
       <tr>
         <th>S. No.</th>
         <th>Day</th>
         <th>Meal</th>
         <th>Menu</th>
-        <th>Modify</th>
+        <th>Delete</th>
       </tr>
 
-      {% for items in menu %}
+      {% for items in regularmenu %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <select
+            name="day{{items.id}}"
+            value="{{items.Day}}"
+          >
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
+        </td>
+        <td>
+          <select
+            name="meal{{items.id}}"
+            value="{{items.Meal}}"
+          >
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+          </select>
+        </td>
+        <td>
+          <input
+            required
+            type="text"
+            name="item{{items.id}}"
+            value="{{items.Items}}"
+            placeholder="Enter New Item"
+            style="text-align: center"
+            {% if forloop.last%}
+            autofocus
+            {% endif %}
+          />
+        </td>
+        <td>
+          <button type="submit" name="delete" value="{{items.id}}">
+            <input type="hidden" name="editable_mode" />Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %} 
+      {% else %}
+      <tr>
+        <th colspan="3" class="main_head">Modify/Update Menu</th>
+        <th class="main_head">
+          <button type="submit" name="edit">Edit</button>
+        </th>
+        <th class="main_head">
+          <button type="submit" name="add_hidden_item">Add New Item</button>
+        </th>
+      </tr>
+      <tr>
+        <th>S. No.</th>
+        <th>Day</th>
+        <th>Meal</th>
+        <th>Menu</th>
+        <th>Delete</th>
+      </tr>
+      {% for items in regularmenu %}
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{items.Day}}</td>
         <td>{{items.Meal}}</td>
-        <form method="POST">
-        {% csrf_token %}
-        {% if status_check %}
-        <td><input type = "text" value="{{items.Items}}" name="content" style="width: 70%; input"></td>
-        <td><button type="submit" name="submit" value={{items.id}}>Submit</button></td>
-        {% else %}
         <td>{{items.Items}}</td>
-        <td><button type="submit"name="edit">Edit</button></td>
-        {% endif %}
+        <td>
+          <button type="submit" name="delete" value="{{items.id}}">
+            Delete
+          </button>
+        </td>
       </tr>
+      {% endfor %} 
+      {% endif %}
     </form>
-      {% endfor %}
     </table>
   </div>
 </body>
