@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from datetime import datetime
 from Booking.models import Guestroom,sports_equipments_request,Courts,sports_equipments_registered,sports_equipmnents_store
+from django.contrib import messages
 
 # Create your views here.
  
@@ -111,7 +112,8 @@ def courts_book(request): #student
     if request.user.designation == "Student" :
         context ={
             'var_date' : str(datetime.today()),
-            'var_time' : str(datetime.now().time())
+            'var_time' : str(datetime.now().time()),
+            'messages' : messages.get_messages(request)
         }
         today = datetime.today().date()
         court_items = Courts.objects.all().filter(day_of_booking = today)
@@ -127,41 +129,54 @@ def courts_book(request): #student
             checkout_time = request.POST.get('checkout_time')
             date = request.POST.get('date')
 
-            #This codes will tackle when the request of booking is mad
-            court_items = Courts.objects.filter(sports=sports)
-            if(len(court_items)>0):
-                flag=1
-                for court_item in court_items:
-                    in_time = court_item.time_of_checkin
-                    out_time = court_item.time_of_checkout
-                    day = court_item.day_of_booking
+            request_in_time = datetime.strptime(checkin_time, "%H:%M").time()
+            request_out_time = datetime.strptime(checkout_time, "%H:%M").time()
+            request_date = datetime.strptime(date, "%Y-%m-%d").date()
 
-                    request_in_time = datetime.strptime(checkin_time, "%Y-%m-%d").time()
-                    request_out_time = datetime.strptime(checkout_time, "%Y-%m-%d").time()
-                    request_date = datetime.strptime(date, "%Y-%m-%d").date()
-                    
-                    if(request_date == day):
-                        if (request_in_time>=in_time and request_in_time<=out_time) or (request_out_time>=in_time and request_out_time<=out_time):
-                            flag=0
+
+            if(request_in_time<=request_out_time and request_date>=datetime.today().date()):
+                #This codes will tackle when the request of booking is mad
+                court_items = Courts.objects.filter(sports=sports)
+                if(len(court_items)>0):
+                    flag=1
+                    for court_item in court_items:
+                        in_time = court_item.time_of_checkin
+                        out_time = court_item.time_of_checkout
+                        day = court_item.day_of_booking
+
+                        request_in_time = datetime.strptime(checkin_time, "%H:%M").time()
+                        request_out_time = datetime.strptime(checkout_time, "%H:%M").time()
+                        request_date = datetime.strptime(date, "%Y-%m-%d").date()
+                        
+                        if(request_date == day):
+                            if (request_in_time>=in_time and request_in_time<=out_time) or (request_out_time>=in_time and request_out_time<=out_time):
+                                flag=0
+                                break
+
+                    if flag==1:
+                        courts_request = Courts(sports=sports, time_of_checkin = checkin_time, time_of_checkout = checkout_time, day_of_booking = date,
+                                        date=datetime.today(), name=request.user.name,username=request.user.username)
+                        courts_request.save()
+                        messages.success(request, 'Your have succesfully booked the court, enjoy your playtime :)')
+                        return render(request,'courts.html',context)
+                    else:
+                        courts=Courts.objects.filter(sports=sports)
+                        for court in courts:
+                            court_r=court
                             break
-
-                if flag==1:
-                    courts_request = Courts(sports=sports, time_of_checkin = checkin_time, time_of_checkout = checkout_time, day_of_booking = date,
-                                    date=datetime.today(), name=request.user.name,username=request.user.username)
-                    courts_request.save()
-                    return render(request,'courts.html',context)
+                        messages.error(request, 'The court is already booked for the given time, please try again with different time :(')
+                        return render(request,'courts.html',context)                
                 else:
-                    courts=Courts.objects.filter(sports=sports)
-                    for court in courts:
-                        court_r=court
-                        break
-                    return HttpResponse(f'Those date-time clash with another booking of good as this room booked between {court_r.time_of_checkin} and {court_r.time_of_checkout}.\nPlease go back and try another date or another room.\n UPHA team highly regrets your inconvenience')
-                
+                    courts_request = Courts(sports=sports, time_of_checkin = checkin_time, time_of_checkout = checkout_time, day_of_booking = date,
+                                        date=datetime.today(), name=request.user.name,username=request.user.username)
+                    courts_request.save()
+                    messages.success(request, 'Your have succesfully booked the court, enjoy your playtime :)')
             else:
-                courts_request = Courts(sports=sports, time_of_checkin = checkin_time, time_of_checkout = checkout_time, day_of_booking = date,
-                                    date=datetime.today(), name=request.user.name,username=request.user.username)
-                courts_request.save()
-
+                if(request_date>=datetime.now().date()):
+                    messages.error(request, 'The checkin time is greater than or same as checkout time, please try again with different time :(')
+                else:
+                    messages.error(request, 'The date is in past, please try again with different date :(')
+                return render(request,'courts.html',context)
             
         return render(request,'courts.html',context)
     else:
