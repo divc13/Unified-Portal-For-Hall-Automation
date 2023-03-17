@@ -1,0 +1,64 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Secy Return Validation</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+    <table cellspacing="1" cellpadding="5em">
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Sports Equipment Returns</th></tr>
+      <tr>
+        <th style="text-align: center;">Name</th>
+        <th style="text-align: center;">Roll</th>
+        {% comment %} <th style="text-align: center;">Room no.</th> {% endcomment %}
+        <th style="text-align: center;">Sports-equipment</th>
+        <th style="text-align: center;">Return Status</th>
+      </tr>
+
+  
+          {% for item in querry %}
+          <tr>
+            <form method='post' action='secy_return_validation'>
+            {% csrf_token %}
+          <td>{{item.name}}
+            <input type='hidden' name='returner_name' value= "{{item.name}}" required></input>
+          </td>
+          <td>{{item.username}}
+            <input type='hidden' name='returner_roll' value="{{item.username}}" required></input>
+          </td>
+          <td>{{item.equipment_selected}}
+            <input type='hidden' name='item_returning' value="{{item.equipment_selected}}" required></input>
+          </td>
+          <td>
+            <input type='submit' value='validated' required></input></td>
+        </form>
+        </tr>
+          {% endfor %}  
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>
