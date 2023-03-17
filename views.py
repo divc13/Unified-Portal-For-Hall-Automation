@@ -50,7 +50,7 @@ def guestroom(request): #student
                                                 date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
                             
                             guestroom_request.save()
-                            messages.success(request, f'Your request for this room has been sent to the Hall manager, Please reach out to him for further details.')
+                            messages.success(request, f'Your request for this room has been sent to the Hall manager, UPHA team will communicate their confirmation to you.')
                             return render(request,'guestroom.html',context)
                         else:
                             rooms=Guestroom.objects.filter(room=room)
@@ -213,7 +213,8 @@ def secy_request_validation(request):
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
             context ={
-                'querry':sports_equipments_request.objects.all().filter(secy_validation='NO')
+                'querry':sports_equipments_request.objects.all().filter(secy_validation='NO'),
+                'messages' : messages.get_messages(request)
             }
             if request.method=="POST":
                 requester_username=request.POST.get('requester_username')
@@ -227,8 +228,10 @@ def secy_request_validation(request):
                     reg_item = sports_equipments_registered.objects.get(equipments= item_requested)
                     reg_item.quantity = reg_item.quantity-1
                     reg_item.save()
+                    messages.success(request, 'The request has been validated')
                 else:
                     item=sports_equipments_request.objects.get(equipment_selected = item_requested,username=requester_username)
+                    messages.success(request, 'The request has been rejected')
                     item.delete()
                 
             return render(request,'secy_validate_request.html',context)
@@ -241,7 +244,8 @@ def secy_return_validation(request):
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
             context ={
-                'querry':sports_equipments_request.objects.all().filter(student_return_request='YES')
+                'querry':sports_equipments_request.objects.all().filter(student_return_request='YES'),
+                'messages' : messages.get_messages(request)
             }
 
             if request.method == 'POST':
@@ -253,6 +257,7 @@ def secy_return_validation(request):
                 reg_item = sports_equipments_registered.objects.get(equipments=item_returning)
                 reg_item.quantity = reg_item.quantity + 1
                 reg_item.save()
+                messages.success(request, 'The return has been validated')
             return render(request,'secy_validate_return.html',context)
         else:
             return render(request,"Error.html")
@@ -262,6 +267,9 @@ def secy_return_validation(request):
 def secy_add_equipment(request):
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
+            context ={
+                'message':messages.get_messages(request)
+            }
             if request.method=='POST':
                 sport_selected =request.POST.get('sport')
                 equipment_quantity = request.POST.get('equipment_quantity')
@@ -274,28 +282,10 @@ def secy_add_equipment(request):
                 sport_reg.quantity = sport_reg.quantity+ int(equipment_quantity)
                 sport_reg.save()
 
-            return render(request,'secy_add_equipments.html')
+                messages.success(request, 'The equipment has been added successfully')
+            return render(request,'secy_add_equipments.html',context)
         else:
             return render(request,"Error.html")
     else:
         return render(request,"Error.html")
 
-
-# def return_request_initiate(request):
-#     if request.user.is_authenticated:
-#         if request.user.designation == "Student":
-#             if request.method=='POST':
-#                 return_equipment = request.POST.get('return_equipment')
-#                 return_item_check = sports_equipments_request.objects.filter(equipment_selected = return_equipment,username=request.user.username)
-#                 if (return_item_check): 
-#                     pass
-#                 else:
-#                     item_of_return = sports_equipments_request.objects.get(equipment_selected = return_equipment,username=request.user.username)
-#                     # number_of_items = len(items_of_return)
-#                     item_of_return.student_return_request='YES'
-#                     item_of_return.save()
-#             return render(request,'sports_equipments.html')   
-#         else: 
-#             return render(request,"Error.html")
-#     else:
-#         return render(request,"Error.html")

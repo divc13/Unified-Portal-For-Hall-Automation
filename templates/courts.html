@@ -49,7 +49,7 @@
         <form method = 'post' action='courts' id='courts'>
         {% csrf_token %}
           <td><select class="form-select" aria-label="Default select example" form = 'courts' name = 'sport' required>
-              <option selected>Select a sport</option>
+              {% comment %} <option selected>Select a sport</option> {% endcomment %}
               <option value="BM">Badminton</option>
               <option value="CB">Cricket</option>
               <option value="TT">Table Tennis</option>
