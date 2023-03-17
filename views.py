@@ -8,7 +8,9 @@ from django.contrib import messages
 def guestroom(request): #student
     if request.user.is_authenticated:
         if request.user.designation == "Student" :
-            context = {}
+            context = {
+                'messages' : messages.get_messages(request)
+            }
             #let's keep the booking logs updated
             today = datetime.today().date()
             rooms = Guestroom.objects.all()
@@ -24,40 +26,51 @@ def guestroom(request): #student
                 checkout_date = request.POST.get('checkout_date')
                 price = request.POST.get('price')
 
-                rooms = Guestroom.objects.filter(room=room)
-                if(len(rooms)>0):
-                    flag=1
-                    for room_item in rooms:
-                        in_date = room_item.checkin_date
-                        out_date = room_item.checkout_date
+                request_in_date = datetime.strptime(checkin_date, "%Y-%m-%d").date()
+                request_out_date = datetime.strptime(checkout_date, "%Y-%m-%d").date()
 
-                        request_in_date = datetime.strptime(checkin_date, "%Y-%m-%d").date()
-                        request_out_date = datetime.strptime(checkout_date, "%Y-%m-%d").date()
-                        
+                if (request_in_date<request_out_date and request_in_date>=today):
+                    rooms = Guestroom.objects.filter(room=room)
+                    if(len(rooms)>0):
+                        flag=1
+                        for room_item in rooms:
+                            in_date = room_item.checkin_date
+                            out_date = room_item.checkout_date
 
-                        if (request_in_date>=in_date and request_in_date<=out_date) or (request_out_date>=in_date and request_out_date<=out_date):
-                            flag=0
-                            break
+                            request_in_date = datetime.strptime(checkin_date, "%Y-%m-%d").date()
+                            request_out_date = datetime.strptime(checkout_date, "%Y-%m-%d").date()
+                            
 
-                    if flag==1:
-                        guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
-                                            date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
-                        
-                        guestroom_request.save()
-                        return render(request,'guestroom.html',context)
+                            if (request_in_date>=in_date and request_in_date<=out_date) or (request_out_date>=in_date and request_out_date<=out_date):
+                                flag=0
+                                break
+
+                        if flag==1:
+                            guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
+                                                date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
+                            
+                            guestroom_request.save()
+                            messages.success(request, f'Your request for this room has been sent to the Hall manager, Please reach out to him for further details.')
+                            return render(request,'guestroom.html',context)
+                        else:
+                            rooms=Guestroom.objects.filter(room=room)
+                            for room in rooms:
+                                room_r=room
+                                break
+                            messages.error(request, f'The room you have requested is already booked from {room_r.checkin_date} to {room_r.checkout_date}. UPHA team highly regrets the inconvenience caused.')
+                            return render(request,'guestroom.html',context)
                     else:
-                        rooms=Guestroom.objects.filter(room=room)
-                        for room in rooms:
-                            room_r=room
-                            break
-                        return HttpResponse(f'Those dates clash with another reservation as this room booked between {room_r.checkin_date} and {room_r.checkout_date}.\nPlease go back and try another date or another room.\n UPHA team highly regrets your inconvenience')
-                    
+                        guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
+                                                date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
+                            
+                        guestroom_request.save()
+                        messages.success(request, f'Your request for this room has been sent to the Hall manager, Please reach out to him for further details.')
+
                 else:
-                    guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
-                                            date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
-                        
-                    guestroom_request.save()
-                
+                    if(request_in_date>today):
+                        messages.error(request, f'Checkin date can not be after checkout date, please enter dates correctly again.')
+                    else:
+                        messages.error(request, f'Checkin date can not be before today, please enter dates correctly again.')
             return render(request,'guestroom.html',context)
         else:
             return render(request,"Error.html")
@@ -76,7 +89,8 @@ def sports_equipments(request): #student\
             'football_item':sports_equipments_registered.objects.get(equipments='FB'),
             
             'request_querry':sports_equipments_request.objects.filter(username=request.user.username,secy_validation='NO'),
-            'validated_request_querry':sports_equipments_request.objects.filter(username=request.user.username,secy_validation='YES')
+            'validated_request_querry':sports_equipments_request.objects.filter(username=request.user.username,secy_validation='YES'),
+            'messages' : messages.get_messages(request)
         }
 
         if request.method =="POST":
@@ -92,16 +106,19 @@ def sports_equipments(request): #student\
                 # number_of_items = len(items_of_return)
                 item_of_return.student_return_request='YES'
                 item_of_return.save()
+                messages.success(request, f'Your request for returning this item has been sent to the secretary.')
             
             else:
                 equipment_selected_get = request.POST.get("equipment_selected")
                 check_requested_item = sports_equipments_request.objects.filter(username=request.user.username,equipment_selected=equipment_selected_get)
                 if (check_requested_item):
+                    messages.error(request, f'You have already requested for this item.')
                     pass
                 else:    
                     equipment_request = sports_equipments_request(equipment_selected=equipment_selected_get,date=datetime.today(),
                                                                 name=request.user.name,username=request.user.username,argument = equipment_selected_get+'_'+str(request.user.name))
                     equipment_request.save()
+                    messages.success(request, f'Your request for this item has been sent to the secretary.')
 
 
         return render(request,'sports_equipments.html',context)

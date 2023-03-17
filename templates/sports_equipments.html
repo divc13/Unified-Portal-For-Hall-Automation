@@ -20,6 +20,13 @@
 
   <body>
     <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
     <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
