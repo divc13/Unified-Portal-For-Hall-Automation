@@ -9,6 +9,7 @@ def guestroom(request): #student
     if request.user.is_authenticated:
         if request.user.designation == "Student" :
             context = {
+                'bookings' : Guestroom.objects.filter(username=request.user.username),
                 'messages' : messages.get_messages(request)
             }
             #let's keep the booking logs updated
@@ -30,7 +31,7 @@ def guestroom(request): #student
                 request_out_date = datetime.strptime(checkout_date, "%Y-%m-%d").date()
 
                 if (request_in_date<request_out_date and request_in_date>=today):
-                    rooms = Guestroom.objects.filter(room=room)
+                    rooms = Guestroom.objects.filter(room=room,manager_validation='YES')
                     if(len(rooms)>0):
                         flag=1
                         for room_item in rooms:
@@ -46,12 +47,17 @@ def guestroom(request): #student
                                 break
 
                         if flag==1:
-                            guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
-                                                date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
-                            
-                            guestroom_request.save()
-                            messages.success(request, f'Your request for this room has been sent to the Hall manager, UPHA team will communicate their confirmation to you.')
-                            return render(request,'guestroom.html',context)
+                            check_booking = Guestroom.objects.filter(room=room,username=request.user.username,manager_validation='NO')
+                            if(len(check_booking)>0):
+                                messages.error(request, f'You have already requested this room, please check your booking history.')
+                                return render(request,'guestroom.html',context)
+                            else:
+                                guestroom_request = Guestroom(checkin_date = checkin_date, checkout_date = checkout_date, price=price,
+                                                    date=datetime.today(),name=request.user.name,username=request.user.username,room=room)
+                                
+                                guestroom_request.save()
+                                messages.success(request, f'Your request for this room has been sent to the Hall manager, UPHA team will communicate their confirmation to you.')
+                                return render(request,'guestroom.html',context)
                         else:
                             rooms=Guestroom.objects.filter(room=room)
                             for room in rooms:
@@ -98,16 +104,15 @@ def sports_equipments(request): #student\
             action = request.POST.get("submit")
             if (action == "Return Item"): #
                 return_equipment = request.POST.get('return_equipment')
-                # return_item_check = sports_equipments_request.objects.filter(equipment_selected = return_equipment,username=request.user.username)
-                # if (return_item_check): 
-                #     pass
-                # else:
+              
                 item_of_return = sports_equipments_request.objects.get(equipment_selected = return_equipment,username=request.user.username)
-                # number_of_items = len(items_of_return)
-                item_of_return.student_return_request='YES'
-                item_of_return.save()
-                messages.success(request, f'Your request for returning this item has been sent to the secretary.')
-            
+                
+                if(not(item_of_return.student_return_request == 'YES')):
+                    item_of_return.student_return_request='YES'
+                    item_of_return.save()
+                    messages.success(request, f'Your request for returning this item has been sent to the secretary.')
+                else:
+                    messages.error(request, f'You have already requested for return of this item.')
             else:
                 equipment_selected_get = request.POST.get("equipment_selected")
                 check_requested_item = sports_equipments_request.objects.filter(username=request.user.username,equipment_selected=equipment_selected_get)
@@ -128,6 +133,8 @@ def sports_equipments(request): #student\
 def courts_book(request): #student
     if request.user.designation == "Student" :
         context ={
+            'querry' : Courts.objects.filter(username=request.user.username),
+            'today' : datetime.today().date(),
             'var_date' : str(datetime.today()),
             'var_time' : str(datetime.now().time()),
             'messages' : messages.get_messages(request)
@@ -211,19 +218,20 @@ def secy_request_validation(request):
                 requester_username=request.POST.get('requester_username')
                 item_requested=request.POST.get('item_requested')
                 secy_action=request.POST.get('action')
-                if (secy_action == "validated"):
+                if (secy_action == "Validate"):
                     item=sports_equipments_request.objects.get(equipment_selected = item_requested,username=requester_username) 
                     item.secy_validation='YES'
-                    item.save()   
+                    item.save()
+                    messages.success(request, 'The request has been validated')   
 
                     reg_item = sports_equipments_registered.objects.get(equipments= item_requested)
                     reg_item.quantity = reg_item.quantity-1
                     reg_item.save()
-                    messages.success(request, 'The request has been validated')
+                    
                 else:
                     item=sports_equipments_request.objects.get(equipment_selected = item_requested,username=requester_username)
-                    messages.success(request, 'The request has been rejected')
                     item.delete()
+                    messages.success(request, 'The request has been rejected')
                 
             return render(request,'secy_validate_request.html',context)
         else:
@@ -287,7 +295,9 @@ def booking_manager(request): #hall manager
     if request.user.is_authenticated:
         if request.user.designation == "Hall Manager":
             context = {
-                'query_results' : Guestroom.objects.all()
+                'query_results_request' : Guestroom.objects.filter(manager_validation='NO'),
+                'query_results_approved' : Guestroom.objects.filter(manager_validation='YES'),
+                'messages' : messages.get_messages(request)
             }
             if request.method =="POST":
                 username = request.POST.get('username')
@@ -296,6 +306,8 @@ def booking_manager(request): #hall manager
 
                 get_booking = Guestroom.objects.get(username=username,room=room)
                 if action == "approve":
+                    get_booking.manager_validation = "YES"
+                    get_booking.save()
                     messages.success(request, 'The booking has been validated')
                 else:
                     messages.success(request, 'The booking has been rejected')
