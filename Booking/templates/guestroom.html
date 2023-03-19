@@ -23,7 +23,14 @@
 
   <body>
     <div class="main_div">
-    <table cellspacing="1" cellpadding="5em">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -41,18 +48,17 @@
         <form method="post" action='guestroom'>
           {% csrf_token %}
         <td>1
-          <input type='hidden' name='room' value='1'></input>
+          <input type='hidden' name='room' value='1' required></input>
         </td>
 
-        <td><input type="date"
-          id="test" name="checkin_date"></td>
+        <td><input type="date" id="test" name="checkin_date" required></td>
 
         <td><input type="date"
-          id="test" name="checkout_date"></input></td>
+          id="test" name="checkout_date" required></input></td>
         <td>Rs.900
-          <input type="hidden" name="price" value="Rs.900"></input>
+          <input type="hidden" name="price" value="Rs.900" required></input>
         </td>
-        <td><input type="submit" name="submit" value="Book" ></input></td>
+        <td><input type="submit" name="submit" value="Book" required ></input></td>
         </form>
       </tr>
 
@@ -60,18 +66,18 @@
         <form method="post" action='guestroom'>
           {% csrf_token %}
         <td>2
-          <input type='hidden' name='room' value='2'></input>
+          <input type='hidden' name='room' value='2'required></input>
         </td>
 
         <td><input type="date"
-          id="test" name="checkin_date"></td>
+          id="test" name="checkin_date" required></td>
 
         <td><input type="date"
-          id="test" name="checkout_date"></input></td>
+          id="test" name="checkout_date" required></input></td>
         <td>Rs.1200
-          <input type="hidden" name="price" value="Rs.1200"></input>
+          <input type="hidden" name="price" value="Rs.1200" required></input>
         </td>
-        <td><input type="submit" name="submit" value="Book" ></input></td>
+        <td><input type="submit" name="submit" value="Book" required></input></td>
         </form>
       </tr>
 
@@ -79,18 +85,18 @@
         <form method="post" action='guestroom'>
           {% csrf_token %}
         <td>3
-          <input type='hidden' name='room' value='3'></input>
+          <input type='hidden' name='room' value='3' required></input>
         </td>
 
         <td><input type="date"
-          id="test" name="checkin_date"></td>
+          id="test" name="checkin_date" required></td>
 
         <td><input type="date"
-          id="test" name="checkout_date"></input></td>
+          id="test" name="checkout_date" required></input></td>
         <td>Rs.500
-          <input type="hidden" name="price" value="Rs.500"></input>
+          <input type="hidden" name="price" value="Rs.500" required></input>
         </td>
-        <td><input type="submit" name="submit" value="Book" ></input></td>
+        <td><input type="submit" name="submit" value="Book" required></input></td>
         </form>
       </tr>
 
@@ -98,19 +104,19 @@
         <form method="post" action='guestroom'>
           {% csrf_token %}
         <td>4
-          <input type='hidden' name='room' value='4'></input>
+          <input type='hidden' name='room' value='4'required></input>
         </td>
 
         <td><input type="date"
-          id="test" name="checkin_date"></td>
+          id="test" name="checkin_date" required></td>
 
         <td><input type="date"
-          id="test" name="checkout_date"></input></td>
+          id="test" name="checkout_date" required></input></td>
         <td>Rs.1500
-          <input type="hidden" name="price" value="Rs.1500"></input>
+          <input type="hidden" name="price" value="Rs.1500" required></input>
         </td>
         <td>
-          <input type="submit" name="submit" value="Book" ></input></td>
+          <input type="submit" name="submit" value="Book" required></input></td>
         </form>
       </tr>
       

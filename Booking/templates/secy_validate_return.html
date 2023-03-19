@@ -21,7 +21,14 @@
 
   <body>
     <div class="main_div">
-    <table cellspacing="1" cellpadding="5em">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -42,16 +49,39 @@
             <form method='post' action='secy_return_validation'>
             {% csrf_token %}
           <td>{{item.name}}
-            <input type='hidden' name='returner_name' value= "{{item.name}}"></input>
+            <input type='hidden' name='returner_name' value= "{{item.name}}" required></input>
           </td>
           <td>{{item.username}}
-            <input type='hidden' name='returner_roll' value="{{item.username}}"></input>
-          </td>
-          <td>{{item.equipment_selected}}
-            <input type='hidden' name='item_returning' value="{{item.equipment_selected}}"></input>
+            <input type='hidden' name='returner_roll' value="{{item.username}}" required></input>
           </td>
           <td>
-            <input type='submit' value='validated'></input></td>
+            {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}
+            <input type='hidden' name='item_returning' value="{{item.equipment_selected}}" required></input>
+          </td>
+          <td>
+            <input type='submit' value='validated' required></input></td>
         </form>
         </tr>
           {% endfor %}  

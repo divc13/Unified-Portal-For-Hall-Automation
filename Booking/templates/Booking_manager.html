@@ -26,27 +26,43 @@
 
   <body>
     <div class="main_div">
-    <table cellspacing="1" cellpadding="5em">
-      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "6" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
         165.96249371767044,
         0.6200000047683716
       );">Guestroom Booking</th></tr>
       <tr>
+        {% comment %} <th style="text-align: center;">Student</th> {% endcomment %}
         <th style="text-align: center;">Student</th>
-        <th style="text-align: center;">Student's Roll</th>
         <th style="text-align: center;">Room No.</th>
         <th style="text-align: center;">Check in Date</th>
         <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Choose action</th>
+        <th style="text-align: center;">Validate</th>
       </tr>
       {% for item in query_results %}
       <tr>
-            <td> {{item.name}}</td>
-            <td> {{item.username}}</td>
-            <td> {{item.room}}</td>
-            <td> {{item.checkin_date}}</td>
-            <td> {{item.checkout_date}}</td>
+        <form action="/booking_manager" method="post" id='manager_action'>
+            {% csrf_token %}
+            <td> {{item.username}}
+            <input type="hidden" name="username" value="{{item.username}}">
+            </td>
+            <td> {{item.room}}
+            <input type="hidden" name="room" value="{{item.room}}">
+            </td>
+            <td> {{item.checkin_date}}
+            </td>
+            <td> {{item.checkout_date}}
+            </td>
+            <td><select class="form-select" aria-label="Default select example" form = 'manager_action' name = 'action' required>
+              {% comment %} <option selected>Select a sport</option> {% endcomment %}
+              <option value="approve">Approve</option>
+              <option value="reject">Reject</option>
+            </select</td>
+            <td><input type="submit" >Submit</input></td>
+      </form>
       </tr>
       {% endfor %}
       

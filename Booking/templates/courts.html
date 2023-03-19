@@ -23,7 +23,14 @@
 
   <body>
     <div class="main_div">
-    <table cellspacing="1" cellpadding="5em">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -41,8 +48,8 @@
       <tr>
         <form method = 'post' action='courts' id='courts'>
         {% csrf_token %}
-          <td><select class="form-select" aria-label="Default select example" form = 'courts' name = 'sport'>
-              <option selected>Select a sport</option>
+          <td><select class="form-select" aria-label="Default select example" form = 'courts' name = 'sport' required>
+              {% comment %} <option selected>Select a sport</option> {% endcomment %}
               <option value="BM">Badminton</option>
               <option value="CB">Cricket</option>
               <option value="TT">Table Tennis</option>
@@ -52,15 +59,15 @@
             </select></td>
 
           <td>
-              <input type='time' placeholder= '12:00' name='checkin_time'></input> 
+              <input type='time' placeholder= '12:00' name='checkin_time' required></input> 
           </td>
           <td>
-              <input type='time' placeholder= '12:00' name = 'checkout_time'></input>
+              <input type='time' placeholder= '12:00' name = 'checkout_time'required></input>
           </td>
           <td>
-                <input type='date' placeholder= '09-03-2023' name='date'></input>
+                <input type='date' placeholder= '09-03-2023' name='date' required></input>
           </td>
-          <td><input type='submit' name='submit' value="Book court"></input></td>
+          <td><input type='submit' name='submit' value="Book court" required></input></td>
 
         </form>
       </tr>

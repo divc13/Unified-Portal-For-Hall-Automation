@@ -21,7 +21,14 @@
 
   <body>
     <div class="main_div">
-    <table cellspacing="1" cellpadding="5em">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "3" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -37,8 +44,8 @@
       <tr>
         <form method = 'post' action='secy_add_equipment' id='add_equipment'>
         {% csrf_token %}
-          <td><select class="form-select" aria-label="Default select example" form = 'add_equipment' name = 'sport'>
-              <option selected>Select a sport</option>
+          <td><select class="form-select" aria-label="Default select example" form = 'add_equipment' name = 'sport'required>
+              {% comment %} <option selected>Select a sport</option> {% endcomment %}
               <option value="BM">Badminton</option>
               <option value="CB">Cricket</option>
               <option value="TT">Table Tennis</option>
@@ -48,9 +55,9 @@
             </select></td>
 
           <td>
-              <input type='number' placeholder= '0' name='equipment_quantity'></input> 
+              <input type='number' placeholder= '0' name='equipment_quantity'required></input> 
           </td>
-          <td><input type='submit' name='submit' value="submit"></input></td>
+          <td><input type='submit' name='submit' value="submit" required></input></td>
 
         </form>
       </tr>
