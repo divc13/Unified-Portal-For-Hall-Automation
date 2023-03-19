@@ -20,24 +20,13 @@ class sports_equipments_request(models.Model):
         (FOOTBALL,'Football')
     ]
 
-    # #status choices
-    # BOOK = 'book'
-    # UNAVAILABLE = 'unavailable'
 
-    # STATUS_CHOICES = [
-    #     (BOOK,'Book'),
-    #     (UNAVAILABLE, 'Item is Booked')
-    # ]
     equipment_selected = models.CharField(
         max_length=100,
         choices=EQUIPMENT_CHOICES,
         default=CRICKET_BAT
     )
-    # quantity = models.IntegerField()
-    # status = models.CharField(
-    #     max_length=20,
-    #     choices = STATUS_CHOICES
-    # )
+ 
 
     #Essentials
     date = models.DateField()
@@ -98,6 +87,8 @@ class Guestroom(models.Model):
     checkin_date = models.DateField()
     checkout_date = models.DateField()
     price = models.CharField(max_length=100)
+    manager_validation = models.CharField(max_length=10,default='NO')
+
 
     #Essentials
     date = models.DateField()

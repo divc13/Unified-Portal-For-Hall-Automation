@@ -30,7 +30,7 @@
         {% endfor %}
       {% endif %}
     <table cellspacing="0" cellpadding="5em">
-      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
         165.96249371767044,
@@ -42,7 +42,7 @@
         {% comment %} <th style="text-align: center;">Room no.</th> {% endcomment %}
         <th style="text-align: center;">Sports-equipment</th>
         <th style="text-align: center;"> Choose action</th>
-        <th style="text-align: center;"> Confirm</th>
+        {% comment %} <th style="text-align: center;"> Confirm</th> {% endcomment %}
       </tr>
 
       <!---->
@@ -80,13 +80,13 @@
           {% endif %}
           {% endif %}
           </td>
-          <input type='hidden' name='item_requested' value={{item.equipment_selected}} required></input> <!-- {{item.equipment_selected}} -->
-          <td><select class="form-select" aria-label="Default select example" form = 'request_tackle' name = 'action' required>
-            {% comment %} <option selected >Choose action</option> {% endcomment %}
+          <input type='hidden' name='item_requested' value={{item.equipment_selected}} required></input>
+          {% comment %} <td><select class="form-select"  form = 'request_tackle' name = 'action' required>
             <option value="validated">Validate</option>
             <option value="rejected">Reject</option>
-          </select></td>
-          <td><input type='submit' value='Submit' name='submit' required></input></td>
+          </select></td> {% endcomment %}
+          <td><input type='submit' value='Validate' name='action' required></input>
+          <input type='submit' value='Reject' name='action' required></input></td>
         </form>
         </tr>
           {% endfor %}  
