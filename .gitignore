@@ -1,0 +1,6 @@
+db.sqlite3
+**/migrations/**
+**/__pycache__/**
+**/__pycache__
+/__pycache__
+/static_files
