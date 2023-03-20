@@ -42,102 +42,113 @@
 
       <!--Cricket Bat-->
       <tr>
-        <form method='post' action='sports_equipments'>
-          {% csrf_token %}
+        
         <td>Cricket Bat
-          <input type='hidden' name='equipment_selected' value='CB' required></input>
         </td>
           {% if cricket_item.quantity > 0 %}
+          <form method='post' action='sports_equipments'>
+            {% csrf_token %}
+            <input type='hidden' name='equipment_selected' value='CB' required></input>
           <td>{{cricket_item.quantity}}</td>
           <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+        </form>
           {% else %}
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked" ></button></td>
           {% endif %}
-      </form>
+      
       </tr>
 
       <!--Basketball-->
       <tr>
-        <form method='post' action='sports_equipments'>
-        {% csrf_token %}
         <td>Basketball
-            <input type='hidden' name='equipment_selected' value='BB' required></input>
+            
         </td>
           {% if basketball_item.quantity > 0 %}
+          <form method='post' action='sports_equipments'>
+            {% csrf_token %}
+            <input type='hidden' name='equipment_selected' value='BB' required></input>
           <td>{{basketball_item.quantity}}</td>
           <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+        </form>
           {% else %}
+          
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked" ></button></td>
           {% endif %}
-        </form>
+        
       </tr>
 
       <!--Hockey-->
       <tr>
-        <form method='post' action='sports_equipments'>
-        {% csrf_token %}
+        
         <td>Hockey
-            <input type='hidden' name='equipment_selected' value='HK'required></input>
         </td>
           {% if hockey_item.quantity > 0 %}
+          <form method='post' action='sports_equipments'>
+            {% csrf_token %}
+            <input type='hidden' name='equipment_selected' value='HK'required></input>
           <td>{{hockey_item.quantity}}</td>
           <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+        </form>
           {% else %}
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked"></button></td>
           {% endif %}
-        </form>
+        
       </tr>
 
       <!--Table Tennis-->
       <tr>
-        <form method='post' action='sports_equipments'>
-        {% csrf_token %}
         <td>Table Tennis
-            <input type='hidden' name='equipment_selected' value='TT' required></input>
         </td>
           {% if table_tennis_item.quantity > 0 %}
+          <form method='post' action='sports_equipments'>
+            {% csrf_token %}
+            <input type='hidden' name='equipment_selected' value='TT' required></input>
           <td>{{table_tennis_item.quantity}}</td>
           <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+        </form>
           {% else %}
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked"></button></td>
           {% endif %}
-    </form>
+    
       </tr>
 
       <!--Football-->
       <tr>
-        <form method='post' action='sports_equipments'>
-          {% csrf_token %}
         <td>Football
-          <input type='hidden' name='equipment_selected' value='FB' required></input>
         </td> 
           {% if football_item.quantity > 0 %}
+          <form method='post' action='sports_equipments'>
+            {% csrf_token %}
+            <input type='hidden' name='equipment_selected' value='FB' required></input>
             <td>{{football_item.quantity}}</td>
             <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+          </form>
           {% else %}
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked"></button></td>
           {% endif %}
-    </form>
+    
   </tr>
   <tr>
-    <form method='post' action='sports_equipments'>
-      {% csrf_token %}
     <td>Badminton
-      <input type='hidden' name='equipment_selected' value='BM' required></input>
     </td> 
       {% if badminton_item.quantity > 0 %}
+      <form method='post' action='sports_equipments'>
+        {% csrf_token %}
+        <input type='hidden' name='equipment_selected' value='BM' required></input>
         <td>{{badminton_item.quantity}}</td>
         <td><input type='submit' name='submit'  value="Request Booking" required></input></td>
+      </form>
           {% else %}
+        
           <td><font color='grey'><i>Not available</i></font></td>
           <td><button type='submit' name='submit'  value="Item is booked" required></button></td>
           {% endif %}
-</form>
+
   </tr>
 
     </table>
