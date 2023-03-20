@@ -1,43 +1,42 @@
-Title
-===
-Abstract:xxx
-## Papar Information
-- Title:  `paper name`
-- Authors:  `A`,`B`,`C`
-- Preprint: [https://arxiv.org/abs/xx]()
-- Full-preprint: [paper position]()
-- Video: [video position]()
+Unified Portal For Hall Automation
+==================================
 
-## Install & Dependence
-- python
-- pytorch
-- numpy
+The application was made as a course project of [CS253A](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo22.shtml/): Software Development and Operations in spring 2022 under the guidance of [Dr. Indranil Saha](https://www.cse.iitk.ac.in/users/isaha/).
 
-## Dataset Preparation
-| Dataset | Download |
-| ---     | ---   |
-| dataset-A | [download]() |
-| dataset-B | [download]() |
-| dataset-C | [download]() |
+Unified Portal for Hall Automation is a merged platform designed for the residents of various halls at IITK to access day to day hall functionalities. This portal aims to digitalize various services provided by the hall that includes mess, canteen and various other services. Through this portal, you can book your mess extras, order your canteen food, request room cleaning, book various Hall facilities, and many more.
 
-## Use
-- for train
-  ```
-  python train.py
-  ```
-- for test
-  ```
-  python test.py
-  ```
-## Pretrained model
-| Model | Download |
-| ---     | ---   |
-| Model-1 | [download]() |
-| Model-2 | [download]() |
-| Model-3 | [download]() |
+Broadly, the application will support the following:
 
+* Students can pre-book extras in mess and order food in canteen.
+* Students can book the hall's guest room, gym and sports courts online and also schedule cleaning services.
+* Students can access their pending mess and canteen bills.
+* Special permissions have been provided to the Hall Manager, Mess manager, Canteen Owner and the sports secretary to facilitate all these services.
+
+## How to run the software locally?
+
+* Make sure you have python and pip installed in your system
+* Now run this command in terminal `pip install requirements.txt`
+
+Give the following commands to start the backend server.
+
+```
+python manage.py collectstatic
+```
+
+```
+python manage.py makemigrations
+```
+
+```
+python manage.py migrate
+```
+
+```
+python manage.py runserver
+```
 
 ## Directory Hierarchy
+
 ```
 |—— .gitignore
 |—— Booking
@@ -188,37 +187,4 @@ Abstract:xxx
 |    |—— urls.py
 |    |—— wsgi.py
 |    |—— __init__.py
-|    |—— __pycache__
-|        |—— settings.cpython-310.pyc
-|        |—— urls.cpython-310.pyc
-|        |—— wsgi.cpython-310.pyc
-|        |—— __init__.cpython-310.pyc
-```
-## Code Details
-### Tested Platform
-- software
-  ```
-  OS: Debian unstable (May 2021), Ubuntu LTS
-  Python: 3.8.5 (anaconda)
-  PyTorch: 1.7.1, 1.8.1
-  ```
-- hardware
-  ```
-  CPU: Intel Xeon 6226R
-  GPU: Nvidia RTX3090 (24GB)
-  ```
-### Hyper parameters
-```
-```
-## References
-- [paper-1]()
-- [paper-2]()
-- [code-1](https://github.com)
-- [code-2](https://github.com)
-  
-## License
-
-## Citing
-If you use xxx,please use the following BibTeX entry.
-```
 ```
