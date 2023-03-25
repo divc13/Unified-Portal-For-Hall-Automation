@@ -139,6 +139,20 @@ def guestroom(request):  # student
     else:
         return render(request, "Error.html")
 
+# this is to see the previous guestroom booking history
+def guestroom_pb(request):
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+            context = {
+                "bookings": Guestroom.objects.filter(username=request.user.username),
+                "messages": messages.get_messages(request)
+            }
+           
+            return render(request, "guestroom_pb.html", context)
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
 
 def sports_equipments(request):  # student\
     if request.user.designation == "Student":

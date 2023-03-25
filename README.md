@@ -1,4 +1,4 @@
-Unified Portal For Hall Automation
+cleUnified Portal For Hall Automation
 ==================================
 
 The application was made as a course project of [CS253A](https://www.cse.iitk.ac.in/users/isaha/Courses/sdo22.shtml/): Software Development and Operations in spring 2022 under the guidance of [Dr. Indranil Saha](https://www.cse.iitk.ac.in/users/isaha/).

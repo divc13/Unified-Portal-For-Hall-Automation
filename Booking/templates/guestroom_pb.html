@@ -30,7 +30,7 @@
           </div>
         {% endfor %}
       {% endif %}
-    <table cellspacing="0" cellpadding="5em">
+    {% comment %} <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -120,18 +120,8 @@
         </form>
       </tr>
       
-    </table>
-    <p><br></p>
-    <div class="container">
-      <div class="row" align="center">
-        <div class="col-md-6">
-          
-          <button type="button"><a href={% url 'guestroom_pb' %}>Check Your Previous Bookings</a></button>
-          
-        </div>
-      </div>
-    </div>
-    {% comment %} <table cellspacing="0" cellpadding="5em">
+    </table> {% endcomment %}
+    <table cellspacing="0" cellpadding="5em">
       <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
         62.92744293808937,
         153.59830677509308,
@@ -156,7 +146,17 @@
           {% else %} <font color='grey' ><i>Pending...</i></font>
           {% endif %}</td>
       {% endfor %}
-    </table> {% endcomment %}
+    </table>
+    <p><br></p>
+    <div class="container">
+      <div class="row" align="center">
+        <div class="col-md-6">
+          
+          <button type="button"><a href={% url 'guestroom' %}>Go Back</a></button>
+          
+        </div>
+      </div>
+    </div>
   </div>
 
       </div>
