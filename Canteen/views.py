@@ -4,6 +4,9 @@ from Canteen.models import Bill
 from Canteen.models import Menu
 from django.contrib import messages
 from datetime import datetime
+from Login.models import User_class
+from django.conf import settings
+from django.core.mail import send_mail
 
 def Student_Place_Order(request):
     if request.user.is_authenticated:
@@ -145,6 +148,18 @@ def Owner_New_Order(request):
                     order.History_Status = 1
                     order.Processing_Status = 0
                     order.save()
+                    
+                    username = order.User_Name
+                    name = User_class.objects.filter(username=username)[0].name
+                    subject = "Order Rejected"
+                    message = f"Dear {name}, Your order, made on {order.Order_Date_Time}, with items {order.Item_Name} has been rejected. We deeply regret this. Contact the canteen manager."
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [
+                        f"{username}@iitk.ac.in",
+                    ]
+                    send_mail(subject, message, email_from, recipient_list)
+                    
+                    
                     messages.error(request, "You rejected the order")
 
                 return render(

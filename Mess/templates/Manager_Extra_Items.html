@@ -23,7 +23,8 @@
       {% endif %}
       <table cellspacing="0" cellpadding="5em">
         <form method="POST" action="Manager_Extra_Items">
-          {% csrf_token %} {% if status_check%}
+          {% csrf_token %} 
+          {% if status_check%}
           <tr>
             <th colspan="7" class="main_head">Modify/Update Extra Items</th>
             <th class="main_head">
@@ -64,9 +65,19 @@
                 value="{{items.Meal}}"
                 style="width: 105%"
               >
-                <option>Breakfast</option>
+              {% if items.Meal == "Breakfast" %}
+                <option selected>Breakfast</option>
                 <option>Lunch</option>
                 <option>Dinner</option>
+              {% elif items.Meal == "Lunch" %}
+              <option>Breakfast</option>
+                <option selected>Lunch</option>
+                <option>Dinner</option>
+              {% else %}
+              <option>Breakfast</option>
+                <option >Lunch</option>
+                <option selected>Dinner</option>
+                {% endif %}
               </select>
             </td>
             <td>

@@ -49,13 +49,63 @@
             name="day{{items.id}}"
             value="{{items.Day}}"
           >
-            <option>Monday</option>
+          {% if items.Day == "Monday" %}
+            <option selected>Monday</option>
             <option>Tuesday</option>
             <option>Wednesday</option>
             <option>Thursday</option>
             <option>Friday</option>
             <option>Saturday</option>
             <option>Sunday</option>
+          {% elif items.Day == "Tuesday" %}
+            <option>Monday</option>
+            <option selected>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          {% elif items.Day == "Wednesday" %}
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option selected>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          {% elif items.Day == "Thursday" %}
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option selected>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          {% elif items.Day == "Friday" %}
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option selected>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          {% elif items.Day == "Saturday" %}
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option selected>Saturday</option>
+            <option>Sunday</option>
+          {% else %}
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option selected>Sunday</option>
+            {% endif %}
           </select>
         </td>
         <td>
@@ -63,10 +113,20 @@
             name="meal{{items.id}}"
             value="{{items.Meal}}"
           >
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-          </select>
+          {% if items.Meal == "Breakfast" %}
+          <option selected>Breakfast</option>
+          <option>Lunch</option>
+          <option>Dinner</option>
+        {% elif items.Meal == "Lunch" %}
+        <option>Breakfast</option>
+          <option selected>Lunch</option>
+          <option>Dinner</option>
+        {% else %}
+        <option>Breakfast</option>
+          <option >Lunch</option>
+          <option selected>Dinner</option>
+          {% endif %}
+        </select>
         </td>
         <td>
           <input

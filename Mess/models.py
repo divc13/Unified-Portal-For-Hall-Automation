@@ -4,24 +4,24 @@ from datetime import datetime
 
 class Regular_menu(models.Model):
     Day_Choices = (
-        ("Monday", "Mon"),
-        ("Tuesday", "Tues"),
-        ("Wednesday", "Wed"),
-        ("Thursday", "Thu"),
-        ("Friday", "Fri"),
-        ("Saturday", "Sat"),
-        ("Sunday", "Sun"),
+        ("Monday", "Monday"),
+        ("Tuesday", "Tuesday"),
+        ("Wednesday", "Wednesday"),
+        ("Thursday", "Thursday"),
+        ("Friday", "Friday"),
+        ("Saturday", "Saturday"),
+        ("Sunday", "Sunday"),
     )
-    Meal_Choices = (("Breakfast", "B"), ("Lunch", "L"), ("Dinner", "D"))
+    Meal_Choices = (("Breakfast", "Breakfast"), ("Lunch", "Lunch"), ("Dinner", "Dinner"))
     Day = models.CharField(
         max_length=9,
         choices=Day_Choices,
-        default="Mon",
+        default="Monday",
     )
     Meal = models.CharField(
         max_length=9,
         choices=Meal_Choices,
-        default="B",
+        default="Breakfast",
     )
     Items = models.CharField(
         max_length=100,
@@ -113,15 +113,17 @@ class Rebate(models.Model):
 
 class Rating_Regular(models.Model):
 
-    Meal_Choices = (("Breakfast", "B"), ("Lunch", "L"), ("Dinner", "D"))
+    Meal_Choices = (("Breakfast", "Breakfast"),
+        ("Lunch", "Lunch"),
+        ("Dinner", "Dinner"),)
     Day_Choices = (
-        ("Monday", "Mon"),
-        ("Tuesday", "Tues"),
-        ("Wednesday", "Wed"),
-        ("Thursday", "Thu"),
-        ("Friday", "Fri"),
-        ("Saturday", "Sat"),
-        ("Sunday", "Sun"),
+        ("Monday", "Monday"),
+        ("Tuesday", "Tuesday"),
+        ("Wednesday", "Wednesday"),
+        ("Thursday", "Thursday"),
+        ("Friday", "Friday"),
+        ("Saturday", "Saturday"),
+        ("Sunday", "Sunday"),
     )
 
     Meal = models.CharField(

@@ -219,18 +219,26 @@ def Student_Apply_For_Rebate(request):
 
                 from_date = datetime.strptime(str(request.POST.get("from")), "%Y-%m-%d")
                 to_date = datetime.strptime(str(request.POST.get("to")), "%Y-%m-%d")
+                
+                if from_date <= to_date:
 
-                rebate_request = Rebate(
-                    Date_From=from_date,
-                    Date_To=to_date,
-                    User_Name=request.user.username,
-                )
-                rebate_request.Rebate_Days = rebate_request.date_diff()
-                rebate_request.save()
-                messages.success(
-                    request,
-                    "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
-                )
+                    rebate_request = Rebate(
+                        Date_From=from_date,
+                        Date_To=to_date,
+                        User_Name=request.user.username,
+                    )
+                    rebate_request.Rebate_Days = rebate_request.date_diff()
+                    rebate_request.save()
+                    messages.success(
+                        request,
+                        "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
+                    )
+                
+                else :
+                    messages.error(
+                        request,
+                        "From-Date must be less than equal to To-Date",
+                    )
 
             return render(
                 request,
@@ -363,6 +371,8 @@ def Manager_Extra_Items(request):
             extras = Extras.objects.all().order_by("-Start_Time")
 
             if request.method == "POST":
+                
+                flag = 0
 
                 if (
                     ("submit" in request.POST)
@@ -375,7 +385,7 @@ def Manager_Extra_Items(request):
                     # Commits changes to the database
 
                     for obj in Extras.objects.all():  # for obj in extras?
-                        # each instance of Extras is rewritten to the database (CONFIRM)
+
                         meal_date = request.POST.get("meal_date" + str(obj.id))
                         meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
                         meal = request.POST.get("meal" + str(obj.id))
@@ -389,19 +399,26 @@ def Manager_Extra_Items(request):
                         )
                         end_time = request.POST.get("end_time" + str(obj.id))
                         end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
+                        
+                        if start_time > end_time:
+                            messages.error(request, "Start time must be less than end time.")
+                            flag = 1
+                            break
+                            
+                        else:
 
-                        extra_items = Extras.objects.filter(id=obj.id)[0]
-                        extra_items.Meal = meal
-                        extra_items.Booking_Date = booking_date
-                        extra_items.Meal_Date = meal_date
-                        extra_items.Item_Name = item
-                        extra_items.Capacity = capacity
-                        extra_items.Price = price
-                        extra_items.Start_Time = start_time
-                        extra_items.End_Time = end_time
-                        extra_items.Available_Orders = capacity
+                            extra_items = Extras.objects.filter(id=obj.id)[0]
+                            extra_items.Meal = meal
+                            extra_items.Booking_Date = booking_date
+                            extra_items.Meal_Date = meal_date
+                            extra_items.Item_Name = item
+                            extra_items.Capacity = capacity
+                            extra_items.Price = price
+                            extra_items.Start_Time = start_time
+                            extra_items.End_Time = end_time
+                            extra_items.Available_Orders = capacity
 
-                        extra_items.save()
+                            extra_items.save()
 
                 if "add_hidden_item" in request.POST:
                     # samajh nahi aaya
@@ -415,17 +432,27 @@ def Manager_Extra_Items(request):
                     )
 
                 elif "submit" in request.POST:
-
-                    messages.success(request, "Changes made successfully.")
-                    return render(
-                        request,
-                        "Manager_Extra_Items.html",
-                        context={
-                            "extra_item": extras,
-                            "status_check": 0,
-                            "messages": messages.get_messages(request),
-                        },
-                    )
+                    if flag:
+                        return render(
+                            request,
+                            "Manager_Extra_Items.html",
+                            context={
+                                "extra_item": extras,
+                                "status_check": 1,
+                                "messages": messages.get_messages(request),
+                            },
+                        )
+                    else :
+                        messages.success(request, "Changes made successfully.")
+                        return render(
+                            request,
+                            "Manager_Extra_Items.html",
+                            context={
+                                "extra_item": extras,
+                                "status_check": 0,
+                                "messages": messages.get_messages(request),
+                            },
+                        )
 
                 elif "edit" in request.POST:
 
@@ -613,16 +640,17 @@ def Manager_Modify_BDMR(request):
         if request.user.designation == "Mess Manager":
 
             if request.method == "POST":
-
-                date = request.POST.get("BDMR_Date")
-                date = datetime.strptime(str(date), "%Y-%m-%d")
-                bdmr = request.POST.get("BDMR")
-
-                for obj in User_class.objects.filter(designation="Student"):
-                    # The Bill object corresponding to each student is modified when the BDMR of a day is uploaded/updated
-                    bill_objects = Bill.objects.filter(
-                        User_Name=obj.username, Bill_Month=date.month
-                    )
+                    
+                if "bdmr_submit" in request.POST:
+                    bdmr = request.POST.get("BDMR")
+                    date = request.POST.get("bdmr_submit")
+                    date = datetime.strptime(str(date), "%Y-%m-%d")
+                    for obj in User_class.objects.filter(designation="Student"):
+                        # The Bill object corresponding to each student is modified when the BDMR of a day is uploaded/updated
+                        bill_objects = Bill.objects.filter(
+                            User_Name=obj.username, Bill_Month=date.month
+                        )
+                        
                     if not bill_objects:
                         # If the Bill object corresponding to the user for the current month has not been initialised
                         # it is done when the BDMR is being saved
@@ -644,6 +672,7 @@ def Manager_Modify_BDMR(request):
 
                     else:
                         # If a Bill object has been generated for the user
+
                         bill = bill_objects[0]
                         bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
                         if not bdmr_obj:
@@ -656,15 +685,33 @@ def Manager_Modify_BDMR(request):
                         bill.messbillcalc()
                         bill.save()
 
-                # A "Datewise_BDMR" object is generated/updated
-                date_and_bdmr = Datewise_BDMR(
-                    Date=date,
-                    BDMR=bdmr,
-                )
-                date_and_bdmr.save()
+                    # A "Datewise_BDMR" object is generated/updated
+                    date_and_bdmr = Datewise_BDMR(
+                        Date=date,
+                        BDMR=bdmr,
+                    )
+                    date_and_bdmr.save()
 
-                messages.success(request, "BDMR modified")
+                    messages.success(request, "BDMR modified")
+                    
+                    return render(
+                        request,
+                        "Manager_Modify_BDMR.html",
+                        context={"messages": messages.get_messages(request)},
+                    )
 
+                if "BDMR_Date" in request.POST:
+                    date = request.POST.get("BDMR_Date")
+                    date = datetime.strptime(str(date), "%Y-%m-%d")
+                    if Datewise_BDMR.objects.filter(Date = date):
+                        amt = Datewise_BDMR.objects.filter(Date = date)[0].BDMR
+                    else:
+                        amt = 0
+                    return render(
+                        request,
+                        "Manager_Modify_BDMR.html",
+                        context={"messages": messages.get_messages(request),"date":date,"amount":amt},
+                    )
             return render(
                 request,
                 "Manager_Modify_BDMR.html",
