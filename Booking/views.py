@@ -188,7 +188,7 @@ def sports_equipments(request):  # student\
         if request.method == "POST":
 
             action = request.POST.get("submit")
-            if action == "Return Item":  #
+            if (1 == 2):  #Never true
                 return_equipment = request.POST.get("return_equipment")
 
                 item_of_return = sports_equipments_request.objects.get(
@@ -232,6 +232,42 @@ def sports_equipments(request):  # student\
                     )
 
         return render(request, "sports_equipments.html", context)
+    else:
+        return render(request, "Error.html")
+    
+def sports_equipments_pb(request):  # student
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+            context = {
+               "request_querry": sports_equipments_request.objects.filter(
+                username=request.user.username, secy_validation="NO"
+            ),
+            "validated_request_querry": sports_equipments_request.objects.filter(
+                username=request.user.username, secy_validation="YES"
+            ),
+            "messages": messages.get_messages(request)
+            }
+            if request.method == "POST":
+                return_equipment = request.POST.get("return_equipment")
+
+                item_of_return = sports_equipments_request.objects.get(
+                    equipment_selected=return_equipment, username=request.user.username
+                )
+
+                if not (item_of_return.student_return_request == "YES"):
+                    item_of_return.student_return_request = "YES"
+                    item_of_return.save()
+                    messages.success(
+                        request,
+                        f"Your request for returning this item has been sent to the secretary.",
+                    )
+                else:
+                    messages.error(
+                        request, f"You have already requested for return of this item."
+                    )
+            return render(request, "sports_equipments_pb.html", context)
+        else:
+            return render(request, "Error.html")
     else:
         return render(request, "Error.html")
 
