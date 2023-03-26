@@ -42,7 +42,7 @@
         <td>{{item.Items}}</td>
           <td>
             {%if item.Rating%}
-             ☆ {{item.Rating}}
+             ☆ {{item.Rating  | floatformat=2}}
             {% else %} 
             Be the first one to rate
             {% endif %}

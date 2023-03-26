@@ -31,7 +31,7 @@
           <td>{{items.Day}}</td>
           <td>{{items.Meal}}</td>
           <td>{{items.Items}}</td>
-          <td>☆ {{items.Rating}}</td>
+          <td>☆ {{items.Rating | floatformat=2}}</td>
         </tr>
         {% endfor %}
       </table>
