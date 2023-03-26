@@ -15,7 +15,8 @@ urlpatterns = [
     path('secy_request_validation', views.secy_request_validation, name='secy_request_validation'),
     path('secy_return_validation', views.secy_return_validation, name='secy_return_validation'),
     path('secy_add_equipment', views.secy_add_equipment, name='secy_add_equipment'),
-    path('guestroom_pb', views.guestroom_pb, name='guestroom_pb')
+    path('guestroom_pb', views.guestroom_pb, name='guestroom_pb'),
+    path('courts_ub', views.courts_ub, name='courts_ub')
 
     # path('return_request_initiate', views.return_request_initiate, name='return_request_initiate')
 ]

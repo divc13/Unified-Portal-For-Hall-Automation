@@ -375,6 +375,18 @@ def courts_book(request):  # student
     else:
         return render(request, "Error.html")
 
+def courts_ub(request):
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+            context = {
+                "querry": Courts.objects.filter(username=request.user.username)
+            }
+            return render(request, "courts_ub.html", context)
+        else:
+            return HttpResponse("You are not allowed to access this page")
+            # return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
 
 # sports secy functions
 def secy_request_validation(request):
