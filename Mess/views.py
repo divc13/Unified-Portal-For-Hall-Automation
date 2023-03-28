@@ -404,6 +404,10 @@ def Manager_Extra_Items(request):
                             messages.error(request, "Start time must be less than end time.")
                             flag = 1
                             break
+                        if meal_date < end_time.date():
+                            messages.error(request, "End time must be less than meal date.")
+                            flag = 1
+                            break
                             
                         else:
 
