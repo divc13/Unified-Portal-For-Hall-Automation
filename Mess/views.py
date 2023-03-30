@@ -421,6 +421,9 @@ def Manager_Extra_Items(request):
                                 extra_items.Available_Orders = capacity
 
                                 extra_items.save()
+                                
+                        else:
+                            obj.delete()
 
                 if "add_hidden_item" in request.POST:
 
