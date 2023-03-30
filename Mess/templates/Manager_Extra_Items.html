@@ -139,7 +139,8 @@
           <tr>
             <th colspan="7" class="main_head">Modify/Update Extra Items</th>
             <th class="main_head">
-              <button type="submit" name="edit">Edit</button>
+              {% if regularmenu %}<button type="submit" name="edit">Edit</button>{% endif %}
+
             </th>
             <th class="main_head">
               <button type="submit" name="add_hidden_item" >Add New Item</button>
