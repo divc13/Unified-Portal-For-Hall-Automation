@@ -215,7 +215,6 @@ class tests:
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
-
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
@@ -289,17 +288,20 @@ class tests:
         # deleting
         self.driver.find_elements(By.NAME, "delete")[0].click()       
        
+        # logging out
+        self.logout()
         
+    def 
         
         
     def main_test(self):
-        self.test1()
-        self.test2()        
-        self.test3()
-        self.test4()
-        self.test5()
-        self.test6()
-
+        # self.test1()
+        # self.test2()        
+        # self.test3()
+        # self.test4()
+        # self.test5()
+        # self.test6()
+        self.test7()
         
 test = tests()
 test.setup_method()
