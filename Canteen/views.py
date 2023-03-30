@@ -241,11 +241,14 @@ def Owner_Modify_Menu(request):
                     if "editable_mode" in request.POST:
                         for obj in Menu.objects.all():
                             item = request.POST.get("item" + str(obj.id))
-                            price = request.POST.get("price" + str(obj.id))
-                            extra_items = Menu.objects.filter(id=obj.id)[0]
-                            extra_items.Item_Name = item
-                            extra_items.Price = price
-                            extra_items.save()
+                            if item is not None:
+                                price = request.POST.get("price" + str(obj.id))
+                                extra_items = Menu.objects.filter(id=obj.id)[0]
+                                extra_items.Item_Name = item
+                                extra_items.Price = price
+                                extra_items.save()
+                            else:
+                                obj.delete()
                     extra_items1 = Menu()
                     extra_items1.save()
                     idt = extra_items1.id
@@ -259,11 +262,14 @@ def Owner_Modify_Menu(request):
                     # idt = request.POST.get("submit")
                     for obj in Menu.objects.all():
                         item = request.POST.get("item" + str(obj.id))
-                        price = request.POST.get("price" + str(obj.id))
-                        extra_items = Menu.objects.filter(id=obj.id)[0]
-                        extra_items.Item_Name = item
-                        extra_items.Price = price
-                        extra_items.save()
+                        if item is not None:
+                            price = request.POST.get("price" + str(obj.id))
+                            extra_items = Menu.objects.filter(id=obj.id)[0]
+                            extra_items.Item_Name = item
+                            extra_items.Price = price
+                            extra_items.save()
+                        else:
+                            obj.delete()
                     return render(
                         request,
                         "Owner_Modify_Menu.html",
@@ -283,11 +289,14 @@ def Owner_Modify_Menu(request):
                     if "editable_mode" in request.POST:
                         for obj in Menu.objects.all():
                             item = request.POST.get("item" + str(obj.id))
-                            price = request.POST.get("price" + str(obj.id))
-                            extra_items = Menu.objects.filter(id=obj.id)[0]
-                            extra_items.Item_Name = item
-                            extra_items.Price = price
-                            extra_items.save()
+                            if item is not None:
+                                price = request.POST.get("price" + str(obj.id))
+                                extra_items = Menu.objects.filter(id=obj.id)[0]
+                                extra_items.Item_Name = item
+                                extra_items.Price = price
+                                extra_items.save()
+                            else:
+                                obj.delete()
                     if Menu.objects.filter(id=idt):
                         extra_items_del = Menu.objects.filter(id=idt)[0]
                         extra_items_del.delete()
