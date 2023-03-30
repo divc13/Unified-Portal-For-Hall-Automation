@@ -17,21 +17,21 @@ class Regular_menu(models.Model):
         max_length=9,
         choices=Day_Choices,
         default="Monday",
-        blank=True,
+        blank=True, null = True,
     )
     Meal = models.CharField(
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
-        blank=True,
+        blank=True, null = True,
     )
     Items = models.CharField(
         max_length=100,
-        blank=True,
+        blank=True, null = True,
     )
     Rating = models.FloatField(
         default=0.0,
-        blank=True,
+        blank=True, null = True,
     )
 
 
@@ -45,15 +45,15 @@ class Extras(models.Model):
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
-        blank=True,
+        blank=True, null = True,
     )
-    Meal_Date = models.DateField(blank=True,)
-    Item_Name = models.CharField(max_length=50,blank=True,)
-    Price = models.IntegerField(default=20,blank=True,)
-    Start_Time = models.DateTimeField(blank=True,)
-    End_Time = models.DateTimeField(blank=True,)
-    Capacity = models.IntegerField(default=200,blank=True,)
-    Available_Orders = models.IntegerField(default=200,blank=True,)
+    Meal_Date = models.DateField(blank=True, null = True,)
+    Item_Name = models.CharField(max_length=50,blank=True, null = True,)
+    Price = models.IntegerField(default=20,blank=True, null = True,)
+    Start_Time = models.DateTimeField(blank=True, null = True,)
+    End_Time = models.DateTimeField(blank=True, null = True,)
+    Capacity = models.IntegerField(default=200,blank=True, null = True,)
+    Available_Orders = models.IntegerField(default=200,blank=True, null = True,)
 
 class Orders(models.Model):
     Meal_Choices = (
