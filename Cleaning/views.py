@@ -17,8 +17,6 @@ def Past_Request(request):
     else:
         return render(request,"Error.html")
     
-
-
 def Pending_Request(request):
     # Used to mark pending requests as complete
     if request.user.is_authenticated:

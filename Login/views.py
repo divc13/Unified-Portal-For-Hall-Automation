@@ -168,7 +168,7 @@ def SignUp(request):
             if User_class.objects.filter(username = username):
                 messages.error(request, "This Username has been already taken. Please check your username.")
                 return render(request, "SignUp.html", context={'messages':messages.get_messages(request)})
-            request.session.set_expiry(300)
+            request.session.set_expiry(1000)
             request.session['0']=name
             request.session['1']=username
             request.session['2']=designation
@@ -219,6 +219,8 @@ def OTP(request):
         if otp1=='':
             messages.error(request, "Empty OTP field")
             return render(request, "OTP.html", context={'messages':messages.get_messages(request)})
+        if '3' not in request.session:
+            return redirect(SignUp)
         otp2=request.session['3']
         if otp1==str(otp2):
             return redirect(Set_Password)
