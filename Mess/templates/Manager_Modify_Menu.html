@@ -113,18 +113,18 @@
             name="meal{{items.id}}"
             value="{{items.Meal}}"
           >
-          {% if items.Meal == "Breakfast" %}
-          <option selected>Breakfast</option>
-          <option>Lunch</option>
-          <option>Dinner</option>
+          {% if items.Meal == "Dinner" %}
+          <option >Breakfast</option>
+          <option >Lunch</option>
+          <option selected>Dinner</option>
         {% elif items.Meal == "Lunch" %}
         <option>Breakfast</option>
           <option selected>Lunch</option>
           <option>Dinner</option>
         {% else %}
-        <option>Breakfast</option>
+        <option selected>Breakfast</option>
           <option >Lunch</option>
-          <option selected>Dinner</option>
+          <option >Dinner</option>
           {% endif %}
         </select>
         </td>
