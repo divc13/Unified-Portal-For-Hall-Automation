@@ -408,9 +408,10 @@ def Manager_Extra_Items(request):
                             end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
                             
                             if start_time > end_time:
-                                messages.error(request, "Start time must be less than end time.")
+                                if flag == 0:
+                                    messages.error(request, "Start time must be less than end time.")
                                 flag = 1
-                                break
+                                continue
                                 
                             else:
 

@@ -291,7 +291,35 @@ class tests:
         # logging out
         self.logout()
         
-    def 
+    def test7(self):
+        # mess manager extra menu
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Pav Bhaji")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("150")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("50")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("2023-03-30 00:00:00")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("2023-04-02 00:00:00")
+        
+        
         
         
     def main_test(self):

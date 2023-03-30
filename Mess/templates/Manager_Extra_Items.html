@@ -57,6 +57,7 @@
                 type="date"
                 name="meal_date{{items.id}}"
                 value="{{items.Meal_Date|date:'Y-m-d'}}"
+                class = "a"
               />
             </td>
             <td>
@@ -64,19 +65,20 @@
                 name="meal{{items.id}}"
                 value="{{items.Meal}}"
                 style="width: 105%"
+                class = "b"
               >
-              {% if items.Meal == "Breakfast" %}
-                <option selected>Breakfast</option>
-                <option>Lunch</option>
-                <option>Dinner</option>
+              {% if items.Meal == "Dinner" %}
+                <option name = "b0" >Breakfast</option>
+                <option  name = "b1">Lunch</option>
+                <option name = "b2" selected>Dinner</option>
               {% elif items.Meal == "Lunch" %}
-              <option>Breakfast</option>
-                <option selected>Lunch</option>
-                <option>Dinner</option>
+              <option name = "b0">Breakfast</option>
+                <option  name = "b1"selected>Lunch</option>
+                <option name = "b2">Dinner</option>
               {% else %}
-              <option>Breakfast</option>
-                <option >Lunch</option>
-                <option selected>Dinner</option>
+              <option name = "b0" selected>Breakfast</option>
+                <option  name = "b1">Lunch</option>
+                <option  name = "b2">Dinner</option>
                 {% endif %}
               </select>
             </td>
@@ -88,6 +90,7 @@
                 value="{{items.Item_Name}}"
                 placeholder="Enter New Item"
                 style="text-align: center"
+                class = "c"
                 autofocus
               />
             </td>
@@ -99,6 +102,7 @@
                 value="{{items.Capacity}}"
                 min="1"
                 style="width: 35%; text-align: center"
+                class = "d"
               />
             </td>
             <td>
@@ -109,6 +113,7 @@
                 value="{{items.Price}}"
                 min="1"
                 style="width: 35%; text-align: center"
+                class = "e"
               />
             </td>
             
@@ -118,6 +123,7 @@
                 type="datetime-local"
                 name="start_time{{items.id}}"
                 value="{{items.Start_Time|date:'Y-m-d H:i'}}"
+                class = "f"
               />
             </td>
             <td>
@@ -126,6 +132,7 @@
                 type="datetime-local"
                 name="end_time{{items.id}}"
                 value="{{items.End_Time|date:'Y-m-d H:i'}}"
+                class = "g"
               />
             </td>
             <td>
