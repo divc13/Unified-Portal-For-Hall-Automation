@@ -31,7 +31,7 @@ class Regular_menu(models.Model):
     )
     Rating = models.FloatField(
         default=0.0,
-        blank=True, null = True, default=""
+        blank=True, null = True,
     )
 
 
