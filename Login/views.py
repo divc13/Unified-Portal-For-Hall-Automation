@@ -204,7 +204,7 @@ def OTP_Send(request):
             if request.session['4']==1:
                 username=request.session['5']
                 name=User_class.objects.filter(username=username)[0].name
-            subject = 'OTP for SignUp'
+            subject = f'OTP for SignUp - {otp}'
             message = f'Dear {name}, Your OTP for Registration on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [f'{username}@iitk.ac.in',]
