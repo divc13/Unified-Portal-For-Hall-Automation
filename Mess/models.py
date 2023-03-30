@@ -25,7 +25,6 @@ class Regular_menu(models.Model):
     )
     Items = models.CharField(
         max_length=100,
-        null=True
     )
     Rating = models.FloatField(
         default=0.0,
@@ -43,11 +42,11 @@ class Extras(models.Model):
         choices=Meal_Choices,
         default="Breakfast",
     )
-    Meal_Date = models.DateField(default=datetime.now)
-    Item_Name = models.CharField(max_length=50,null=True)
+    Meal_Date = models.DateField()
+    Item_Name = models.CharField(max_length=50)
     Price = models.IntegerField(default=20)
-    Start_Time = models.DateTimeField(default=datetime.now)
-    End_Time = models.DateTimeField(default=datetime.now)
+    Start_Time = models.DateTimeField()
+    End_Time = models.DateTimeField()
     Capacity = models.IntegerField(default=200)
     Available_Orders = models.IntegerField(default=200)
 

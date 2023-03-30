@@ -19,7 +19,7 @@ class Order(models.Model):
     # or if the order has been accepted and is being prepared, or has been delivered
     User_Name = models.CharField(max_length=20)
     Name = models.TextField(max_length=30)
-    Item_Name = models.TextField(max_length=50,null=True,)
+    Item_Name = models.TextField(max_length=50)
     Price = models.PositiveIntegerField(default=20)
     Quantity = models.PositiveIntegerField(default=1)
     Amount = models.PositiveIntegerField(default=20)
