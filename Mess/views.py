@@ -387,9 +387,9 @@ def Manager_Extra_Items(request):
 
                     for obj in Extras.objects.all():  # for obj in extras?
                         
-                        if obj.Meal_Date!="None" and obj.Meal_Date!="" and obj.Meal_Date is not None:
+                        meal_date = request.POST.get("meal_date" + str(obj.id))
+                        if meal_date is not None:
 
-                            meal_date = request.POST.get("meal_date" + str(obj.id))
                             meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
                             meal = request.POST.get("meal" + str(obj.id))
                             item = request.POST.get("item" + str(obj.id))
