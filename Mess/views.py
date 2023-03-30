@@ -21,7 +21,7 @@ def Student_Regular_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
 
-            regular_menu = Regular_menu.objects.all().exclude(Items = "")
+            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None")
 
             if request.method == "POST":
 
@@ -100,7 +100,7 @@ def Student_Book_Extras(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             # Processes requests to purchase extras by students
-            extras = Extras.objects.all().exclude(Item_Name = "").order_by(
+            extras = Extras.objects.all().exclude(Item_Name = "").exclude(Item_Name = "None").order_by(
                 "-Start_Time"
             )  # QuerySet containing all extras
 
@@ -386,43 +386,41 @@ def Manager_Extra_Items(request):
                     # Commits changes to the database
 
                     for obj in Extras.objects.all():  # for obj in extras?
-
-                        meal_date = request.POST.get("meal_date" + str(obj.id))
-                        meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
-                        meal = request.POST.get("meal" + str(obj.id))
-                        item = request.POST.get("item" + str(obj.id))
-                        capacity = request.POST.get("capacity" + str(obj.id))
-                        price = request.POST.get("price" + str(obj.id))
-
-                        start_time = request.POST.get("start_time" + str(obj.id))
-                        start_time = datetime.strptime(
-                            str(start_time), "%Y-%m-%dT%H:%M"
-                        )
-                        end_time = request.POST.get("end_time" + str(obj.id))
-                        end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
                         
-                        if start_time > end_time:
-                            messages.error(request, "Start time must be less than end time.")
-                            flag = 1
-                            break
-                        if meal_date < end_time:
-                            messages.error(request, "End time must be less than meal date.")
-                            flag = 1
-                            break
+                        if obj.meal_date!="None" and obj.meal_date!="":
+
+                            meal_date = request.POST.get("meal_date" + str(obj.id))
+                            meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
+                            meal = request.POST.get("meal" + str(obj.id))
+                            item = request.POST.get("item" + str(obj.id))
+                            capacity = request.POST.get("capacity" + str(obj.id))
+                            price = request.POST.get("price" + str(obj.id))
+
+                            start_time = request.POST.get("start_time" + str(obj.id))
+                            start_time = datetime.strptime(
+                                str(start_time), "%Y-%m-%dT%H:%M"
+                            )
+                            end_time = request.POST.get("end_time" + str(obj.id))
+                            end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
                             
-                        else:
+                            if start_time > end_time:
+                                messages.error(request, "Start time must be less than end time.")
+                                flag = 1
+                                break
+                                
+                            else:
 
-                            extra_items = Extras.objects.filter(id=obj.id)[0]
-                            extra_items.Meal = meal
-                            extra_items.Meal_Date = meal_date
-                            extra_items.Item_Name = item
-                            extra_items.Capacity = capacity
-                            extra_items.Price = price
-                            extra_items.Start_Time = start_time
-                            extra_items.End_Time = end_time
-                            extra_items.Available_Orders = capacity
+                                extra_items = Extras.objects.filter(id=obj.id)[0]
+                                extra_items.Meal = meal
+                                extra_items.Meal_Date = meal_date
+                                extra_items.Item_Name = item
+                                extra_items.Capacity = capacity
+                                extra_items.Price = price
+                                extra_items.Start_Time = start_time
+                                extra_items.End_Time = end_time
+                                extra_items.Available_Orders = capacity
 
-                            extra_items.save()
+                                extra_items.save()
 
                 if "add_hidden_item" in request.POST:
 

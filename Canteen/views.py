@@ -12,7 +12,7 @@ import pytz
 def Student_Place_Order(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
-            menu = Menu.objects.all().exclude(Item_Name = "")
+            menu = Menu.objects.all().exclude(Item_Name = "").exclude(Item_Name = "None")
             if request.method == "POST":
                 quantity = int(request.POST.get("quantity"))
                 idt = request.POST.get("submit")
