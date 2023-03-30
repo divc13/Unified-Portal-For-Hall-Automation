@@ -25,6 +25,7 @@ class Regular_menu(models.Model):
     )
     Items = models.CharField(
         max_length=100,
+        null=True
     )
     Rating = models.FloatField(
         default=0.0,
@@ -43,13 +44,12 @@ class Extras(models.Model):
         default="Breakfast",
     )
     Meal_Date = models.DateField(default=datetime.now)
-    Item_Name = models.CharField(max_length=50)
+    Item_Name = models.CharField(max_length=50,null=True)
     Price = models.IntegerField(default=20)
     Start_Time = models.DateTimeField(default=datetime.now)
     End_Time = models.DateTimeField(default=datetime.now)
     Capacity = models.IntegerField(default=200)
     Available_Orders = models.IntegerField(default=200)
-
 
 class Orders(models.Model):
     Meal_Choices = (
@@ -78,6 +78,7 @@ class Datewise_BDMR(models.Model):
 
 
 class Bill(models.Model):
+    Year = models.IntegerField(default=2023)
     Bill_Month = models.IntegerField(default=1)
     Month_Name = models.TextField(max_length=9, default="January")
     Total_Days = models.IntegerField(default=0)
@@ -138,4 +139,3 @@ class Rating_Regular(models.Model):
 
     User_Name = models.CharField(max_length=20)
     Rating_Value = models.FloatField(default=0.0)
-    

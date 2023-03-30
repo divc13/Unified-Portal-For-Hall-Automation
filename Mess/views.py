@@ -21,7 +21,7 @@ def Student_Regular_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
 
-            regular_menu = Regular_menu.objects.all()
+            regular_menu = Regular_menu.objects.all().exclude(Items = "")
 
             if request.method == "POST":
 
@@ -100,7 +100,7 @@ def Student_Book_Extras(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             # Processes requests to purchase extras by students
-            extras = Extras.objects.all().order_by(
+            extras = Extras.objects.all().exclude(Item_Name = "").order_by(
                 "-Start_Time"
             )  # QuerySet containing all extras
 
@@ -296,16 +296,16 @@ def Manager_Modify_Menu(request):
                         day = request.POST.get("day" + str(obj.id))
                         meal = request.POST.get("meal" + str(obj.id))
                         item = request.POST.get("item" + str(obj.id))
-
-                        menu = Regular_menu.objects.filter(id=obj.id)[0]
-                        menu.Day = day
-                        menu.Items = item
-                        menu.Meal = meal
-                        menu.save()
+                        if Regular_menu.objects.filter(id=obj.id):
+                            menu = Regular_menu.objects.filter(id=obj.id)[0]
+                            menu.Day = day
+                            menu.Items = item
+                            menu.Meal = meal
+                            menu.save()
 
                 if "add_hidden_item" in request.POST:
 
-                    obj = Regular_menu()
+                    obj = Regular_menu(Day = "Sunday")
                     obj.save()
                     return render(
                         request,
@@ -338,9 +338,10 @@ def Manager_Modify_Menu(request):
                 elif "delete" in request.POST:
                     idt = request.POST.get(
                         "delete"
-                    ) 
-                    menu_del = Regular_menu.objects.filter(id=idt)[0]
-                    menu_del.delete()
+                    )
+                    if Regular_menu.objects.filter(id=idt):
+                        menu_del = Regular_menu.objects.filter(id=idt)[0]
+                        menu_del.delete()
 
                     messages.success(request, "Deleted Successfully")
                     return render(
@@ -392,7 +393,7 @@ def Manager_Extra_Items(request):
                         item = request.POST.get("item" + str(obj.id))
                         capacity = request.POST.get("capacity" + str(obj.id))
                         price = request.POST.get("price" + str(obj.id))
-                        booking_date = request.POST.get("booking_date" + str(obj.id))
+
                         start_time = request.POST.get("start_time" + str(obj.id))
                         start_time = datetime.strptime(
                             str(start_time), "%Y-%m-%dT%H:%M"
@@ -404,7 +405,7 @@ def Manager_Extra_Items(request):
                             messages.error(request, "Start time must be less than end time.")
                             flag = 1
                             break
-                        if meal_date < end_time.date():
+                        if meal_date < end_time:
                             messages.error(request, "End time must be less than meal date.")
                             flag = 1
                             break
@@ -413,7 +414,6 @@ def Manager_Extra_Items(request):
 
                             extra_items = Extras.objects.filter(id=obj.id)[0]
                             extra_items.Meal = meal
-                            extra_items.Booking_Date = booking_date
                             extra_items.Meal_Date = meal_date
                             extra_items.Item_Name = item
                             extra_items.Capacity = capacity
@@ -425,9 +425,8 @@ def Manager_Extra_Items(request):
                             extra_items.save()
 
                 if "add_hidden_item" in request.POST:
-                    # samajh nahi aaya
 
-                    obj = Extras()
+                    obj = Extras(Meal_Date =  datetime.today(),Start_Time = datetime.now(),End_Time = datetime.now())
                     obj.save()
                     return render(
                         request,
@@ -472,8 +471,9 @@ def Manager_Extra_Items(request):
                     idt = request.POST.get(
                         "delete"
                     )  # idt is the key of the object to be deleted
-                    extra_items_del = Extras.objects.filter(id=idt)[0]
-                    extra_items_del.delete()
+                    if Extras.objects.filter(id=idt):
+                        extra_items_del = Extras.objects.filter(id=idt)[0]
+                        extra_items_del.delete()
 
                     messages.success(request, "Deleted Successfully")
                     return render(
@@ -532,7 +532,7 @@ def Manager_Rebate_Requests(request):
                     for dt in rrule(DAILY, dtstart=fromdt, until=todt):
 
                         bill_objects = Bill.objects.filter(
-                            User_Name=username, Bill_Month=dt.month
+                            User_Name=username, Bill_Month=dt.month,Year = dt.year,
                         )
 
                         if not bill_objects:
@@ -540,6 +540,7 @@ def Manager_Rebate_Requests(request):
                             bill = Bill(
                                 User_Name=username,
                                 Bill_Month=dt.month,
+                                Year = dt.year,
                             )
                             bill.rebate_days += 1
                             bill.Month_Name = calendar.month_name[bill.Bill_Month]
@@ -590,11 +591,12 @@ def Manager_Students_Bills(request):
     # Used to clear dues from the database when a student pays the mess dues
     if request.user.is_authenticated:
         if request.user.designation == "Mess Manager":
-            bill = Bill.objects.all().order_by("User_Name", "Bill_Month")
+            bill = Bill.objects.all().order_by("Year","Bill_Month","User_Name")
             if request.method == "POST":
                 key = request.POST.get("clear_dues")
-                billObject = Bill.objects.filter(id=key)[0]
-                billObject.delete()
+                if Bill.objects.filter(id=key):
+                    billObject = Bill.objects.filter(id=key)[0]
+                    billObject.delete()
                 # The Bill object corresponding to the mess dues of a student for a particular month
                 # is deleted when payment is confirmed by the mess manager
                 messages.success(request, "Dues cleared successfully")
@@ -652,42 +654,43 @@ def Manager_Modify_BDMR(request):
                     for obj in User_class.objects.filter(designation="Student"):
                         # The Bill object corresponding to each student is modified when the BDMR of a day is uploaded/updated
                         bill_objects = Bill.objects.filter(
-                            User_Name=obj.username, Bill_Month=date.month
+                            User_Name=obj.username, Bill_Month=date.month,Year = date.year,
                         )
                         
-                    if not bill_objects:
-                        # If the Bill object corresponding to the user for the current month has not been initialised
-                        # it is done when the BDMR is being saved
-                        bill = Bill(
-                            User_Name=obj.username,
-                            Bill_Month=date.month,
-                        )
-                        bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
-                        if not bdmr_obj:
-                            # if the BDMR is being uploaded instead of updated
-                            bill.Basic_Amount += float(bdmr)
+                        if not bill_objects:
+                            # If the Bill object corresponding to the user for the current month has not been initialised
+                            # it is done when the BDMR is being saved
+                            bill = Bill(
+                                User_Name=obj.username,
+                                Bill_Month=date.month,
+                                Year = date.year,
+                            )
+                            bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
+                            if not bdmr_obj:
+                                # if the BDMR is being uploaded instead of updated
+                                bill.Basic_Amount += float(bdmr)
+                            else:
+                                bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
+
+                            bill.Total_Days = 1
+                            bill.Month_Name = calendar.month_name[bill.Bill_Month]
+                            bill.messbillcalc()
+                            bill.save()
+
                         else:
-                            bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
+                            # If a Bill object has been generated for the user
 
-                        bill.Total_Days = 1
-                        bill.Month_Name = calendar.month_name[bill.Bill_Month]
-                        bill.messbillcalc()
-                        bill.save()
+                            bill = bill_objects[0]
+                            bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
+                            if not bdmr_obj:
+                                bill.Basic_Amount += float(bdmr)
+                            else:
+                                bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
 
-                    else:
-                        # If a Bill object has been generated for the user
-
-                        bill = bill_objects[0]
-                        bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
-                        if not bdmr_obj:
-                            bill.Basic_Amount += float(bdmr)
-                        else:
-                            bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
-
-                        bill.Total_Days += 1
-                        bill.Month_Name = calendar.month_name[bill.Bill_Month]
-                        bill.messbillcalc()
-                        bill.save()
+                            bill.Total_Days += 1
+                            bill.Month_Name = calendar.month_name[bill.Bill_Month]
+                            bill.messbillcalc()
+                            bill.save()
 
                     # A "Datewise_BDMR" object is generated/updated
                     date_and_bdmr = Datewise_BDMR(
