@@ -293,15 +293,19 @@ def Manager_Modify_Menu(request):
                     # Commits changes to the database
 
                     for obj in Regular_menu.objects.all():  
-                        day = request.POST.get("day" + str(obj.id))
-                        meal = request.POST.get("meal" + str(obj.id))
+                        
                         item = request.POST.get("item" + str(obj.id))
-                        if Regular_menu.objects.filter(id=obj.id):
-                            menu = Regular_menu.objects.filter(id=obj.id)[0]
-                            menu.Day = day
-                            menu.Items = item
-                            menu.Meal = meal
-                            menu.save()
+                        if item is not None:
+                            day = request.POST.get("day" + str(obj.id))
+                            meal = request.POST.get("meal" + str(obj.id))
+                            if Regular_menu.objects.filter(id=obj.id):
+                                menu = Regular_menu.objects.filter(id=obj.id)[0]
+                                menu.Day = day
+                                menu.Items = item
+                                menu.Meal = meal
+                                menu.save()
+                        else:
+                            obj.delete()
 
                 if "add_hidden_item" in request.POST:
 
