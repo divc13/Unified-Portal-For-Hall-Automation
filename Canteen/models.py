@@ -5,7 +5,7 @@ from datetime import datetime
 class Menu(models.Model):
     # dishes available in the canteen
     Item_Name = models.TextField(max_length=50,blank=True, null = True, default="")
-    Price = models.PositiveIntegerField(default=20,blank=True, null = True, default="")
+    Price = models.PositiveIntegerField(default=20,blank=True, null = True,)
     
 class Bill(models.Model):
     # A Bill object is generated for each user each month and deleted when the month's dues are cleared

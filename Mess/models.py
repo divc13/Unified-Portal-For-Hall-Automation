@@ -17,13 +17,13 @@ class Regular_menu(models.Model):
         max_length=9,
         choices=Day_Choices,
         default="Monday",
-        blank=True, null = True, default=""
+        blank=True, null = True,
     )
     Meal = models.CharField(
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
-        blank=True, null = True, default=""
+        blank=True, null = True,
     )
     Items = models.CharField(
         max_length=100,
@@ -45,15 +45,15 @@ class Extras(models.Model):
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
-        blank=True, null = True, default=""
+        blank=True, null = True, 
     )
     Meal_Date = models.DateField(blank=True, null = True, default="")
     Item_Name = models.CharField(max_length=50,blank=True, null = True, default="")
-    Price = models.IntegerField(default=20,blank=True, null = True, default="")
+    Price = models.IntegerField(default=20,blank=True, null = True,)
     Start_Time = models.DateTimeField(blank=True, null = True, default="")
     End_Time = models.DateTimeField(blank=True, null = True, default="")
-    Capacity = models.IntegerField(default=200,blank=True, null = True, default="")
-    Available_Orders = models.IntegerField(default=200,blank=True, null = True, default="")
+    Capacity = models.IntegerField(default=200,blank=True, null = True,)
+    Available_Orders = models.IntegerField(default=200,blank=True, null = True,)
 
 class Orders(models.Model):
     Meal_Choices = (
