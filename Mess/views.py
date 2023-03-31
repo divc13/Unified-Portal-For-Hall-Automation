@@ -540,7 +540,7 @@ def Manager_Rebate_Requests(request):
                     rebate.status = 1
                     rebate.save()
                     
-                    messages.success("Rebate Request Accepted.")
+                    messages.success(request,"Rebate Request Accepted.")
 
                     for dt in rrule(DAILY, dtstart=fromdt, until=todt):
 
@@ -569,7 +569,7 @@ def Manager_Rebate_Requests(request):
                             bill.save()
 
                 elif "reject" in request.POST:
-                    messages.success("Rebate Request Rejected.")
+                    messages.success(request,"Rebate Request Rejected.")
                     # For requests that are rejected
                     idt = request.POST.get("reject")
                     rebate = Rebate.objects.filter(id=idt)[0]

@@ -710,11 +710,11 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
         
         self.driver.find_elements(By.NAME, "from")[0].clear()
-        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-04-30")
         self.driver.find_elements(By.NAME, "to")[0].clear()
-        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-03-01")
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-04-01")
         self.driver.find_elements(By.NAME, "submit")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "From-Date must be less than equal to To-Date")
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "From-Date must be less than equal to To-Date")
         self.logout()
         
     def test15(self):
