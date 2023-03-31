@@ -4,5 +4,3 @@ db.sqlite3
 /__pycache__
 /static_files
 .vscode/
-**/migrations/*
-!**/migrations/__init__.py
