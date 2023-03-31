@@ -1113,7 +1113,49 @@ class tests:
         # logging out
         self.logout()
     
-    
+    def test20(self):
+        # add item in menu, student adds it to cart, removes from the cart
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0] == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        
+        
+        
+        
     
     def main_test(self):
         # self.test1()
