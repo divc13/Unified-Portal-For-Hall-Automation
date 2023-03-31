@@ -941,25 +941,25 @@ class tests:
         self.login_student_1()
 
         # clicking on cleaning
-        self.driver.find_elements(By.CLASS_NAME, "e1_240").click()
+        self.driver.find_elements(By.CLASS_NAME, "e1_238")[0].click()
 
         # making requests
 
-        self.driver.find_elements(By.CLASS_NAME, "room_text")[0].send_keys("D-213")
-        self.driver.find_elements(By.CLASS_NAME, "comment")[0].send_keys("Room check")
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-213")
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Room check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         
-        self.driver.find_elements(By.CLASS_NAME, "room_text")[0].send_keys("F-211")
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-211")
         self.driver.find_elements(By.CLASS_NAME, "toilet")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "comment")[0].send_keys("Toilet check")
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Toilet check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "room_text")[0].send_keys("D-343")
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-343")
         self.driver.find_elements(By.CLASS_NAME, "corridor")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "comment")[0].send_keys("Corridor check")
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Corridor check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "room_text")[0].send_keys("F-413")
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-413")
         self.driver.find_elements(By.CLASS_NAME, "other")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "comment")[0].send_keys("Others check")
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Others check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
 
         #logging out
