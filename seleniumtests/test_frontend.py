@@ -441,6 +441,12 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "Thursday")
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[0].text == "Lunch")
+        assert(self.driver.find_elements(By.CLASS_NAME, "h")[0].text == "Rajma Chawal")
+        assert(self.driver.find_elements(By.CLASS_NAME, "i")[0].text == "Be the first one to rate")
+        
         self.driver.find_elements(By.CLASS_NAME, "c")[0].click()
         
         # logging out
@@ -453,10 +459,73 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_31")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0] == "Thursday")
-        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0] == "Lunch")
-        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0] == "Rajma Chawal")
-        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0] == "☆ 3.00")
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Thursday")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Lunch")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Rajma Chawal")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "☆ 3.00")
+        
+        # logging out
+        self.logout()
+        
+    def test10(self):
+        # add item in menu, rate and test in feedback
+        
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("02-04-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("30-03-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # logging out
+        self.logout()
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        
+        # logging out
+        self.logout()
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_31")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Thursday")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Lunch")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Rajma Chawal")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "☆ 3.00")
         
         # logging out
         self.logout()

@@ -947,3 +947,65 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
 1680238397357	Marionette	INFO	Stopped listening on port 55030
 Dynamically enable window occlusion 1
+1680238703104	geckodriver	INFO	Listening on 127.0.0.1:55187
+1680238706131	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55188" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileTiAY5a"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680238706456	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680238706462	Marionette	INFO	Listening on port 55196
+Read port: 55196
+WebDriver BiDi listening on ws://127.0.0.1:55188
+1680238706638	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileTiAY5a\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55188/devtools/browser/29f7e11b-061b-43a0-861e-4fd861836341
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+1680238717803	Marionette	INFO	Stopped listening on port 55196
+Dynamically enable window occlusion 1
+1680238804036	geckodriver	INFO	Listening on 127.0.0.1:55247
+1680238807073	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55248" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile7js0Mn"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680238807394	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680238807400	Marionette	INFO	Listening on port 55255
+Read port: 55255
+WebDriver BiDi listening on ws://127.0.0.1:55248
+1680238807561	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile7js0Mn\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55248/devtools/browser/6a4e7073-86ef-45d4-92b5-34501b73518e
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+1680238892415	geckodriver	INFO	Listening on 127.0.0.1:55326
+1680238895428	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55327" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileFkquRD"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680238895752	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680238895758	Marionette	INFO	Listening on port 55334
+Read port: 55334
+WebDriver BiDi listening on ws://127.0.0.1:55327
+1680238895934	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileFkquRD\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55327/devtools/browser/a3671262-3281-489c-9192-4a7a277dcbb4
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+1680238914865	Marionette	INFO	Stopped listening on port 55334
+Dynamically enable window occlusion 1
+1680239004931	geckodriver	INFO	Listening on 127.0.0.1:55386
+1680239007963	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55387" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilehwAi5A"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680239008312	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680239008319	Marionette	INFO	Listening on port 55394
+Read port: 55394
+WebDriver BiDi listening on ws://127.0.0.1:55387
+1680239008499	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilehwAi5A\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55387/devtools/browser/db8d4c5d-7f46-448b-aff5-1ee5fb162828
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+1680239027029	Marionette	INFO	Stopped listening on port 55394
+Dynamically enable window occlusion 1

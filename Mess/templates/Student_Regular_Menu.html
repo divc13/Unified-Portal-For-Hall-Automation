@@ -37,10 +37,10 @@
       {%for item in menu%}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{item.Day}}</td>
-        <td>{{item.Meal}}</td>
-        <td>{{item.Items}}</td>
-          <td>
+        <td class = "f">{{item.Day}}</td>
+        <td class = "g">{{item.Meal}}</td>
+        <td class = "h">{{item.Items}}</td>
+          <td class = "i">
             {%if item.Rating%}
              ☆ {{item.Rating  | floatformat:2}}
             {% else %} 
