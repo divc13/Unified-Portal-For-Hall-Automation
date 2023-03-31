@@ -965,7 +965,7 @@ class tests:
 
         #logging out
 
-        self.logout
+        self.logout()
 
         #logging in as hall manager
 
@@ -1006,16 +1006,20 @@ class tests:
 
         self.login_student_1()
 
+        # clicking on cleaning
+        self.driver.find_elements(By.CLASS_NAME, "e1_238")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+
         # checking the data for student 1
 
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Others")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Corridor")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Toilet")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Room")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
 
         # Past requests of student 1 assessment
 
