@@ -1063,6 +1063,7 @@ class tests:
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Sandwitch")
         self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("25")
@@ -1072,6 +1073,7 @@ class tests:
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Masala Dosa")
         self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
@@ -1099,6 +1101,7 @@ class tests:
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Veg. Maggi")
         self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
