@@ -456,7 +456,7 @@ def secy_request_validation(request):
                     reg_item.save()
                     #delete the other requests if the quantity is zero
                     if(if_zero_quantity == 0):
-                        items = sports_equipments_request.objects.filter(equipment_selected=item_requested)
+                        items = sports_equipments_request.objects.filter(equipment_selected=item_requested,secy_validation="NO")
                         for item in items:
                             item.delete()
 
