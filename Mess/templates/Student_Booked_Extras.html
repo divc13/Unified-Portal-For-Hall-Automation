@@ -38,11 +38,11 @@
         <form method="POST" action="Student_Booked_Extras">
           {% csrf_token %}
         <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{item.Item_Name}}</td>
-          <td>{{item.Quantity}}</td>
-          <td>{{item.Meal_Date}}</td>
-          <td>{{item.Meal}}</td>
+          <td >{{ forloop.counter }}</td>
+          <td class = "a">{{item.Item_Name}}</td>
+          <td class = "b">{{item.Quantity}}</td>
+          <td class = "c">{{item.Meal_Date}}</td>
+          <td class = "d">{{item.Meal}}</td>
           <td><button type = "submit" name = "order_validation" value = "{{item.id}}">Ok</button></td>
         </tr>
         </form>

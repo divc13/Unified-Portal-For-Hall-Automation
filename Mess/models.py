@@ -4,30 +4,34 @@ from datetime import datetime
 
 class Regular_menu(models.Model):
     Day_Choices = (
-        ("Monday", "Mon"),
-        ("Tuesday", "Tues"),
-        ("Wednesday", "Wed"),
-        ("Thursday", "Thu"),
-        ("Friday", "Fri"),
-        ("Saturday", "Sat"),
-        ("Sunday", "Sun"),
+        ("Monday", "Monday"),
+        ("Tuesday", "Tuesday"),
+        ("Wednesday", "Wednesday"),
+        ("Thursday", "Thursday"),
+        ("Friday", "Friday"),
+        ("Saturday", "Saturday"),
+        ("Sunday", "Sunday"),
     )
-    Meal_Choices = (("Breakfast", "B"), ("Lunch", "L"), ("Dinner", "D"))
+    Meal_Choices = (("Breakfast", "Breakfast"), ("Lunch", "Lunch"), ("Dinner", "Dinner"))
     Day = models.CharField(
         max_length=9,
         choices=Day_Choices,
-        default="Mon",
+        default="Monday",
+        blank=True, null = True,
     )
     Meal = models.CharField(
         max_length=9,
         choices=Meal_Choices,
-        default="B",
+        default="Breakfast",
+        blank=True, null = True,
     )
     Items = models.CharField(
         max_length=100,
+        blank=True, null = True, default=""
     )
     Rating = models.FloatField(
         default=0.0,
+        blank=True, null = True,
     )
 
 
@@ -41,15 +45,15 @@ class Extras(models.Model):
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
+        blank=True, null = True, 
     )
-    Meal_Date = models.DateField(default=datetime.now)
-    Item_Name = models.CharField(max_length=50)
-    Price = models.IntegerField(default=20)
-    Start_Time = models.DateTimeField(default=datetime.now)
-    End_Time = models.DateTimeField(default=datetime.now)
-    Capacity = models.IntegerField(default=200)
-    Available_Orders = models.IntegerField(default=200)
-
+    Meal_Date = models.DateField(blank=True, null = True, default="")
+    Item_Name = models.CharField(max_length=50,blank=True, null = True, default="")
+    Price = models.IntegerField(default=20,blank=True, null = True,)
+    Start_Time = models.DateTimeField(blank=True, null = True, default="")
+    End_Time = models.DateTimeField(blank=True, null = True, default="")
+    Capacity = models.IntegerField(default=200,blank=True, null = True,)
+    Available_Orders = models.IntegerField(default=200,blank=True, null = True,)
 
 class Orders(models.Model):
     Meal_Choices = (
@@ -78,6 +82,7 @@ class Datewise_BDMR(models.Model):
 
 
 class Bill(models.Model):
+    Year = models.IntegerField(default=2023)
     Bill_Month = models.IntegerField(default=1)
     Month_Name = models.TextField(max_length=9, default="January")
     Total_Days = models.IntegerField(default=0)
@@ -113,15 +118,17 @@ class Rebate(models.Model):
 
 class Rating_Regular(models.Model):
 
-    Meal_Choices = (("Breakfast", "B"), ("Lunch", "L"), ("Dinner", "D"))
+    Meal_Choices = (("Breakfast", "Breakfast"),
+        ("Lunch", "Lunch"),
+        ("Dinner", "Dinner"),)
     Day_Choices = (
-        ("Monday", "Mon"),
-        ("Tuesday", "Tues"),
-        ("Wednesday", "Wed"),
-        ("Thursday", "Thu"),
-        ("Friday", "Fri"),
-        ("Saturday", "Sat"),
-        ("Sunday", "Sun"),
+        ("Monday", "Monday"),
+        ("Tuesday", "Tuesday"),
+        ("Wednesday", "Wednesday"),
+        ("Thursday", "Thursday"),
+        ("Friday", "Friday"),
+        ("Saturday", "Saturday"),
+        ("Sunday", "Sunday"),
     )
 
     Meal = models.CharField(
@@ -136,4 +143,3 @@ class Rating_Regular(models.Model):
 
     User_Name = models.CharField(max_length=20)
     Rating_Value = models.FloatField(default=0.0)
-    

@@ -49,7 +49,7 @@
         <td>{{bill.Basic_Amount}}</td>
         <td>{{bill.Extras_Amount}}</td>
         <td>{{bill.rebate_days}}</td>
-        <td>{{bill.Mess_Bill}}</td>
+        <td>{{bill.Mess_Bill | floatformat:2}}</td>
       </tr>
 
       {% endfor %}

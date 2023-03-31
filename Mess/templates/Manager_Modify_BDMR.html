@@ -29,16 +29,18 @@
           <tr>
             <td>Enter Date</td>
             <td>
-              <input type="date" placeholder="dd-mm-yyyy" name="BDMR_Date" required />
+              <input onchange="this.form.submit();" type="date" placeholder="dd-mm-yyyy" name="BDMR_Date" value = "{{date|date:"Y-m-d"}}" required />
             </td>
           </tr>
+          {% if date %}
           <tr>
             <td>Enter BDMR</td>
             <td>
-              <input type="floatformat" placeholder="BDMR in Rs." name="BDMR" required />
-              <button type="submit">Submit</button>
+              <input type="number" step = "any" placeholder="BDMR = Rs. {{amount}}" name="BDMR" required />
+              <button type="submit" name="bdmr_submit" value="{{date|date:"Y-m-d"}}">Submit</button>
             </td>
           </tr>
+          {% endif %}
         </form>
       </table>
     </div>

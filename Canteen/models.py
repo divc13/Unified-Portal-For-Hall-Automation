@@ -4,14 +4,14 @@ from datetime import datetime
 
 class Menu(models.Model):
     # dishes available in the canteen
-    Item_Name = models.TextField(max_length=50)
-    Price = models.PositiveIntegerField(default=20)
+    Item_Name = models.TextField(max_length=50,blank=True, null = True, default="")
+    Price = models.PositiveIntegerField(default=20,blank=True, null = True,)
     
 class Bill(models.Model):
     # A Bill object is generated for each user each month and deleted when the month's dues are cleared
     User_Name = models.TextField(max_length=20,primary_key=True)
     Name = models.TextField(max_length=30)
-    Amount = models.PositiveIntegerField(default=0)
+    Amount = models.IntegerField(default=0)
     
 class Order(models.Model):
     # An Order object is generated when an item is placed in the cart (not when a dish is ordered)

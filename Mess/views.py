@@ -21,7 +21,7 @@ def Student_Regular_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
 
-            regular_menu = Regular_menu.objects.all()
+            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None")
 
             if request.method == "POST":
 
@@ -100,7 +100,7 @@ def Student_Book_Extras(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             # Processes requests to purchase extras by students
-            extras = Extras.objects.all().order_by(
+            extras = Extras.objects.all().exclude(Item_Name = "").exclude(Item_Name = "None").order_by(
                 "-Start_Time"
             )  # QuerySet containing all extras
 
@@ -219,18 +219,26 @@ def Student_Apply_For_Rebate(request):
 
                 from_date = datetime.strptime(str(request.POST.get("from")), "%Y-%m-%d")
                 to_date = datetime.strptime(str(request.POST.get("to")), "%Y-%m-%d")
+                
+                if from_date <= to_date:
 
-                rebate_request = Rebate(
-                    Date_From=from_date,
-                    Date_To=to_date,
-                    User_Name=request.user.username,
-                )
-                rebate_request.Rebate_Days = rebate_request.date_diff()
-                rebate_request.save()
-                messages.success(
-                    request,
-                    "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
-                )
+                    rebate_request = Rebate(
+                        Date_From=from_date,
+                        Date_To=to_date,
+                        User_Name=request.user.username,
+                    )
+                    rebate_request.Rebate_Days = rebate_request.date_diff()
+                    rebate_request.save()
+                    messages.success(
+                        request,
+                        "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
+                    )
+                
+                else :
+                    messages.error(
+                        request,
+                        "From-Date must be less than equal to To-Date",
+                    )
 
             return render(
                 request,
@@ -285,19 +293,23 @@ def Manager_Modify_Menu(request):
                     # Commits changes to the database
 
                     for obj in Regular_menu.objects.all():  
-                        day = request.POST.get("day" + str(obj.id))
-                        meal = request.POST.get("meal" + str(obj.id))
+                        
                         item = request.POST.get("item" + str(obj.id))
-
-                        menu = Regular_menu.objects.filter(id=obj.id)[0]
-                        menu.Day = day
-                        menu.Items = item
-                        menu.Meal = meal
-                        menu.save()
+                        if item is not None:
+                            day = request.POST.get("day" + str(obj.id))
+                            meal = request.POST.get("meal" + str(obj.id))
+                            if Regular_menu.objects.filter(id=obj.id):
+                                menu = Regular_menu.objects.filter(id=obj.id)[0]
+                                menu.Day = day
+                                menu.Items = item
+                                menu.Meal = meal
+                                menu.save()
+                        else:
+                            obj.delete()
 
                 if "add_hidden_item" in request.POST:
 
-                    obj = Regular_menu()
+                    obj = Regular_menu(Day = "Sunday")
                     obj.save()
                     return render(
                         request,
@@ -330,9 +342,10 @@ def Manager_Modify_Menu(request):
                 elif "delete" in request.POST:
                     idt = request.POST.get(
                         "delete"
-                    ) 
-                    menu_del = Regular_menu.objects.filter(id=idt)[0]
-                    menu_del.delete()
+                    )
+                    if Regular_menu.objects.filter(id=idt):
+                        menu_del = Regular_menu.objects.filter(id=idt)[0]
+                        menu_del.delete()
 
                     messages.success(request, "Deleted Successfully")
                     return render(
@@ -363,6 +376,8 @@ def Manager_Extra_Items(request):
             extras = Extras.objects.all().order_by("-Start_Time")
 
             if request.method == "POST":
+                
+                flag = 0
 
                 if (
                     ("submit" in request.POST)
@@ -375,38 +390,54 @@ def Manager_Extra_Items(request):
                     # Commits changes to the database
 
                     for obj in Extras.objects.all():  # for obj in extras?
-                        # each instance of Extras is rewritten to the database (CONFIRM)
+                        
                         meal_date = request.POST.get("meal_date" + str(obj.id))
-                        meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
-                        meal = request.POST.get("meal" + str(obj.id))
-                        item = request.POST.get("item" + str(obj.id))
-                        capacity = request.POST.get("capacity" + str(obj.id))
-                        price = request.POST.get("price" + str(obj.id))
-                        booking_date = request.POST.get("booking_date" + str(obj.id))
-                        start_time = request.POST.get("start_time" + str(obj.id))
-                        start_time = datetime.strptime(
-                            str(start_time), "%Y-%m-%dT%H:%M"
-                        )
-                        end_time = request.POST.get("end_time" + str(obj.id))
-                        end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
+                        if meal_date is not None:
 
-                        extra_items = Extras.objects.filter(id=obj.id)[0]
-                        extra_items.Meal = meal
-                        extra_items.Booking_Date = booking_date
-                        extra_items.Meal_Date = meal_date
-                        extra_items.Item_Name = item
-                        extra_items.Capacity = capacity
-                        extra_items.Price = price
-                        extra_items.Start_Time = start_time
-                        extra_items.End_Time = end_time
-                        extra_items.Available_Orders = capacity
+                            meal_date = datetime.strptime(str(meal_date), "%Y-%m-%d")
+                            meal = request.POST.get("meal" + str(obj.id))
+                            item = request.POST.get("item" + str(obj.id))
+                            capacity = request.POST.get("capacity" + str(obj.id))
+                            price = request.POST.get("price" + str(obj.id))
 
-                        extra_items.save()
+                            start_time = request.POST.get("start_time" + str(obj.id))
+                            start_time = datetime.strptime(
+                                str(start_time), "%Y-%m-%dT%H:%M"
+                            )
+                            end_time = request.POST.get("end_time" + str(obj.id))
+                            end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
+                            
+                            if meal_date.date()<end_time.date():
+                                if flag == 0:
+                                    messages.error(request, "Meal date must be greater than end time.")
+                                flag = 1
+                                continue
+                            
+                            if start_time > end_time:
+                                if flag == 0:
+                                    messages.error(request, "Start time must be less than end time.")
+                                flag = 1
+                                continue
+                            
+                            else:
+                                extra_items = Extras.objects.filter(id=obj.id)[0]
+                                extra_items.Meal = meal
+                                extra_items.Meal_Date = meal_date
+                                extra_items.Item_Name = item
+                                extra_items.Capacity = capacity
+                                extra_items.Price = price
+                                extra_items.Start_Time = start_time
+                                extra_items.End_Time = end_time
+                                extra_items.Available_Orders = capacity
+
+                                extra_items.save()
+                                
+                        else:
+                            obj.delete()
 
                 if "add_hidden_item" in request.POST:
-                    # samajh nahi aaya
 
-                    obj = Extras()
+                    obj = Extras(Meal_Date =  datetime.today(),Start_Time = datetime.now(),End_Time = datetime.now())
                     obj.save()
                     return render(
                         request,
@@ -415,17 +446,27 @@ def Manager_Extra_Items(request):
                     )
 
                 elif "submit" in request.POST:
-
-                    messages.success(request, "Changes made successfully.")
-                    return render(
-                        request,
-                        "Manager_Extra_Items.html",
-                        context={
-                            "extra_item": extras,
-                            "status_check": 0,
-                            "messages": messages.get_messages(request),
-                        },
-                    )
+                    if flag:
+                        return render(
+                            request,
+                            "Manager_Extra_Items.html",
+                            context={
+                                "extra_item": extras,
+                                "status_check": 1,
+                                "messages": messages.get_messages(request),
+                            },
+                        )
+                    else :
+                        messages.success(request, "Changes made successfully.")
+                        return render(
+                            request,
+                            "Manager_Extra_Items.html",
+                            context={
+                                "extra_item": extras,
+                                "status_check": 0,
+                                "messages": messages.get_messages(request),
+                            },
+                        )
 
                 elif "edit" in request.POST:
 
@@ -441,8 +482,9 @@ def Manager_Extra_Items(request):
                     idt = request.POST.get(
                         "delete"
                     )  # idt is the key of the object to be deleted
-                    extra_items_del = Extras.objects.filter(id=idt)[0]
-                    extra_items_del.delete()
+                    if Extras.objects.filter(id=idt):
+                        extra_items_del = Extras.objects.filter(id=idt)[0]
+                        extra_items_del.delete()
 
                     messages.success(request, "Deleted Successfully")
                     return render(
@@ -497,11 +539,13 @@ def Manager_Rebate_Requests(request):
                     # Database is updated
                     rebate.status = 1
                     rebate.save()
+                    
+                    messages.success(request,"Rebate Request Accepted.")
 
                     for dt in rrule(DAILY, dtstart=fromdt, until=todt):
 
                         bill_objects = Bill.objects.filter(
-                            User_Name=username, Bill_Month=dt.month
+                            User_Name=username, Bill_Month=dt.month,Year = dt.year,
                         )
 
                         if not bill_objects:
@@ -509,6 +553,7 @@ def Manager_Rebate_Requests(request):
                             bill = Bill(
                                 User_Name=username,
                                 Bill_Month=dt.month,
+                                Year = dt.year,
                             )
                             bill.rebate_days += 1
                             bill.Month_Name = calendar.month_name[bill.Bill_Month]
@@ -524,6 +569,7 @@ def Manager_Rebate_Requests(request):
                             bill.save()
 
                 elif "reject" in request.POST:
+                    messages.success(request,"Rebate Request Rejected.")
                     # For requests that are rejected
                     idt = request.POST.get("reject")
                     rebate = Rebate.objects.filter(id=idt)[0]
@@ -547,7 +593,7 @@ def Manager_Rebate_Requests(request):
                     rebate.save()  # Updates database
 
             return render(
-                request, "Manager_Rebate_Requests.html", context={"req": requests}
+                request, "Manager_Rebate_Requests.html", context={"req": requests,"messages": messages.get_messages(request)}
             )
         else:
             return render(request, "Error.html")
@@ -559,11 +605,12 @@ def Manager_Students_Bills(request):
     # Used to clear dues from the database when a student pays the mess dues
     if request.user.is_authenticated:
         if request.user.designation == "Mess Manager":
-            bill = Bill.objects.all().order_by("User_Name", "Bill_Month")
+            bill = Bill.objects.all().order_by("Year","Bill_Month","User_Name")
             if request.method == "POST":
                 key = request.POST.get("clear_dues")
-                billObject = Bill.objects.filter(id=key)[0]
-                billObject.delete()
+                if Bill.objects.filter(id=key):
+                    billObject = Bill.objects.filter(id=key)[0]
+                    billObject.delete()
                 # The Bill object corresponding to the mess dues of a student for a particular month
                 # is deleted when payment is confirmed by the mess manager
                 messages.success(request, "Dues cleared successfully")
@@ -613,58 +660,79 @@ def Manager_Modify_BDMR(request):
         if request.user.designation == "Mess Manager":
 
             if request.method == "POST":
-
-                date = request.POST.get("BDMR_Date")
-                date = datetime.strptime(str(date), "%Y-%m-%d")
-                bdmr = request.POST.get("BDMR")
-
-                for obj in User_class.objects.filter(designation="Student"):
-                    # The Bill object corresponding to each student is modified when the BDMR of a day is uploaded/updated
-                    bill_objects = Bill.objects.filter(
-                        User_Name=obj.username, Bill_Month=date.month
-                    )
-                    if not bill_objects:
-                        # If the Bill object corresponding to the user for the current month has not been initialised
-                        # it is done when the BDMR is being saved
-                        bill = Bill(
-                            User_Name=obj.username,
-                            Bill_Month=date.month,
+                    
+                if "bdmr_submit" in request.POST:
+                    bdmr = request.POST.get("BDMR")
+                    date = request.POST.get("bdmr_submit")
+                    date = datetime.strptime(str(date), "%Y-%m-%d")
+                    for obj in User_class.objects.filter(designation="Student"):
+                        # The Bill object corresponding to each student is modified when the BDMR of a day is uploaded/updated
+                        bill_objects = Bill.objects.filter(
+                            User_Name=obj.username, Bill_Month=date.month,Year = date.year,
                         )
-                        bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
-                        if not bdmr_obj:
-                            # if the BDMR is being uploaded instead of updated
-                            bill.Basic_Amount += float(bdmr)
+                        
+                        if not bill_objects:
+                            # If the Bill object corresponding to the user for the current month has not been initialised
+                            # it is done when the BDMR is being saved
+                            bill = Bill(
+                                User_Name=obj.username,
+                                Bill_Month=date.month,
+                                Year = date.year,
+                            )
+                            bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
+                            if not bdmr_obj:
+                                # if the BDMR is being uploaded instead of updated
+                                bill.Basic_Amount += float(bdmr)
+                            else:
+                                bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
+
+                            bill.Total_Days = 1
+                            bill.Month_Name = calendar.month_name[bill.Bill_Month]
+                            bill.messbillcalc()
+                            bill.save()
+
                         else:
-                            bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
+                            # If a Bill object has been generated for the user
 
-                        bill.Total_Days = 1
-                        bill.Month_Name = calendar.month_name[bill.Bill_Month]
-                        bill.messbillcalc()
-                        bill.save()
+                            bill = bill_objects[0]
+                            bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
+                            if not bdmr_obj:
+                                bill.Basic_Amount += float(bdmr)
+                            else:
+                                bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
 
+                            bill.Total_Days += 1
+                            bill.Month_Name = calendar.month_name[bill.Bill_Month]
+                            bill.messbillcalc()
+                            bill.save()
+
+                    # A "Datewise_BDMR" object is generated/updated
+                    date_and_bdmr = Datewise_BDMR(
+                        Date=date,
+                        BDMR=bdmr,
+                    )
+                    date_and_bdmr.save()
+
+                    messages.success(request, "BDMR modified")
+                    
+                    return render(
+                        request,
+                        "Manager_Modify_BDMR.html",
+                        context={"messages": messages.get_messages(request)},
+                    )
+
+                if "BDMR_Date" in request.POST:
+                    date = request.POST.get("BDMR_Date")
+                    date = datetime.strptime(str(date), "%Y-%m-%d")
+                    if Datewise_BDMR.objects.filter(Date = date):
+                        amt = Datewise_BDMR.objects.filter(Date = date)[0].BDMR
                     else:
-                        # If a Bill object has been generated for the user
-                        bill = bill_objects[0]
-                        bdmr_obj = Datewise_BDMR.objects.filter(Date=date)
-                        if not bdmr_obj:
-                            bill.Basic_Amount += float(bdmr)
-                        else:
-                            bill.Basic_Amount += float(bdmr) - bdmr_obj[0].BDMR
-
-                        bill.Total_Days += 1
-                        bill.Month_Name = calendar.month_name[bill.Bill_Month]
-                        bill.messbillcalc()
-                        bill.save()
-
-                # A "Datewise_BDMR" object is generated/updated
-                date_and_bdmr = Datewise_BDMR(
-                    Date=date,
-                    BDMR=bdmr,
-                )
-                date_and_bdmr.save()
-
-                messages.success(request, "BDMR modified")
-
+                        amt = 0
+                    return render(
+                        request,
+                        "Manager_Modify_BDMR.html",
+                        context={"messages": messages.get_messages(request),"date":date,"amount":amt},
+                    )
             return render(
                 request,
                 "Manager_Modify_BDMR.html",

@@ -37,12 +37,12 @@
       {%for item in menu%}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{item.Day}}</td>
-        <td>{{item.Meal}}</td>
-        <td>{{item.Items}}</td>
-          <td>
+        <td class = "f">{{item.Day}}</td>
+        <td class = "g">{{item.Meal}}</td>
+        <td class = "h">{{item.Items}}</td>
+          <td class = "i">
             {%if item.Rating%}
-             ☆ {{item.Rating}}
+             ☆ {{item.Rating  | floatformat:2}}
             {% else %} 
             Be the first one to rate
             {% endif %}
@@ -52,15 +52,15 @@
           <td>
             <div class="rating">
               <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="5"
-                id="5_{{item.id}}"><label for="5_{{item.id}}">☆</label>
-              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="4"
-                id="4_{{item.id}}"><label for="4_{{item.id}}">☆</label>
+                id="5_{{item.id}}"><label class = "a" for="5_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();"  type="radio" name="rating{{item.id}}" value="4"
+                id="4_{{item.id}}"><label class = "b" for="4_{{item.id}}">☆</label>
               <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="3"
-                id="3_{{item.id}}"><label for="3_{{item.id}}">☆</label>
+                id="3_{{item.id}}"><label class = "c"for="3_{{item.id}}">☆</label>
               <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="2"
-                id="2_{{item.id}}"><label for="2_{{item.id}}">☆</label>
+                id="2_{{item.id}}"><label class = "d"for="2_{{item.id}}">☆</label>
               <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="1"
-                id="1_{{item.id}}"><label for="1_{{item.id}}">☆</label>
+                id="1_{{item.id}}"><label class = "e"for="1_{{item.id}}">☆</label>
             </div>
           </td>
         </form>

@@ -21,8 +21,8 @@
         0.6200000047683716
       );">Pending requests</th></tr>
       <tr>
-        <th>Date</th>
-        <th>Time</th>
+        <th>Date and Time</th>
+        
         <th>Place</th>
         <th>Status</th>
       </tr>
@@ -30,8 +30,8 @@
       <tr>
       <form method="post" action="Pending_Request">
         {% csrf_token %}
-      <td>{{i.Cleaning_DateTime.date}}</td>
-      <td>{{i.Cleaning_DateTime.time}}</td>
+      <td>{{i.Cleaning_DateTime}}</td>
+
       <td>{{i.Place}}</td>
       <td><button type="submit" name = "identity" value = {{i.id}}>Done</button></td>
     </form>

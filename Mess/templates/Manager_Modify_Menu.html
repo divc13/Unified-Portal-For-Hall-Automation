@@ -48,29 +48,92 @@
           <select
             name="day{{items.id}}"
             value="{{items.Day}}"
+            class = "a"
           >
-            <option>Monday</option>
-            <option>Tuesday</option>
-            <option>Wednesday</option>
-            <option>Thursday</option>
-            <option>Friday</option>
-            <option>Saturday</option>
-            <option>Sunday</option>
+          {% if items.Day == "Monday" %}
+            <option selected name = "a1">Monday</option>
+            <option name = "a2">Tuesday</option>
+            <option name = "a3">Wednesday</option>
+            <option name = "a4">Thursday</option>
+            <option name = "a5">Friday</option>
+            <option name = "a6">Saturday</option>
+            <option name = "a0">Sunday</option>
+          {% elif items.Day == "Tuesday" %}
+          <option name = "a1">Monday</option>
+          <option selected name = "a2">Tuesday</option>
+          <option name = "a3">Wednesday</option>
+          <option name = "a4">Thursday</option>
+          <option name = "a5">Friday</option>
+          <option name = "a6">Saturday</option>
+          <option name = "a0">Sunday</option>
+          {% elif items.Day == "Wednesday" %}
+          <option name = "a1">Monday</option>
+          <option name = "a2">Tuesday</option>
+          <option selected name = "a3">Wednesday</option>
+          <option name = "a4">Thursday</option>
+          <option name = "a5">Friday</option>
+          <option name = "a6">Saturday</option>
+          <option name = "a0">Sunday</option>
+          {% elif items.Day == "Thursday" %}
+          <option name = "a1">Monday</option>
+          <option name = "a2">Tuesday</option>
+          <option name = "a3">Wednesday</option>
+          <option selected name = "a4">Thursday</option>
+          <option name = "a5">Friday</option>
+          <option name = "a6">Saturday</option>
+          <option name = "a0">Sunday</option>
+          {% elif items.Day == "Friday" %}
+          <option name = "a1">Monday</option>
+          <option name = "a2">Tuesday</option>
+          <option name = "a3">Wednesday</option>
+          <option name = "a4">Thursday</option>
+          <option selected name = "a5">Friday</option>
+          <option name = "a6">Saturday</option>
+          <option name = "a0">Sunday</option>
+          {% elif items.Day == "Saturday" %}
+          <option name = "a1">Monday</option>
+          <option name = "a2">Tuesday</option>
+          <option name = "a3">Wednesday</option>
+          <option name = "a4">Thursday</option>
+          <option name = "a5">Friday</option>
+          <option selected name = "a6">Saturday</option>
+          <option name = "a0">Sunday</option>
+          {% else %}
+          <option name = "a1">Monday</option>
+          <option name = "a2">Tuesday</option>
+          <option name = "a3">Wednesday</option>
+          <option name = "a4">Thursday</option>
+          <option name = "a5">Friday</option>
+          <option name = "a6">Saturday</option>
+          <option selected name = "a0">Sunday</option>
+            {% endif %}
           </select>
         </td>
         <td>
           <select
             name="meal{{items.id}}"
             value="{{items.Meal}}"
+            class = "b"
           >
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-          </select>
+          {% if items.Meal == "Dinner" %}
+          <option name = "b0">Breakfast</option>
+          <option name = "b1">Lunch</option>
+          <option name = "b2" selected>Dinner</option>
+        {% elif items.Meal == "Lunch" %}
+        <option name = "b0">Breakfast</option>
+          <option name = "b1" selected>Lunch</option>
+          <option name = "b2">Dinner</option>
+        {% else %}
+        <option name = "b0" selected>Breakfast</option>
+          <option name = "b1">Lunch</option>
+          <option name = "b2">Dinner</option>
+          {% endif %}
+        </select>
         </td>
         <td>
           <input
             required
+            class = "c"
             type="text"
             name="item{{items.id}}"
             value="{{items.Items}}"
@@ -92,7 +155,8 @@
       <tr>
         <th colspan="3" class="main_head">Modify/Update Menu</th>
         <th class="main_head">
-          <button type="submit" name="edit">Edit</button>
+
+          {% if regularmenu %}<button type="submit" name="edit">Edit</button>{% endif %}
         </th>
         <th class="main_head">
           <button type="submit" name="add_hidden_item">Add New Item</button>

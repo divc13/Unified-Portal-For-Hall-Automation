@@ -4,11 +4,15 @@ from Canteen.models import Bill
 from Canteen.models import Menu
 from django.contrib import messages
 from datetime import datetime
+from Login.models import User_class
+from django.conf import settings
+from django.core.mail import send_mail
+import pytz
 
 def Student_Place_Order(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
-            menu = Menu.objects.all()
+            menu = Menu.objects.all().exclude(Item_Name = "").exclude(Item_Name = "None")
             if request.method == "POST":
                 quantity = int(request.POST.get("quantity"))
                 idt = request.POST.get("submit")
@@ -48,8 +52,9 @@ def Student_Cart(request):
             if request.method == "POST":
                 if "order_validation1" in request.POST:
                     order = request.POST.get("order_validation1")
-                    req = Order.objects.filter(id=int(order))[0]
-                    req.delete()
+                    if Order.objects.filter(id=int(order)):
+                        req = Order.objects.filter(id=int(order))[0]
+                        req.delete()
                     messages.success(
                         request, "Your Cart Item has been successfully removed"
                     )
@@ -145,6 +150,20 @@ def Owner_New_Order(request):
                     order.History_Status = 1
                     order.Processing_Status = 0
                     order.save()
+                    
+                    username = order.User_Name
+                    name = User_class.objects.filter(username=username)[0].name
+                    dt = order.Order_Date_Time.astimezone(pytz.timezone('Asia/Kolkata'))
+                    dt = dt.strftime("%Y-%m-%d %H:%M:%S")
+                    subject = "Order Rejected"
+                    message = f"Dear {name}, Your order, made on {dt}, with items {order.Item_Name} has been rejected. We deeply regret this. Contact the canteen manager."
+                    email_from = settings.EMAIL_HOST_USER
+                    recipient_list = [
+                        f"{username}@iitk.ac.in",
+                    ]
+                    send_mail(subject, message, email_from, recipient_list)
+                    
+                    
                     messages.error(request, "You rejected the order")
 
                 return render(
@@ -222,11 +241,14 @@ def Owner_Modify_Menu(request):
                     if "editable_mode" in request.POST:
                         for obj in Menu.objects.all():
                             item = request.POST.get("item" + str(obj.id))
-                            price = request.POST.get("price" + str(obj.id))
-                            extra_items = Menu.objects.filter(id=obj.id)[0]
-                            extra_items.Item_Name = item
-                            extra_items.Price = price
-                            extra_items.save()
+                            if item is not None:
+                                price = request.POST.get("price" + str(obj.id))
+                                extra_items = Menu.objects.filter(id=obj.id)[0]
+                                extra_items.Item_Name = item
+                                extra_items.Price = price
+                                extra_items.save()
+                            else:
+                                obj.delete()
                     extra_items1 = Menu()
                     extra_items1.save()
                     idt = extra_items1.id
@@ -240,11 +262,14 @@ def Owner_Modify_Menu(request):
                     # idt = request.POST.get("submit")
                     for obj in Menu.objects.all():
                         item = request.POST.get("item" + str(obj.id))
-                        price = request.POST.get("price" + str(obj.id))
-                        extra_items = Menu.objects.filter(id=obj.id)[0]
-                        extra_items.Item_Name = item
-                        extra_items.Price = price
-                        extra_items.save()
+                        if item is not None:
+                            price = request.POST.get("price" + str(obj.id))
+                            extra_items = Menu.objects.filter(id=obj.id)[0]
+                            extra_items.Item_Name = item
+                            extra_items.Price = price
+                            extra_items.save()
+                        else:
+                            obj.delete()
                     return render(
                         request,
                         "Owner_Modify_Menu.html",
@@ -264,13 +289,17 @@ def Owner_Modify_Menu(request):
                     if "editable_mode" in request.POST:
                         for obj in Menu.objects.all():
                             item = request.POST.get("item" + str(obj.id))
-                            price = request.POST.get("price" + str(obj.id))
-                            extra_items = Menu.objects.filter(id=obj.id)[0]
-                            extra_items.Item_Name = item
-                            extra_items.Price = price
-                            extra_items.save()
-                    extra_items_del = Menu.objects.filter(id=idt)[0]
-                    extra_items_del.delete()
+                            if item is not None:
+                                price = request.POST.get("price" + str(obj.id))
+                                extra_items = Menu.objects.filter(id=obj.id)[0]
+                                extra_items.Item_Name = item
+                                extra_items.Price = price
+                                extra_items.save()
+                            else:
+                                obj.delete()
+                    if Menu.objects.filter(id=idt):
+                        extra_items_del = Menu.objects.filter(id=idt)[0]
+                        extra_items_del.delete()
                     return render(
                         request,
                         "Owner_Modify_Menu.html",

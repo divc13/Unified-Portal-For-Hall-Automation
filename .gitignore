@@ -3,4 +3,6 @@ db.sqlite3
 **/__pycache__
 /__pycache__
 /static_files
-/.vscode
+.vscode/
+**/migrations/*
+!**/migrations/__init__.py

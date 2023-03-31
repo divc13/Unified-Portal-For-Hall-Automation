@@ -122,14 +122,20 @@ def Set_Password(request):
             user.set_password(password2)
             user.save()
             return redirect(Login)
-
-    return render(request, "Set_Password.html")
+    if request.method=="GET":
+        if '4' in request.session:
+            return render(request, "Set_Password.html")
+        else:
+            return redirect(Login)
 
 def Reset_Password(request):
     if request.method== 'POST':
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
             username=request.POST.get("username")
+            if username =='':
+                messages.error(request, "Please put in the username")
+                return render(request, "Reset_Password.html", context={'messages':messages.get_messages(request)})
             if not User_class.objects.filter(username=username).exists():
                 messages.error(request, "No such username in base")
                 return render(request, "Reset_Password.html", context={'messages':messages.get_messages(request)})
@@ -162,12 +168,12 @@ def SignUp(request):
             if User_class.objects.filter(username = username):
                 messages.error(request, "This Username has been already taken. Please check your username.")
                 return render(request, "SignUp.html", context={'messages':messages.get_messages(request)})
-            request.session.set_expiry(300)
+            request.session.set_expiry(1000)
             request.session['0']=name
             request.session['1']=username
             request.session['2']=designation
             request.session['4']=0
-            return redirect(OTP)
+            return redirect(OTP_Send)
         else:
             messages.error(request, "Please enable cookies and then try again")
             return render(request, "SignUp.html", context={'messages':messages.get_messages(request)})
@@ -187,12 +193,34 @@ def SignUp(request):
             options4=0
         return render(request, "SignUp.html", context={"options1": options1, "options2":options2, "options3":options3, "options4":options4})
 
+def OTP_Send(request):
+    if request.method=="GET":
+        otp = random.randrange(100000,999999)
+        request.session['3']=otp
+        if '4' in request.session:
+            if request.session['4']==0:
+                name=request.session['0']
+                username=request.session['1']
+            if request.session['4']==1:
+                username=request.session['5']
+                name=User_class.objects.filter(username=username)[0].name
+            subject = f'OTP for SignUp - {otp}'
+            message = f'Dear {name}, Your OTP for Registration on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [f'{username}@iitk.ac.in',]
+            send_mail(subject, message, email_from, recipient_list)
+            return redirect(OTP)
+        else:
+            return redirect(Login)
+
 def OTP(request):
     if request.method=="POST":
         otp1=request.POST.get("OTP")
         if otp1=='':
             messages.error(request, "Empty OTP field")
             return render(request, "OTP.html", context={'messages':messages.get_messages(request)})
+        if '3' not in request.session:
+            return redirect(SignUp)
         otp2=request.session['3']
         if otp1==str(otp2):
             return redirect(Set_Password)
@@ -200,20 +228,10 @@ def OTP(request):
             messages.error(request, 'incorrect OTP')
             return render(request, "OTP.html", context={'messages':messages.get_messages(request)})
     if request.method=="GET":
-        otp = random.randrange(100000,999999)
-        request.session['3']=otp
-        if request.session['4']==0:
-            name=request.session['0']
-            username=request.session['1']
-        if request.session['4']==1:
-            username=request.session['5']
-            name=User_class.objects.filter(username=username)[0].name
-        subject = 'OTP for SignUp'
-        message = f'Dear {name}, Your OTP for Registration on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [f'{username}@iitk.ac.in',]
-        send_mail(subject, message, email_from, recipient_list)
-        return render(request, "OTP.html")
+        if '4' in request.session:
+            return render(request, "OTP.html")
+        else:
+            return redirect(Login)
     
 def Logout(request):
     logout(request)

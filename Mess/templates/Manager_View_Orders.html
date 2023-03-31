@@ -33,11 +33,11 @@
         {% for items in orders%}
         <tr>
           <td>{{ forloop.counter }}</td>
-          <td>{{items.Meal_Date}}</td>
-          <td>{{items.User_Name}}</td>          
-          <td>{{items.Meal}}</td>
-          <td>{{items.Item_Name}}</td>
-          <td>{{items.Quantity}}</td>
+          <td class = "a">{{items.Meal_Date}}</td>
+          <td class = "b">{{items.User_Name}}</td>          
+          <td class = "c">{{items.Meal}}</td>
+          <td class = "d">{{items.Item_Name}}</td>
+          <td class = "e">{{items.Quantity}}</td>
         </tr>
         {% endfor %}
       </table>

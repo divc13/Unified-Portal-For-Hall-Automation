@@ -46,15 +46,15 @@
           <form method="post" action="Student_Book_Extras">
             {% csrf_token %}
             <td>{{ forloop.counter }}</td>
-            <td>{{item.Item_Name}}</td>
-            <td>{{item.Meal_Date}}</td>
-            <td>{{item.Meal}}</td>
-            <td>{{item.Start_Time}}</td>
-            <td>{{item.End_Time}}</td>
-            <td>{{item.Available_Orders}}</td>
-            <td>{{item.Price}}</td>
-            <td><input style="max-width: 3.2em;" type = "number" min = "1" value = "1" name = "quantity" required></td>
-            <td><button type="submit"><input type="hidden" name = "identity" value = "{{item.id}}" required>Book</button></td>
+            <td class = "a">{{item.Item_Name}}</td>
+            <td class = "b">{{item.Meal_Date}}</td>
+            <td class = "c">{{item.Meal}}</td>
+            <td class = "d">{{item.Start_Time}}</td>
+            <td class = "e">{{item.End_Time}}</td>
+            <td class = "f">{{item.Available_Orders}}</td>
+            <td class = "g">{{item.Price}}</td>
+            <td class = "h"><input style="max-width: 3.2em;" type = "number" min = "1" value = "1" name = "quantity" required></td>
+            <td><button type="submit" name = "submit"><input type="hidden" name = "identity" value = "{{item.id}}" required>Book</button></td>
           </form>
         </tr>
         {% endfor %}

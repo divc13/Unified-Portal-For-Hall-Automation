@@ -41,12 +41,12 @@
       {% for items in order_history reversed%}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{items.Order_Date_Time}}</td>
-        <td>{{items.Meal}}</td>
-        <td>{{items.Item_Name}}</td>
-        <td>{{items.Quantity}}</td>
-        <td>{{items.Price}}</td>
-        <td>{{items.Amount}}</td>
+        <td class = "a">{{items.Order_Date_Time}}</td>
+        <td class = "b">{{items.Meal}}</td>
+        <td class = "c">{{items.Item_Name}}</td>
+        <td class = "d">{{items.Quantity}}</td>
+        <td class = "e">{{items.Price}}</td>
+        <td class = "f">{{items.Amount}}</td>
       </tr>
       {% endfor %}
     </table>
