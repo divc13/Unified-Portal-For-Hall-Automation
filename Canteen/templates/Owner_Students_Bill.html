@@ -38,11 +38,11 @@
           {% csrf_token %}
           <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{item.Name}}</td>
-            <td>{{item.User_Name}}</td>
-            <td>{{item.Amount}}</td>
-            <td><input type="number" required name="order_validation1"></td>
-            <td><button type="submit" name="submit" value="{{item.User_Name}}">Submit</button></td>
+            <td class="a">{{item.Name}}</td>
+            <td class="b">{{item.User_Name}}</td>
+            <td class="c">{{item.Amount}}</td>
+            <td class="d"><input type="number" required name="order_validation1"></td>
+            <td class="e"><button type="submit" name="submit" value="{{item.User_Name}}">Submit</button></td>
             </td>
           </tr>
         </form>
