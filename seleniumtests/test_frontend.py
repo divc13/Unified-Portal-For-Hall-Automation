@@ -4,7 +4,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 class tests:
     
-    # ################################################ MESS AND RELATED TESTS STARTED #########################################################
     
     def setup_method(self):
         self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
@@ -187,6 +186,7 @@ class tests:
         # logging out
         self.logout()
         
+    # ################################################ MESS AND RELATED TESTS STARTED #########################################################
     def test6(self):
         # mess manager modify menu
         self.driver.get("https://upha.pythonanywhere.com/")
@@ -196,10 +196,8 @@ class tests:
         # clicking on mess
         self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
         
-        
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
-        
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
@@ -1036,7 +1034,83 @@ class tests:
     
     # ################################################ CANTEEN AND RELATED STARTED ############################################################## 
     def test19(self):
+        # modify menu ----- owner
+        # mess manager modify menu
+        self.driver.get("https://upha.pythonanywhere.com/")
         
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Pav Bhaji")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Sandwitch")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("25")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[1].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Cheese Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("34")
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[2].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[1].click()
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[0].click()       
+       
+        # logging out
+        self.logout()
     
     
     
@@ -1058,7 +1132,9 @@ class tests:
         # self.test15()
         # self.test16()
         # self.test17()
-        self.test18()
+        # self.test18()
+        self.test19()
+        
         
 test = tests()
 test.setup_method()
