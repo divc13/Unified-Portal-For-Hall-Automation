@@ -40,8 +40,8 @@
         >
         {% csrf_token %}
         <tr>
-          <td>{{n.Item_Name}}</td>
-          <td>{{n.Price}}</td>
+          <td class="a">{{n.Item_Name}}</td>
+          <td class="b">{{n.Price}}</td>
             <td>
               <input
               required
@@ -52,7 +52,7 @@
                 min="1"
               />
             </td>
-            <td>
+            <td class="c">
               <button
                 type="submit"
                 name="submit"

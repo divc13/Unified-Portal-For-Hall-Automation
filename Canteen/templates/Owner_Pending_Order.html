@@ -41,13 +41,13 @@
         <form method="POST" action="Owner_Pending_Order">
           {% csrf_token %}
           <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{item.Name}}</td>
-            <td>{{item.Item_Name}}</td>
-            <td>{{item.Quantity}}</td>
-            <td>{{item.Price}}</td>
-            <td>{{item.Amount}}</td>
-            <td>
+            <td class = "a">{{ forloop.counter }}</td>
+            <td class = "b">{{item.Name}}</td>
+            <td class = "c">{{item.Item_Name}}</td>
+            <td class = "d">{{item.Quantity}}</td>
+            <td class = "e">{{item.Price}}</td>
+            <td class = "f">{{item.Amount}}</td>
+            <td class = "g">
               {% if item.Served_Status == 0 %}
               <button type="submit" name="served" value="{{item.id}}">
                 Served

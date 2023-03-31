@@ -42,14 +42,14 @@
            {% csrf_token %}
          <tr>
           <td>{{ forloop.counter }}</td>
-           <td>{{item.Order_Date_Time}}</td>
-           <td>{{item.Name}}</td>
-           <td>{{item.Item_Name}}</td>
-           <td>{{item.Quantity}}</td>
-           <td>{{item.Price}}</td>
-           <td>{{item.Amount}}</td>
-           <td><button type = "submit" name = "accepted" value = "{{item.id}}">Accept</button></td>
-           <td><button type = "submit" name = "rejected" value = "{{item.id}}">Reject</button></td>
+           <td class = "a">{{item.Order_Date_Time}}</td>
+           <td class = "b">{{item.Name}}</td>
+           <td class = "c">{{item.Item_Name}}</td>
+           <td class = "d">{{item.Quantity}}</td>
+           <td class = "e">{{item.Price}}</td>
+           <td class = "f">{{item.Amount}}</td>
+           <td class = "g"><button type = "submit" name = "accepted" value = "{{item.id}}">Accept</button></td>
+           <td class = "h"><button type = "submit" name = "rejected" value = "{{item.id}}">Reject</button></td>
          </tr>
          </form>
          {% endfor %}

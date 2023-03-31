@@ -92,9 +92,9 @@
             </tr>
             {% for items in extra_item reversed %}
             <tr>
-              <td>{{ forloop.counter }}</td>
-              <td>{{items.Item_Name}}</td>
-              <td>{{items.Price}}</td>
+              <td class="a">{{ forloop.counter }}</td>
+              <td class="b">{{items.Item_Name}}</td>
+              <td class="c">{{items.Price}}</td>
               <td>
                 <button type="submit" name="delete" value="{{items.id}}">
                   Delete
