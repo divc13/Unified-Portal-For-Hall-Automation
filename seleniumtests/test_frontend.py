@@ -4,7 +4,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 class tests:
     
-    # ################################################ MESS AND RELATED TESTS STARTED #########################################################
     
     def setup_method(self):
         self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
@@ -187,6 +186,7 @@ class tests:
         # logging out
         self.logout()
         
+    # ################################################ MESS AND RELATED TESTS STARTED #########################################################
     def test6(self):
         # mess manager modify menu
         self.driver.get("https://upha.pythonanywhere.com/")
@@ -196,10 +196,8 @@ class tests:
         # clicking on mess
         self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
         
-        
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
-        
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
@@ -920,7 +918,7 @@ class tests:
         
         # logging out
         self.logout()
-        
+
         # student login
         self.login_student_1()
         
@@ -935,11 +933,184 @@ class tests:
     # ################################################ MESS AND RELATED TESTS COMPLETED #########################################################
        
        
-    # ################################################ CANTEEN AND RELATED STARTED ############################################################## 
-    
-    
+    # ################################################ CLEANING AND RELATED STARTED ##############################################################
     def test18(self):
+        self.driver.get("https://upha.pythonanywhere.com/")
         
+        # student login
+        self.login_student_1()
+
+        # clicking on cleaning
+        self.driver.find_elements(By.CLASS_NAME, "e1_238")[0].click()
+
+        # making requests
+
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-213")
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Room check")
+        self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
+        
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-211")
+        self.driver.find_elements(By.CLASS_NAME, "toilet")[0].click()
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Toilet check")
+        self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-343")
+        self.driver.find_elements(By.CLASS_NAME, "corridor")[0].click()
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Corridor check")
+        self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-413")
+        self.driver.find_elements(By.CLASS_NAME, "other")[0].click()
+        self.driver.find_elements(By.ID, "comment")[0].send_keys("Others check")
+        self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
+
+        #logging out
+
+        self.logout
+
+        #logging in as hall manager
+
+        self.login_hall_manager()
+        
+        # cleaning subsection
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+
+        # checking the data for hall manager
+
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "s1")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "D-213")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "Room")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "Room check")
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[1].text == "s1")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[1].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[1].text == "F-211")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[1].text == "Toilet")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[1].text == "Toilet check")
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[2].text == "s1")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[2].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[2].text == "D-343")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[2].text == "Corridor")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[2].text == "Corridor check")
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[3].text == "s1")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[3].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[3].text == "F-413")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[3].text == "Others")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[3].text == "Others check")
+
+        # logging out hall manager
+
+        self.logout()
+
+        # logging in student_1
+
+        self.login_student_1()
+
+        # checking the data for student 1
+
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Others")
+        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Corridor")
+        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Toilet")
+        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Room")
+        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+
+        # Past requests of student 1 assessment
+
+        self.driver.find_elements(By.CLASS_NAME, "e2_9")[0].click()
+
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Others")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[1].text == "Corridor")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[2].text == "Toilet")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[3].text == "Room")
+
+
+        
+       
+    # ################################################ CLEANING AND RELATED ENDS ################################################################
+    
+    
+    
+    # ################################################ CANTEEN AND RELATED STARTED ############################################################## 
+    def test19(self):
+        # modify menu ----- owner
+        # mess manager modify menu
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Pav Bhaji")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Sandwitch")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("25")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[1].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Cheese Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("34")
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[2].click()
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[1].click()
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[0].click()       
+       
+        # logging out
+        self.logout()
     
     
     
@@ -960,7 +1131,10 @@ class tests:
         # self.test14()
         # self.test15()
         # self.test16()
-        self.test17()
+        # self.test17()
+        # self.test18()
+        self.test19()
+        
         
 test = tests()
 test.setup_method()

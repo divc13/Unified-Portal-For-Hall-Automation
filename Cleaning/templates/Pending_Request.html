@@ -22,7 +22,6 @@
       );">Pending requests</th></tr>
       <tr>
         <th>Date and Time</th>
-        
         <th>Place</th>
         <th>Status</th>
       </tr>
@@ -30,9 +29,8 @@
       <tr>
       <form method="post" action="Pending_Request">
         {% csrf_token %}
-      <td>{{i.Cleaning_DateTime}}</td>
-
-      <td>{{i.Place}}</td>
+      <td class="a">{{i.Cleaning_DateTime}}</td>
+      <td class="b">{{i.Place}}</td>
       <td><button type="submit" name = "identity" value = {{i.id}}>Done</button></td>
     </form>
     </tr>

@@ -23,6 +23,7 @@
         0.6200000047683716
       );">Request History</th></tr>
       <tr>
+        <th>S. No.</th>
         <th>Date and Time</th>
         <th>Place</th>
       </tr>
@@ -31,8 +32,9 @@
       <tr>
         <form method="post" action="Past_Request">
           {% csrf_token %}
-        <td>{{i.Cleaning_DateTime}}</td>
-        <td>{{i.Place}}</td>
+        <td>{{ forloop.counter }}</td>
+        <td class="a">{{i.Cleaning_DateTime}}</td>
+        <td class="b">{{i.Place}}</td>
       </form>
       </tr>
       {% endif %}
