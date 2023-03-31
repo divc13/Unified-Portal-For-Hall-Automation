@@ -92,7 +92,7 @@ def guestroom(request):  # student
                                 guestroom_request.save()
                                 messages.success(
                                     request,
-                                    f"Your request for this room has been sent to the Hall manager, UPHA team will communicate their confirmation to you.",
+                                    f"Your request for this room has been sent to the Hall manager, please contact him for further proceedings. UPHA team will communicate their confirmation to you.",
                                 )
                                 return render(request, "guestroom.html", context)
                         else:
