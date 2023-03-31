@@ -1,0 +1,95 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Secy Request Validation</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Sports Equipment Requests</th></tr>
+      <tr>
+        <th style="text-align: center;">Name</th>
+        <th style="text-align: center;">Username</th>
+        
+        <th style="text-align: center;">Sports-equipment</th>
+        <th style="text-align: center;"> Choose action</th>
+        
+      </tr>
+
+      <!---->
+          {% for item in querry %}
+          <tr>
+            <form method='post' action='secy_request_validation'id='request_tackle'>
+            {% csrf_token %}
+          <td class="a">{{item.name}}
+            <input type='hidden' name='requester_name' value={{item.name}} required></input>
+          </td>
+          <td class="b">{{item.username}}</td>
+          <input type='hidden' name='requester_username' value={{item.username}} required></input>
+          <td class="c">
+            {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}
+          </td>
+          <input type='hidden' name='item_requested' value={{item.equipment_selected}} required></input>
+          <td><input type='submit' value='Validate' name='action' class="accept" required></input>
+          <input type='submit' value='Reject' name='action' class="reject" required></input></td>
+        </form>
+        </tr>
+          {% endfor %}  
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

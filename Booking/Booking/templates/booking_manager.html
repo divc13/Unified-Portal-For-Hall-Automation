@@ -1,0 +1,118 @@
+{%include "staff_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator" />
+    <meta name="author" content="htmlGenerator" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+      .btn-sm{
+        padding=10% 0;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+     
+        {% if messages %}
+            {% for message in messages %}
+            <div class="{{message.tags}}">
+              {{message}}
+            </div>
+          {% endfor %}
+   {% endif %}
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Guestroom Booking Requests</th></tr>
+      <tr>
+        {% comment %} <th style="text-align: center;">Student</th> {% endcomment %}
+        <th style="text-align: center;">Student</th>
+        <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Check in Date</th>
+        <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Choose action</th>
+        {% comment %} <th style="text-align: center;">Validate</th> {% endcomment %}
+      </tr>
+      {% for item in query_results_request %}
+      <tr>
+        <form action="booking_manager" method="post" >
+            {% csrf_token %}
+            <td class="a"> {{item.username}}
+            <input type="hidden" name="username" value="{{item.username}}">
+            </td>
+            <td class="b"> {{item.room}}
+            <input type="hidden" name="room" value="{{item.room}}">
+            </td>
+            <td class="c"> {{item.checkin_date}}
+              <input type="hidden" name="checkin_date" value="{{item.checkin_date}}"></input>
+            </td>
+            <td class="d"> {{item.checkout_date}}
+              <input type="hidden" name="checkout_date" value="{{item.checkout_date}}"></input>
+            </td> 
+            <td><input type="submit" name='action' class="approve" value='Approve' required></input>
+              <input type="submit" name='action' class="reject" value='Reject' required></input></td>
+      </form>
+      </tr>
+      {% endfor %}
+      
+    </table>
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Approved Booking Requests</th></tr>
+      <tr>
+        {% comment %} <th style="text-align: center;">Student</th> {% endcomment %}
+        <th style="text-align: center;">Student</th>
+        <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Check in Date</th>
+        <th style="text-align: center;">Check out Date</th>
+        {% comment %} <th style="text-align: center;">Choose action</th>
+        <th style="text-align: center;">Validate</th> {% endcomment %}
+      </tr>
+      {% for item in query_results_approved %}
+      <tr>
+        <form action="booking_manager" method="post" id='manager_action'>
+            {% csrf_token %}
+            <td class="e"> {{item.username}}
+            <input type="hidden" name="username" value="{{item.username}}"></input>
+            </td>
+            <td class="f"> {{item.room}}
+            <input type="hidden" name="room" value="{{item.room}}"></input>
+            </td>
+            <td class="g"> {{item.checkin_date}}
+             
+            </td>
+            <td class="h"> {{item.checkout_date}}
+              
+            </td>
+           
+      </tr>
+      {% endfor %}
+      
+    </table>
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

@@ -1,0 +1,67 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+
+    <title>Student Guestroom</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+      .btn-sm{
+        padding=10% 0;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "5" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Your Previous Bookings</th></tr>
+      <tr>
+        <th style="text-align: center;">Room No.</th>
+        <th style="text-align: center;">Check in Date</th>
+        <th style="text-align: center;">Check out Date</th>
+        <th style="text-align: center;">Price per day</th>
+        <th style="text-align: center;">Status</th>
+      </tr>
+      {% for booking in bookings %}
+      <tr>
+        <td class="a">{{booking.room}}</td>
+        <td class="b">{{booking.checkin_date}}</td>
+        <td class="c">{{booking.checkout_date}}</td>
+        <td class="d">{{booking.price}}</td>
+        <td class="e"> {% if booking.manager_validation == 'YES' %}
+          Booked
+          {% else %} <font color='grey' ><i>Pending...</i></font>
+          {% endif %}</td>
+      {% endfor %}
+    </table>
+    <p><br></p>
+
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>
