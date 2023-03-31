@@ -467,6 +467,7 @@ class tests:
         # logging out
         self.logout()
         
+        
     def test10(self):
         # add item in menu, rate and test in feedback
         
@@ -566,9 +567,7 @@ class tests:
         assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Masala Dosa")
         assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "3")
         assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "34")
-        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "102")
-
-        self.driver.find_elements(By.NAME, "order_validation")[0].click()       
+        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "102")   
         
         # logging out
         self.logout()
@@ -581,10 +580,306 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "a") == None)
+        assert(len(self.driver.find_elements(By.CLASS_NAME, "a")) == 0)
         
         # logging out
         self.logout()
+        
+    def test11(self):
+        # start time must be less than end time
+        
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("02-04-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("30-03-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "Start time must be less than end time.")
+        
+        # logging out
+        self.logout()
+        
+    def test12(self):
+        # start time must be less than end time
+        
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("01-04-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # logging out
+        self.logout()
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("2")
+        self.driver.find_elements(By.NAME, "submit")[0].click()     
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "Order cannot be booked now")
+        # logging out
+        self.logout()
+        
+    def test13(self):
+        # student apply for rebate
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
+        
+        self.driver.find_elements(By.NAME, "from")[0].clear()
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "to")[0].clear()
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-04-01")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.")
+        
+        self.logout()
+        
+    def test14(self):
+        # student apply for rebate
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
+        
+        self.driver.find_elements(By.NAME, "from")[0].clear()
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "to")[0].clear()
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-03-01")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "From-Date must be less than equal to To-Date")
+        self.logout()
+        
+    def test15(self):
+        
+        # student apply for rebate
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
+        
+        self.driver.find_elements(By.NAME, "from")[0].clear()
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "to")[0].clear()
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-04-01")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.")
+        
+        self.logout()
+        
+        # mess manager login
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_32")[0].click()
+        
+        self.driver.find_elements(By.NAME, "accept")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Rebate Request Accepted.")
+        self.logout()
+        
+    def test16(self):
+        # student apply for rebate
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
+        
+        self.driver.find_elements(By.NAME, "from")[0].clear()
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "to")[0].clear()
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-04-01")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.")
+        
+        self.logout()
+        
+        # mess manager login
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_32")[0].click()
+        
+        self.driver.find_elements(By.NAME, "reject")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "Rebate Request Rejected.")
+        self.logout()
+        
+    def test17(self):
+        # add item in menu, rate and test in feedback
+        
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("30-03-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # logging out
+        self.logout()
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("3")
+        self.driver.find_elements(By.NAME, "submit")[0].click()        
+        
+        # logging out
+        self.logout()
+        
+        # enter BDMR
+       
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_34")[0].click()
+        
+        # adding BDMRS
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-03-30")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("63.89")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-03-31")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("75.06")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-01")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("82.47")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-02")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("81.96")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-03")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("71.35")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+         # logging out
+        self.logout()
+        
         
         
     def main_test(self):
@@ -597,7 +892,13 @@ class tests:
         # self.test7()
         # self.test8()
         # self.test9()
-        self.test10()
+        # self.test10()
+        # self.test11()
+        # self.test12()
+        self.test13()
+        self.test14()
+        self.test15()
+        self.test16()
         
         
 test = tests()

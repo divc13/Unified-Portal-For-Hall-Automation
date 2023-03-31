@@ -407,14 +407,19 @@ def Manager_Extra_Items(request):
                             end_time = request.POST.get("end_time" + str(obj.id))
                             end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
                             
+                            if meal_date.date()<end_time.date():
+                                if flag == 0:
+                                    messages.error(request, "Meal date must be greater than end time.")
+                                flag = 1
+                                continue
+                            
                             if start_time > end_time:
                                 if flag == 0:
                                     messages.error(request, "Start time must be less than end time.")
                                 flag = 1
                                 continue
-                                
+                            
                             else:
-
                                 extra_items = Extras.objects.filter(id=obj.id)[0]
                                 extra_items.Meal = meal
                                 extra_items.Meal_Date = meal_date
@@ -534,6 +539,8 @@ def Manager_Rebate_Requests(request):
                     # Database is updated
                     rebate.status = 1
                     rebate.save()
+                    
+                    messages.success("Rebate Request Accepted.")
 
                     for dt in rrule(DAILY, dtstart=fromdt, until=todt):
 
@@ -562,6 +569,7 @@ def Manager_Rebate_Requests(request):
                             bill.save()
 
                 elif "reject" in request.POST:
+                    messages.success("Rebate Request Rejected.")
                     # For requests that are rejected
                     idt = request.POST.get("reject")
                     rebate = Rebate.objects.filter(id=idt)[0]
@@ -585,7 +593,7 @@ def Manager_Rebate_Requests(request):
                     rebate.save()  # Updates database
 
             return render(
-                request, "Manager_Rebate_Requests.html", context={"req": requests}
+                request, "Manager_Rebate_Requests.html", context={"req": requests,"messages": messages.get_messages(request)}
             )
         else:
             return render(request, "Error.html")
