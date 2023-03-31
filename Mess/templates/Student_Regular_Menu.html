@@ -51,16 +51,16 @@
           {% csrf_token %}
           <td>
             <div class="rating">
-              <input onchange="this.form.submit();" class = "a" type="radio" name="rating{{item.id}}" value="5"
-                id="5_{{item.id}}"><label for="5_{{item.id}}">☆</label>
-              <input onchange="this.form.submit();" class = "b" type="radio" name="rating{{item.id}}" value="4"
-                id="4_{{item.id}}"><label for="4_{{item.id}}">☆</label>
-              <input onchange="this.form.submit();" class = "c" type="radio" name="rating{{item.id}}" value="3"
-                id="3_{{item.id}}"><label for="3_{{item.id}}">☆</label>
-              <input onchange="this.form.submit();" class = "d" type="radio" name="rating{{item.id}}" value="2"
-                id="2_{{item.id}}"><label for="2_{{item.id}}">☆</label>
-              <input onchange="this.form.submit();" class = "e" type="radio" name="rating{{item.id}}" value="1"
-                id="1_{{item.id}}"><label for="1_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="5"
+                id="5_{{item.id}}"><label class = "a" for="5_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();"  type="radio" name="rating{{item.id}}" value="4"
+                id="4_{{item.id}}"><label class = "b" for="4_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="3"
+                id="3_{{item.id}}"><label class = "c"for="3_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="2"
+                id="2_{{item.id}}"><label class = "d"for="2_{{item.id}}">☆</label>
+              <input onchange="this.form.submit();" type="radio" name="rating{{item.id}}" value="1"
+                id="1_{{item.id}}"><label class = "e"for="1_{{item.id}}">☆</label>
             </div>
           </td>
         </form>

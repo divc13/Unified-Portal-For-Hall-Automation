@@ -453,10 +453,13 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_31")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0] == "Thursday")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0] == "Lunch")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0] == "Rajma Chawal")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0] == "☆ 3.00")
         
-    
-        
-        
+        # logging out
+        self.logout()
         
         
     def main_test(self):
@@ -467,7 +470,9 @@ class tests:
         # self.test5()
         # self.test6()
         # self.test7()
-        self.test8()
+        # self.test8()
+        self.test9()
+        
         
 test = tests()
 test.setup_method()
