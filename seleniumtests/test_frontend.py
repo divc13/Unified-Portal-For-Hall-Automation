@@ -934,6 +934,7 @@ class tests:
        
        
     # ################################################ CLEANING AND RELATED STARTED ##############################################################
+    
     def test18(self):
         self.driver.get("https://upha.pythonanywhere.com/")
         
@@ -950,21 +951,21 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-211")
-        self.driver.find_elements(By.CLASS_NAME, "toilet")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Toilet check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-343")
-        self.driver.find_elements(By.CLASS_NAME, "corridor")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Corridor check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-413")
-        self.driver.find_elements(By.CLASS_NAME, "other")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Others check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
 
         #logging out
 
-        self.logout
+        self.logout()
 
         #logging in as hall manager
 
@@ -1005,16 +1006,20 @@ class tests:
 
         self.login_student_1()
 
+        # clicking on cleaning
+        self.driver.find_elements(By.CLASS_NAME, "e1_238")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+
         # checking the data for student 1
 
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Others")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Corridor")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Toilet")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Room")
-        self.driver.find_elements(By.CLASS_NAME, "identity")[0].click()
+        self.driver.find_elements(By.NAME, "identity")[0].click()
 
         # Past requests of student 1 assessment
 
@@ -1024,9 +1029,6 @@ class tests:
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[1].text == "Corridor")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[2].text == "Toilet")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[3].text == "Room")
-
-
-        
        
     # ################################################ CLEANING AND RELATED ENDS ################################################################
     
@@ -1054,15 +1056,16 @@ class tests:
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Pav Bhaji")
-        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Pav Bhaji")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Sandwitch")
         self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("25")
@@ -1072,15 +1075,16 @@ class tests:
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Masala Dosa")
         self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Veg. Maggi")
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("30")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
@@ -1090,15 +1094,16 @@ class tests:
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Cheese Maggi")
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Cheese Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("34")
         
         # deleting
         self.driver.find_elements(By.NAME, "delete")[2].click()
         
         # editting
         self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Veg. Maggi")
         self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
         self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
@@ -1112,8 +1117,182 @@ class tests:
         # logging out
         self.logout()
     
-    
-    
+    def test20(self):
+        # add item in menu, student adds it to cart, removes from the cart
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation1")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your Cart Item has been successfully removed")
+        
+        self.logout()
+        
+    def test21(self):
+        # add item in menu, student adds it to cart, books from the cart, owner rejects
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation2")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Order request has been made to Canteen Manager")
+        
+        self.logout()
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # rejecting order
+        self.driver.find_elements(By.NAME, "rejected")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "You rejected the order")
+        
+        self.logout()
+        
+        # checking in student order history
+        
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        # subsection:Order history
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Veg. Maggi")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "4")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "30")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "120")
+        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "Failed")
+        
+        self.logout()
+        
+        
+    def test22(self):
+        # add item in menu, student adds it to cart, books from the cart, owner accepts, 
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation2")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Order request has been made to Canteen Manager")
+        
+        self.logout()
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # rejecting order
+        self.driver.find_elements(By.NAME, "rejected")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "You rejected the order")
+        
+        self.logout()
+        
+        
     def main_test(self):
         # self.test1()
         # self.test2()        
@@ -1133,7 +1312,9 @@ class tests:
         # self.test16()
         # self.test17()
         # self.test18()
-        self.test19()
+        # self.test19()
+        # self.test20()
+        self.test21()
         
         
 test = tests()
