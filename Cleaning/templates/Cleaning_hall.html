@@ -34,23 +34,23 @@
     
       </tr>
       <tr>
+        <th>S. No.</th>
         <th>Username</th>
         <th>Date Requested</th>
         <th>Room no.</th>
         <th>Requested Area</th>
-        
         <th>Comments</th>
       </tr>
-      {% for i in lodging reversed%}
+      {% for i in lodging %}
       <tr>
         <form method="post" action="Past_Request">
           {% csrf_token %}
-          <td>{{i.User_Name}}</td>
-          <td>{{i.Cleaning_DateTime.date}}</td>
-          <td>{{i.Room}}</td>
-          <td>{{i.Place}}</td>
-        <!-- <td><div class="rating"><input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label></div></div></td> -->
-          <td>{{i.comments}}</td>
+          <td>{{ forloop.counter }}</td>
+          <td class="a">{{i.User_Name}}</td>
+          <td class="b">{{i.Cleaning_DateTime.date}}</td>
+          <td class="c">{{i.Room}}</td>
+          <td class="d">{{i.Place}}</td>
+          <td class="e">{{i.comments}}</td>
       </form>
       </tr>
       {% endfor %}
