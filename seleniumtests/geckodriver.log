@@ -977,8 +977,9 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 DevTools listening on ws://127.0.0.1:55248/devtools/browser/6a4e7073-86ef-45d4-92b5-34501b73518e
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
-1680238892415	geckodriver	INFO	Listening on 127.0.0.1:55326
-1680238895428	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55327" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileFkquRD"
+1680244405193	Marionette	INFO	Stopped listening on port 55255
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "55327" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileFkquRD"
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
 1680238895752	Marionette	INFO	Marionette enabled
@@ -1008,4 +1009,53 @@ DevTools listening on ws://127.0.0.1:55387/devtools/browser/db8d4c5d-7f46-448b-a
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
 1680239027029	Marionette	INFO	Stopped listening on port 55394
+Dynamically enable window occlusion 1
+1680244474119	geckodriver	INFO	Listening on 127.0.0.1:58061
+1680244477174	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58062" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilerxsFiZ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680244477498	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680244477504	Marionette	INFO	Listening on port 58070
+Read port: 58070
+WebDriver BiDi listening on ws://127.0.0.1:58062
+1680244477672	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilerxsFiZ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58062/devtools/browser/13c59303-3253-4674-bc35-42f4c089c5ea
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680244543678	Marionette	INFO	Stopped listening on port 58070
+Dynamically enable window occlusion 1
+1680244638880	geckodriver	INFO	Listening on 127.0.0.1:58138
+1680244641927	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58139" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileurOKY9"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680244642268	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680244642275	Marionette	INFO	Listening on port 58146
+Read port: 58146
+WebDriver BiDi listening on ws://127.0.0.1:58139
+1680244642467	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileurOKY9\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58139/devtools/browser/d538a7e0-1c91-486c-96a1-5a27dd5fa061
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680244721056	Marionette	INFO	Stopped listening on port 58146
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58224" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileyyTjl2"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680244713164	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680244713170	Marionette	INFO	Listening on port 58233
+Read port: 58233
+WebDriver BiDi listening on ws://127.0.0.1:58224
+1680244713361	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileyyTjl2\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58224/devtools/browser/74bf4f43-d050-4d61-8fa8-afe8e0896dbe
+1680244719535	Marionette	INFO	Stopped listening on port 58233
 Dynamically enable window occlusion 1

@@ -512,7 +512,7 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
         
         assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Masala Dosa")
-        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "March 30, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "April 30, 2023")
         assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Dinner")
         assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "March 30, 2023, midnight")
         assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "April 2, 2023, midnight")
@@ -534,7 +534,7 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "31 March, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "April 30, 2023")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "s1")
         assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Dinner")
         assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "Masala Dosa")
@@ -554,7 +554,7 @@ class tests:
         
         assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Masala Dosa")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "3")
-        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "April 30, 2023")
         assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "Dinner")
 
         self.driver.find_elements(By.NAME, "order_validation")[0].click() 
