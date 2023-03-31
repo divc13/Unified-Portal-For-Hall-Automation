@@ -492,9 +492,9 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
         self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
-        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("02-04-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("30-03-002023T00:00")
         self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
-        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("30-03-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
@@ -511,21 +511,77 @@ class tests:
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
         
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Masala Dosa")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "March 30, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Dinner")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "March 30, 2023, midnight")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "April 2, 2023, midnight")
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[0].text == "34")
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("3")
+        self.driver.find_elements(By.NAME, "submit")[0].click()        
         
         # logging out
         self.logout()
         
+        
+        # logging in as manager
         self.login_mess_manager()
         
         # clicking on mess
         self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
         
         # subsections of mess
-        self.driver.find_elements(By.CLASS_NAME, "e2_31")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Thursday")
-        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Lunch")
-        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Rajma Chawal")
-        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "☆ 3.00")
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "31 March, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "s1")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Dinner")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "Masala Dosa")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "3")
+        
+        # logging out
+        self.logout()
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_9")[0].click()
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "a")[0].text == "Masala Dosa")
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "3")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "March 31, 2023")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "Dinner")
+
+        self.driver.find_elements(By.NAME, "order_validation")[0].click() 
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Dinner")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "Masala Dosa")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "3")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "34")
+        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "102")
+
+        self.driver.find_elements(By.NAME, "order_validation")[0].click()       
+        
+        # logging out
+        self.logout()
+        
+        # logging in as manager
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "a") == None)
         
         # logging out
         self.logout()
@@ -540,7 +596,8 @@ class tests:
         # self.test6()
         # self.test7()
         # self.test8()
-        self.test9()
+        # self.test9()
+        self.test10()
         
         
 test = tests()
