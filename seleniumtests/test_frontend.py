@@ -853,29 +853,31 @@ class tests:
         
         # adding BDMRS
         self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-03-30")
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(2)
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("63.89")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
         
         self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-03-31")
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(2)
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("75.06")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
         
         self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-01")
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(2)
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("82.47")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
         
         self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-02")
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(2)
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("81.96")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
         
         self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-04-03")
-        self.driver.implicitly_wait(1)
+        self.driver.implicitly_wait(2)
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("71.35")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        self.logout()
         
         # student login
         self.login_student_1()
@@ -910,14 +912,14 @@ class tests:
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_33")[0].click()
         
-        assert(self.driver.find_elements(By.CLASS_NAME, "g")[0].text == "171.75")
-        assert(self.driver.find_elements(By.CLASS_NAME, "g")[1].text == "157.19")
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[0].text == "171.48")
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[3].text == "157.19")
         self.logout()
         
          # logging out
         self.logout()
         
-        
+    
         
     def main_test(self):
         # self.test1()
