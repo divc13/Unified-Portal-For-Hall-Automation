@@ -934,6 +934,7 @@ class tests:
        
        
     # ################################################ CLEANING AND RELATED STARTED ##############################################################
+    
     def test18(self):
         self.driver.get("https://upha.pythonanywhere.com/")
         
@@ -950,15 +951,15 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-211")
-        self.driver.find_elements(By.CLASS_NAME, "toilet")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Toilet check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("D-343")
-        self.driver.find_elements(By.CLASS_NAME, "corridor")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Corridor check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
         self.driver.find_elements(By.CLASS_NAME, "room_text")[1].send_keys("F-413")
-        self.driver.find_elements(By.CLASS_NAME, "other")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].click()
         self.driver.find_elements(By.ID, "comment")[0].send_keys("Others check")
         self.driver.find_elements(By.CLASS_NAME, "submit_rec")[0].click()
 
@@ -1024,9 +1025,6 @@ class tests:
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[1].text == "Corridor")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[2].text == "Toilet")
         assert(self.driver.find_elements(By.CLASS_NAME, "b")[3].text == "Room")
-
-
-        
        
     # ################################################ CLEANING AND RELATED ENDS ################################################################
     
@@ -1054,9 +1052,9 @@ class tests:
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[1].send_keys("Pav Bhaji")
-        self.driver.find_elements(By.CLASS_NAME, "b")[1].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[1].send_keys("30")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Pav Bhaji")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
@@ -1080,9 +1078,9 @@ class tests:
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Veg. Maggi")
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("30")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
         
         # submitting
         self.driver.find_elements(By.NAME, "submit")[0].click()
@@ -1092,9 +1090,9 @@ class tests:
         
         # adding item
         self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
-        self.driver.find_elements(By.CLASS_NAME, "a")[2].send_keys("Cheese Maggi")
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].clear()
-        self.driver.find_elements(By.CLASS_NAME, "b")[2].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Cheese Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("34")
         
         # deleting
         self.driver.find_elements(By.NAME, "delete")[2].click()
