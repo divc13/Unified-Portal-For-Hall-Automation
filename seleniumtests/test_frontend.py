@@ -787,7 +787,7 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "e2_32")[0].click()
         
         self.driver.find_elements(By.NAME, "reject")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "Rebate Request Rejected.")
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Rebate Request Rejected.")
         self.logout()
         
     def test17(self):
@@ -877,6 +877,43 @@ class tests:
         self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("71.35")
         self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
         
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_8")[0].click()
+        
+        self.driver.find_elements(By.NAME, "from")[0].clear()
+        self.driver.find_elements(By.NAME, "from")[0].send_keys("2023-03-31")
+        self.driver.find_elements(By.NAME, "to")[0].clear()
+        self.driver.find_elements(By.NAME, "to")[0].send_keys("2023-04-01")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.")
+        
+        self.logout()
+        
+        # mess manager login
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_32")[0].click()
+        
+        self.driver.find_elements(By.NAME, "accept")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Rebate Request Accepted.")
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_33")[0].click()
+        
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[0].text == "171.75")
+        assert(self.driver.find_elements(By.CLASS_NAME, "g")[1].text == "157.19")
+        self.logout()
+        
          # logging out
         self.logout()
         
@@ -895,10 +932,11 @@ class tests:
         # self.test10()
         # self.test11()
         # self.test12()
-        self.test13()
-        self.test14()
-        self.test15()
-        self.test16()
+        # self.test13()
+        # self.test14()
+        # self.test15()
+        # self.test16()
+        self.test17()
         
         
 test = tests()

@@ -47,13 +47,13 @@
           <form method="POST" action="Manager_Students_Bills">
             {%csrf_token%}
           <td>{{ forloop.counter }}</td>
-          <td>{{bill.User_Name}}</td>
-          <td>{{bill.Month_Name}}</td>
-          <td>{{bill.Year}}</td>
-          <td>{{bill.Basic_Amount}}</td>
-          <td>{{bill.Extras_Amount}}</td>
-          <td>{{bill.rebate_days}}</td>
-          <td>{{bill.Mess_Bill  | floatformat:2}}</td>
+          <td class="a">{{bill.User_Name}}</td>
+          <td class="b">{{bill.Month_Name}}</td>
+          <td class="c">{{bill.Year}}</td>
+          <td class="d">{{bill.Basic_Amount}}</td>
+          <td class="e">{{bill.Extras_Amount}}</td>
+          <td class="f">{{bill.rebate_days}}</td>
+          <td class="g">{{bill.Mess_Bill  | floatformat:2}}</td>
           <td><button type="submit" name = "clear_dues" value = "{{bill.id}}">Clear Dues</button></td>
         </form>
         </tr>
