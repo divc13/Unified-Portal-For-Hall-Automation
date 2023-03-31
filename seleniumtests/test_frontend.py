@@ -1145,18 +1145,150 @@ class tests:
         self.driver.find_elements(By.NAME, "quantity")[0].clear()
         self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
         self.driver.find_elements(By.NAME, "submit")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0] == "Your order has been successfully added to cart")
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
         
         # going to cart
         
         # subsections of canteen
         self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
         
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation1")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your Cart Item has been successfully removed")
+        
+        self.logout()
+        
+    def test21(self):
+        # add item in menu, student adds it to cart, books from the cart, owner rejects
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation2")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Order request has been made to Canteen Manager")
+        
+        self.logout()
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # rejecting order
+        self.driver.find_elements(By.NAME, "rejected")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "You rejected the order")
+        
+        self.logout()
+        
+        # checking in student order history
+        
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        # subsection:Order history
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "b")[0].text == "Veg. Maggi")
+        assert(self.driver.find_elements(By.CLASS_NAME, "c")[0].text == "4")
+        assert(self.driver.find_elements(By.CLASS_NAME, "d")[0].text == "30")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "120")
+        assert(self.driver.find_elements(By.CLASS_NAME, "f")[0].text == "Failed")
+        
+        self.logout()
         
         
+    def test22(self):
+        # add item in menu, student adds it to cart, books from the cart, owner accepts, 
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_4")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("Veg. Maggi")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].send_keys("30")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        self.logout()
+        
+        # login student 1
+        self.login_student_1()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_242")[0].click()
+        
+        self.driver.find_elements(By.NAME, "quantity")[0].clear()
+        self.driver.find_elements(By.NAME, "quantity")[0].send_keys("4")
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Your order has been successfully added to cart")
+        
+        # going to cart
+        
+        # subsections of canteen
+        self.driver.find_elements(By.CLASS_NAME, "e2_5")[0].click()
+        
+        # delete the item
+        self.driver.find_elements(By.NAME, "order_validation2")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "success")[0].text == "Order request has been made to Canteen Manager")
+        
+        self.logout()
+        
+        self.login_canteen_manager()
+        
+        # clicking on canteen
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # rejecting order
+        self.driver.find_elements(By.NAME, "rejected")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "error")[0].text == "You rejected the order")
+        
+        self.logout()
         
         
-    
     def main_test(self):
         # self.test1()
         # self.test2()        
@@ -1176,7 +1308,9 @@ class tests:
         # self.test16()
         # self.test17()
         # self.test18()
-        self.test19()
+        # self.test19()
+        # self.test20()
+        self.test21()
         
         
 test = tests()
