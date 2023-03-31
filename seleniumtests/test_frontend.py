@@ -921,15 +921,12 @@ class tests:
         # logging out
         self.logout()
 
-
-
-
-
-
-
-
-
-    def test20(self):
+        
+    # ################################################ MESS AND RELATED TESTS COMPLETED #########################################################
+       
+       
+    # ################################################ CLEANING AND RELATED STARTED ##############################################################
+    def test18(self):
         self.driver.get("https://upha.pythonanywhere.com/")
         
         # student login
@@ -1032,14 +1029,13 @@ class tests:
         
         # logging out
         self.logout()
-        
-    # ################################################ MESS AND RELATED TESTS COMPLETED #########################################################
        
-       
+    # ################################################ CLEANING AND RELATED ENDS ################################################################
+    
+    
+    
     # ################################################ CANTEEN AND RELATED STARTED ############################################################## 
-    
-    
-    def test18(self):
+    def test19(self):
         
     
     
