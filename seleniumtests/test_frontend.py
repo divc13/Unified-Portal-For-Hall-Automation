@@ -416,7 +416,6 @@ class tests:
         # clicking on mess
         self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
         
-        
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
         
@@ -442,6 +441,21 @@ class tests:
         
         # subsections of mess
         self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].click()
+        
+        # logging out
+        self.logout()
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_31")[0].click()
+        
+    
+        
         
         
         

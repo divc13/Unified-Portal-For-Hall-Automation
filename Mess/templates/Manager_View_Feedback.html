@@ -28,10 +28,10 @@
         {% for items in regular_menu %}
         <tr>
           <td>{{forloop.counter}}</td>
-          <td>{{items.Day}}</td>
-          <td>{{items.Meal}}</td>
-          <td>{{items.Items}}</td>
-          <td>☆ {{items.Rating | floatformat:2}}</td>
+          <td class = "a">{{items.Day}}</td>
+          <td class = "b">{{items.Meal}}</td>
+          <td class = "c">{{items.Items}}</td>
+          <td class = "d">☆ {{items.Rating | floatformat:2}}</td>
         </tr>
         {% endfor %}
       </table>
