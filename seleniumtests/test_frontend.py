@@ -6,6 +6,8 @@ class tests:
     
     def setup_method(self):
         self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        self.driver.maximize_window()
+        self.driver.fullscreen_window()
 
     def quit(self):
         self.driver.quit()
@@ -315,10 +317,131 @@ class tests:
         self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
         self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("50")
         self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
-        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("2023-03-30 00:00:00")
-        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
-        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("2023-04-02 00:00:00")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("30-03-002023T05:50")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
         
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("02-04-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("30-03-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # editting item
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("30-03-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[0].click()  
+        
+        # editting
+        self.driver.find_elements(By.NAME, "edit")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].send_keys("2023-04-30")
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b2")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Masala Dosa")
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "d")[0].send_keys("250")
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "e")[0].send_keys("34")
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "f")[0].send_keys("30-03-002023T00:00")
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].clear()
+        self.driver.find_elements(By.CLASS_NAME, "g")[0].send_keys("02-04-002023T00:00")
+        
+        # deleting
+        self.driver.find_elements(By.NAME, "delete")[0].click()
+        
+        # logging out
+        self.logout()
+        
+    def test8(self):
+        # enter BDMR
+        
+        # mess manager extra menu
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_34")[0].click()
+        self.driver.find_elements(By.NAME, "BDMR_Date")[0].send_keys("2023-03-30")
+        self.driver.implicitly_wait(1)
+        self.driver.find_elements(By.NAME, "BDMR")[0].send_keys("63.89")
+        self.driver.find_elements(By.NAME, "bdmr_submit")[0].click()
+        
+        # logging out
+        self.logout()
+        
+    def test9(self):
+        # add item in menu, rate and test in feedback
+        
+        self.driver.get("https://upha.pythonanywhere.com/")
+        
+        self.login_mess_manager()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
+        
+        # adding item
+        self.driver.find_elements(By.NAME, "add_hidden_item")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "a")[0].click()
+        self.driver.find_elements(By.NAME, "a4")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "b")[0].click()
+        self.driver.find_elements(By.NAME, "b1")[0].click()
+        self.driver.find_elements(By.CLASS_NAME, "c")[0].send_keys("Rajma Chawal")
+        
+        # submitting
+        self.driver.find_elements(By.NAME, "submit")[0].click()
+        
+        # logging out
+        self.logout()
+        
+        # student login
+        self.login_student_1()
+        
+        # clicking on mess
+        self.driver.find_elements(By.CLASS_NAME, "e1_246")[0].click()
+        
+        # subsections of mess
+        self.driver.find_elements(By.CLASS_NAME, "e2_3")[0].click()
         
         
         
@@ -329,7 +452,8 @@ class tests:
         # self.test4()
         # self.test5()
         # self.test6()
-        self.test7()
+        # self.test7()
+        self.test8()
         
 test = tests()
 test.setup_method()

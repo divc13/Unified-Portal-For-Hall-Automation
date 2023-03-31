@@ -585,3 +585,349 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
 1680209662565	Marionette	INFO	Stopped listening on port 49886
 Dynamically enable window occlusion 1
+1680212699227	geckodriver	INFO	Listening on 127.0.0.1:63160
+1680212702252	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63161" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileBybucK"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680212702631	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680212702641	Marionette	INFO	Listening on port 63170
+Read port: 63170
+WebDriver BiDi listening on ws://127.0.0.1:63161
+1680212702825	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileBybucK\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63161/devtools/browser/6cccb38f-cc86-46e1-ae55-ce33b5a170cb
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1680213050244	Marionette	INFO	Stopped listening on port 63170
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63290" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileAx9X8r"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213027976	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213027983	Marionette	INFO	Listening on port 63297
+Read port: 63297
+WebDriver BiDi listening on ws://127.0.0.1:63290
+1680213028158	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileAx9X8r\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63290/devtools/browser/a0b86cc6-33eb-4caa-8c59-fd9cfce662ee
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680213045938	Marionette	INFO	Stopped listening on port 63297
+Dynamically enable window occlusion 1
+1680213146982	geckodriver	INFO	Listening on 127.0.0.1:63461
+1680213150039	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63462" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileKxa0iO"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213150407	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213150412	Marionette	INFO	Listening on port 63471
+Read port: 63471
+WebDriver BiDi listening on ws://127.0.0.1:63462
+1680213150613	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileKxa0iO\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63462/devtools/browser/7eab7c25-e1fb-4dae-ae72-7dd499571a2c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680213227210	Marionette	INFO	Stopped listening on port 63471680213228747	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63530" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileVm0PJf"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213229215	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213229223	Marionette	INFO	Listening on port 63537
+Read port: 63537
+WebDriver BiDi listening on ws://127.0.0.1:63530
+1680213229421	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileVm0PJf\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63530/devtools/browser/beb2682e-ec70-4d87-b8de-777756de4464
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214165671	Marionette	INFO	Stopped listening on port 63537
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63610" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileOfwJsf"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213323583	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213323589	Marionette	INFO	Listening on port 63617
+Read port: 63617
+WebDriver BiDi listening on ws://127.0.0.1:63610
+1680213323763	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileOfwJsf\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63610/devtools/browser/5cf85ee0-8ccc-4a2a-9a2a-a9d227e2d277
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214167074	Marionette	INFO	Stopped listening on port 63617
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63677" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileTq4HUL"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213393651	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213393661	Marionette	INFO	Listening on port 63684
+Read port: 63684
+WebDriver BiDi listening on ws://127.0.0.1:63677
+1680213393830	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileTq4HUL\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63677/devtools/browser/9c7bf33b-13ac-4c36-bcd3-62adfe14e018
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214168571	Marionette	INFO	Stopped listening on port 63684
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63790" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileizBbaj"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213594927	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213594934	Marionette	INFO	Listening on port 63797
+Read port: 63797
+WebDriver BiDi listening on ws://127.0.0.1:63790
+1680213595119	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileizBbaj\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63790/devtools/browser/98a7ae9a-0384-42b0-b996-5530df9fab3e
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214169791	Marionette	INFO	Stopped listening on port 63797
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63884" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileZH9SQv"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680213733305	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680213733312	Marionette	INFO	Listening on port 63894
+Read port: 63894
+WebDriver BiDi listening on ws://127.0.0.1:63884
+1680213733502	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileZH9SQv\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63884/devtools/browser/981f476d-d873-4a39-938d-9dea00006c1a
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214170828	Marionette	INFO	Stopped listening on port 63894
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64005" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile1FcZjf"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680214011201	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680214011211	Marionette	INFO	Listening on port 64012
+Read port: 64012
+WebDriver BiDi listening on ws://127.0.0.1:64005
+1680214011413	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile1FcZjf\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64005/devtools/browser/4f03aa5a-cf13-4901-861f-1d767e3676e4
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214172039	Marionette	INFO	Stopped listening on port 64012
+Dynamically enable window occlusion 1
+1680214185392	geckodriver	INFO	Listening on 127.0.0.1:64090
+1680214188429	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64091" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofiledZCbzS"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680214188890	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680214188897	Marionette	INFO	Listening on port 64098
+Read port: 64098
+WebDriver BiDi listening on ws://127.0.0.1:64091
+1680214189087	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofiledZCbzS\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64091/devtools/browser/4fe3673c-0134-46b4-aef4-7908426a749b
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214399124	Marionette	INFO	Stopped listening on port 64098
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64164" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile6bw2GT"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680214358224	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680214358231	Marionette	INFO	Listening on port 64171
+Read port: 64171
+WebDriver BiDi listening on ws://127.0.0.1:64164
+1680214358417	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile6bw2GT\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64164/devtools/browser/a646281e-a576-44d4-8b5e-adfcf2575bea
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214395926	Marionette	INFO	Stopped listening on port 64171
+Dynamically enable window occlusion 1
+1680214692023	geckodriver	INFO	Listening on 127.0.0.1:64344
+1680214695052	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64345" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile3PXC8Z"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680214695458	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680214695466	Marionette	INFO	Listening on port 64353
+Read port: 64353
+WebDriver BiDi listening on ws://127.0.0.1:64345
+1680214695641	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile3PXC8Z\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64345/devtools/browser/3bc8ae18-a6be-4222-8e8b-8d5280dcaff6
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680214726729	geckodriver	INFO	Listening on 127.0.0.1:64395
+1680214729767	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64396" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileLs3kXH"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680214730186	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680214730194	Marionette	INFO	Listening on port 64403
+Read port: 64403
+WebDriver BiDi listening on ws://127.0.0.1:64396
+1680214730390	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileLs3kXH\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64396/devtools/browser/c681b308-e6b9-4fe5-8a19-abda7af13b72
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680215130615	geckodriver	INFO	Listening on 127.0.0.1:64560
+1680215133669	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64561" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile2eH3Wx"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680215134137	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680215134146	Marionette	INFO	Listening on port 64568
+Read port: 64568
+WebDriver BiDi listening on ws://127.0.0.1:64561
+1680215134322	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile2eH3Wx\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64561/devtools/browser/a78f9e51-bab2-4e82-9a42-7d8519ac3e57
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680215155005	Marionette	INFO	Stopped listening on port 64568
+Dynamically enable window occlusion 1
+1680215211369	geckodriver	INFO	Listening on 127.0.0.1:64634
+1680215214406	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64635" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileyBRCur"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680215214864	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680215214871	Marionette	INFO	Listening on port 64642
+Read port: 64642
+WebDriver BiDi listening on ws://127.0.0.1:64635
+1680215215092	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileyBRCur\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64635/devtools/browser/66162307-4b1f-4609-8039-1b83e34b6403
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680215271619	Marionette	INFO	Stopped listening on port 64642
+Dynamically enable window occlusion 1
+console.error: (new AbortError("IOUtils: Shutting down and refusing additional I/O tasks", (void 0), 890))
+JavaScript error: resource://gre/modules/CrashManager.jsm, line 927: AbortError: IOUtils: Shutting down and refusing additional I/O tasks
+1680215374875	geckodriver	INFO	Listening on 127.0.0.1:64735
+1680215377920	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64736" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofiledS9FM1"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680215378320	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680215378328	Marionette	INFO	Listening on port 64743
+Read port: 64743
+WebDriver BiDi listening on ws://127.0.0.1:64736
+1680215378502	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofiledS9FM1\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64736/devtools/browser/80fbfd20-2473-4a62-9e87-f6c349a2829d
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680215393627	Marionette	INFO	Stopped listening on port 64743
+Dynamically enable window occlusion 1
+1680215462265	geckodriver	INFO	Listening on 127.0.0.1:64799
+1680215465309	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64801" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilej29eHy"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680215465704	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680215465712	Marionette	INFO	Listening on port 64808
+Read port: 64808
+WebDriver BiDi listening on ws://127.0.0.1:64801
+1680215465902	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilej29eHy\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:64801/devtools/browser/9cc4b8b8-a332-4d20-b29d-f7fcefef8033
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680215480700	Marionette	INFO	Stopped listening on port 64808
+Dynamically enable window occlusion 1
+1680236987791	geckodriver	INFO	Listening on 127.0.0.1:54492
+1680236990817	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54493" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileXJMTXH"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680236991418	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680236991428	Marionette	INFO	Listening on port 54500
+Read port: 54500
+WebDriver BiDi listening on ws://127.0.0.1:54493
+1680236991689	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofileXJMTXH\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:54493/devtools/browser/33733442-536e-486a-a35a-b56ca5e8a56f
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680237178821	Marionette	INFO	Stopped listening on port 54500
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54567" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilepR6qlw"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680237106179	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680237106186	Marionette	INFO	Listening on port 54574
+Read port: 54574
+WebDriver BiDi listening on ws://127.0.0.1:54567
+1680237106389	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilepR6qlw\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:54567/devtools/browser/1c558c5d-e832-4273-aa2f-28233e8ed175
+1680237129520	Marionette	INFO	Stopped listening on port 54574
+Dynamically enable window occlusion 1
+[Parent 2876, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:777
+1680237148089	geckodriver	INFO	Listening on 127.0.0.1:54620
+1680237151106	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54621" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile1XDKK4"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680237151624	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680237151632	Marionette	INFO	Listening on port 54628
+Read port: 54628
+WebDriver BiDi listening on ws://127.0.0.1:54621
+1680237151887	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofile1XDKK4\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:54621/devtools/browser/fa5e6bf7-5112-4a2f-95eb-605f27b060e8
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1680237163740	Marionette	INFO	Stopped listening on port 54628
+Dynamically enable window occlusion 1
