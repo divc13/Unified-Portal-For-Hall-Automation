@@ -92,7 +92,7 @@ def guestroom(request):  # student
                                 guestroom_request.save()
                                 messages.success(
                                     request,
-                                    f"Your request for this room has been sent to the Hall manager, UPHA team will communicate their confirmation to you.",
+                                    f"Your request for this room has been sent to the Hall manager, please contact him for further proceedings. UPHA team will communicate their confirmation to you.",
                                 )
                                 return render(request, "guestroom.html", context)
                         else:
@@ -415,11 +415,13 @@ def courts_ub(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             context = {
-                "querry": Courts.objects.filter(username=request.user.username)
+                "booked_courts": Courts.objects.filter(username=request.user.username),
+                "today": datetime.today().date(),
             }
+            # return HttpResponse("This is it"+str(Courts.objects.filter(username = request.user.username)[1]))
             return render(request, "courts_ub.html", context)
         else:
-            return HttpResponse("You are not allowed to access this page")
+            return render(request, "Error.html")
             # return render(request, "Error.html")
     else:
         return render(request, "Error.html")
@@ -450,7 +452,14 @@ def secy_request_validation(request):
                         equipments=item_requested
                     )
                     reg_item.quantity = reg_item.quantity - 1
+                    if_zero_quantity = reg_item.quantity
                     reg_item.save()
+                    #delete the other requests if the quantity is zero
+                    if(if_zero_quantity == 0):
+                        items = sports_equipments_request.objects.filter(equipment_selected=item_requested)
+                        for item in items:
+                            item.delete()
+
 
                 else:
                     item = sports_equipments_request.objects.get(
@@ -582,9 +591,22 @@ def booking_manager(request):  # hall manager
                     get_booking.save()
                     messages.success(request, "The booking has been validated")
 
+                    #deleting the other booking request for same room between same dates
+                    other_bookings = Guestroom.objects.filter(room=room,manager_validation = "NO").exclude(username=username)
+                    for booking in other_bookings:
+                        # if booking.checkin_date <= checkin_date <= booking.checkout_date or booking.checkin_date <= checkout_date <= booking.checkout_date:
+                        if checkin_date <= booking.checkin_date <= checkout_date or checkin_date <= booking.checkout_date <= checkout_date:
+                            booking.delete()
+                            #sending mail to the user
+                            subject = "Guestroom Booking Rejected"
+                            message = f"Dear {booking.username}, Your booking request for Room:{booking.room} has been rejected by the hall manager. You had booked Room-{booking.room} from {booking.checkin_date} to {booking.checkout_date}"
+                            email_from = settings.EMAIL_HOST_USER
+                            recipient_list = [f"{booking.username}@iitk.ac.in"]
+                            send_mail(subject, message, email_from, recipient_list)
+
                     # adding mail for validation of the booking
                     subject = "Guestroom Booking Accepted"
-                    message = f"Dear {request.user.name}, Your booking request for Room:{room} has been accepted by the hall manager. You have booked Room-{room} from {get_booking.checkin_date} to {get_booking.checkout_date}"
+                    message = f"Dear {username}, Your booking request for Room:{room} has been accepted by the hall manager. You have booked Room-{room} from {get_booking.checkin_date} to {get_booking.checkout_date}"
                     email_from = settings.EMAIL_HOST_USER
                     recipient_list = [f"{username}@iitk.ac.in"]
                     send_mail(subject, message, email_from, recipient_list)
@@ -594,7 +616,7 @@ def booking_manager(request):  # hall manager
 
                     # adding mail for rejection of booking
                     subject = "Guestroom Booking Rejected"
-                    message = f"Dear {request.user.name}, Your booking request for Room:{room} has been rejected by the hall manager. You had booked Room-{room} from {get_booking.checkin_date} to {get_booking.checkout_date}"
+                    message = f"Dear {username}, Your booking request for Room:{room} has been rejected by the hall manager. You had booked Room-{room} from {get_booking.checkin_date} to {get_booking.checkout_date}"
                     email_from = settings.EMAIL_HOST_USER
                     recipient_list = [f"{username}@iitk.ac.in"]
                     send_mail(subject, message, email_from, recipient_list)
