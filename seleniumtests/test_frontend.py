@@ -921,6 +921,16 @@ class tests:
         # logging out
         self.logout()
 
+        # student login
+        self.login_student_1()
+        
+        # clicking on my account
+        self.driver.find_elements(By.CLASS_NAME, "e1_230")[0].click()
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "171.48")
+        assert(self.driver.find_elements(By.CLASS_NAME, "e")[1].text == "157.19")
+        
+        # logging out
+        self.logout()
         
     # ################################################ MESS AND RELATED TESTS COMPLETED #########################################################
        
@@ -1019,16 +1029,6 @@ class tests:
 
 
         
-        # student login
-        self.login_student_1()
-        
-        # clicking on my account
-        self.driver.find_elements(By.CLASS_NAME, "e1_230")[0].click()
-        assert(self.driver.find_elements(By.CLASS_NAME, "e")[0].text == "171.48")
-        assert(self.driver.find_elements(By.CLASS_NAME, "e")[1].text == "157.19")
-        
-        # logging out
-        self.logout()
        
     # ################################################ CLEANING AND RELATED ENDS ################################################################
     
