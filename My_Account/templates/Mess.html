@@ -45,11 +45,11 @@
       {% for bill in bills %}
       <tr>
         <td>{{ forloop.counter }}</td>
-        <td>{{bill.Month_Name}}</td>
-        <td>{{bill.Basic_Amount}}</td>
-        <td>{{bill.Extras_Amount}}</td>
-        <td>{{bill.rebate_days}}</td>
-        <td>{{bill.Mess_Bill | floatformat:2}}</td>
+        <td class="a">{{bill.Month_Name}}</td>
+        <td class="b">{{bill.Basic_Amount}}</td>
+        <td class="c">{{bill.Extras_Amount}}</td>
+        <td class="d">{{bill.rebate_days}}</td>
+        <td class="e">{{bill.Mess_Bill | floatformat:2}}</td>
       </tr>
 
       {% endfor %}

@@ -37,11 +37,11 @@
         {% for item in ordering reversed%}
         <tr>
           <td>{{ forloop.counter }}</td>
-          <td>{{item.Order_Date_Time.date}}</td>
-          <td>{{item.Item_Name}}</td>
-          <td>{{item.Quantity}}</td>
-          <td>{{item.Price}}</td>
-          <td>{{item.Amount}}</td>
+          <td class="a">{{item.Order_Date_Time.date}}</td>
+          <td class="b">{{item.Item_Name}}</td>
+          <td class="c">{{item.Quantity}}</td>
+          <td class="d">{{item.Price}}</td>
+          <td class="e">{{item.Amount}}</td>
           {% if item.Accepted_Status == True%}
           <td>Sucessful</td>
           {% else %}

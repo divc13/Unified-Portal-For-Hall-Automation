@@ -1572,3 +1572,18 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
 JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
 1680253460746	geckodriver	INFO	Listening on 127.0.0.1:61629
+1680253463767	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "61630" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilemsmeGo"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680253464091	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680253464099	Marionette	INFO	Listening on port 61638
+Read port: 61638
+WebDriver BiDi listening on ws://127.0.0.1:61630
+1680253464269	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\chhab\\AppData\\Local\\Temp\\rust_mozprofilemsmeGo\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61630/devtools/browser/66941254-e6d6-4f64-9369-fcb2223b666e
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://upha.pythonanywhere.com."
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.

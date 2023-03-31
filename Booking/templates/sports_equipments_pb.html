@@ -1,0 +1,117 @@
+{%include "student_base.html"%} {%load static%}
+<html lang="en">
+  <head>
+    <title>Student Sports Equipment</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{%static 'styles.css'%}" />
+
+    <style>
+      body {
+        background: #e5e5e5;
+      }
+    
+    </style>
+
+  </head>
+
+  <body>
+    <div class="main_div">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="{{message.tags}}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+   
+    <table cellspacing="0" cellpadding="5em">
+      <tr><th colspan = "3" style="font-size: 24px;text-align: center;background-color: rgba(
+        62.92744293808937,
+        153.59830677509308,
+        165.96249371767044,
+        0.6200000047683716
+      );">Previous Equipment Requests</th></tr>
+      <tr>
+        <th style="text-align: center;">Equipment Requested</th>
+        <th style="text-align: center;">Book Status</th>
+      </tr>
+
+      <!--Fetching pending status-->
+      {% for item in request_querry %}
+      <tr>
+      <td> {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}</td>
+      <td><font color='grey'><i>Pending...</i></font></td>
+      </tr>
+      {% endfor %}
+      {% for item in validated_request_querry %}
+      <form method='post' action='sports_equipments_pb'>
+        {% csrf_token %}
+      <tr>
+      <td> {% if item.equipment_selected == 'CB' %}
+            Cricket Bat
+            <input type='hidden' name='return_equipment' value='CB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'BB' %}
+            Basketball
+            <input type='hidden' name='return_equipment' value='BB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'TT' %}
+            Table Tennis
+            <input type='hidden' name='return_equipment' value='TT'></input>
+        {% else %}
+        {% if item.equipment_selected == 'FB' %}
+            Football
+            <input type='hidden' name='return_equipment' value='FB'></input>
+        {% else %}
+        {% if item.equipment_selected == 'HK' %}
+            Hockey
+            <input type='hidden' name='return_equipment' value='HK'></input>
+        {% else %}
+        {% if item.equipment_selected == 'BM' %}
+            Badminton
+            <input type='hidden' name='return_equipment' value='BM'></input>
+          {% endif %}
+          {% endif %}
+          {% endif %} 
+          {% endif %}
+          {% endif %}
+          {% endif %}</td>
+      <td><input type='submit' name='submit' value="Return Item"></input></td> <!--"Return item"-->
+      </tr>
+    </form>
+      {% endfor %}
+    </table>
+   
+  </div>
+
+      </div>
+    </div>
+  </body> 
+</html>

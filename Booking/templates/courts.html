@@ -73,57 +73,8 @@
       </tr>
     </table>
 
-    <table cellspacing="0" cellpadding="5em">
-      <tr><th colspan = "4" style="font-size: 24px;text-align: center;background-color: rgba(
-        62.92744293808937,
-        153.59830677509308,
-        165.96249371767044,
-        0.6200000047683716
-      );">Your upcoming court bookings</th></tr>
-      <tr>
-        <th style="text-align: center;">Sports</th>
-        <th style="text-align: center;">day</th>
-        {% comment %} <th style="text-align: center;">Room no.</th> {% endcomment %}
-        <th style="text-align: center;">Start time</th>
-        <th style="text-align: center;">End time</th>
-      </tr>
-
-  
-          {% for item in querry %}
-          {% if item.date >= today %}
-            <tr>
-            <td>
-              {% if item.sports == 'CB' %}
-              Cricket Bat
-          {% else %}
-          {% if item.sports == 'BB' %}
-              Basketball
-          {% else %}
-          {% if item.sports == 'TT' %}
-              Table Tennis
-          {% else %}
-          {% if item.sports == 'FB' %}
-              Football
-          {% else %}
-          {% if item.sports == 'HK' %}
-              Hockey
-          {% else %}
-          {% if item.sports == 'BM' %}
-              Badminton
-            {% endif %}
-            {% endif %}
-            {% endif %} 
-            {% endif %}
-            {% endif %}
-            {% endif %}
-            </td>
-            <td>{{item.day_of_booking}}</td>
-            <td>{{item.time_of_checkin}}</td>
-            <td>{{item.time_of_checkout}}</td>
-          </tr>
-          {% endif %}
-          {% endfor %}  
-    </table>
+    <p><br></p>
+    
   </div>
 
       </div>
