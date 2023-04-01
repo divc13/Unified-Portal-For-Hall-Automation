@@ -29,9 +29,6 @@ def Pending_Request(request):
                 req.Done = True
                 req.save()
                 messages.success(request, "Your request has been removed from pending requests successfully")
-                # pending_list = Cleaning_Request.objects.filter(Done = False, username=request.user.username)
-                # # After updating the database, the page reloads.
-                # return render(request, 'Pending_Request.html', context= {'lodging': pending_list, "messages": messages.get_messages(request)})
             # After updating the database, the page reloads.
             return render(request, 'Pending_Request.html', context= {'lodging': pending_list, "messages": messages.get_messages(request)})
 

@@ -4,6 +4,7 @@ from Canteen.models import Bill as Canteen_Bill
 from Mess.models import Bill as Mess_Bill
 
 def Mess(request):
+    # displays the mess bills due
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             bill = Mess_Bill.objects.filter(User_Name = request.user.username).order_by('Bill_Month')
@@ -14,6 +15,7 @@ def Mess(request):
         return render(request, "Error.html")
   
 def Canteen(request):
+    # displays tthe canteen bills due
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             bill = 0

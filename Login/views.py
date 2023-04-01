@@ -9,25 +9,28 @@ from Home.views import Make_Homepage
 import re
 
 def Login(request):
-    if request.method== 'POST':
+    # for logging in the user
+    if request.method== 'POST':                         # gets the username and password
         if 'submit_btn' in request.POST:
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
+                login(request, user)                    # login if correct credentials
                 return redirect(Make_Homepage)
             else:
-                messages.error(request, 'Incorrect Password or Username')
+                messages.error(request, 'Incorrect Password or Username')                   #else error
                 return render(request, "Login.html", context={'messages':messages.get_messages(request)})
     else:
         return render(request, "Login.html")
   
 def Set_Password(request):
+    # lets user set password for their account
     if request.method=="POST":
         password1=request.POST.get("password1")
         password2=request.POST.get("password2")
 
+        #checking password
         if password1 and password2 and password1!=password2:
             messages.error(request, "Passwords don't match")
             return render(request, "Set_Password.html", context={'messages':messages.get_messages(request)})
@@ -36,7 +39,7 @@ def Set_Password(request):
         if not valid:
             messages.error(request, "Please Provide Stronger Password as per the condition")
             return render(request, "Set_Password.html", context={'messages':messages.get_messages(request)})
-        if request.session['4']==0:
+        if request.session['4']==0:                 # if new user, create account
             designation=request.session['2']
             if designation=="Student":
                 name=request.session['0']
@@ -115,7 +118,7 @@ def Set_Password(request):
                         return render(request, "Set_Password.html", context={'messages':messages.get_messages(request)})
                     request.session.flush()
             return redirect(Login)
-        else:
+        else:                                   # else change password
             username=request.session['5']
             request.session.flush()
             user=User_class.objects.filter(username=username)[0]
@@ -129,6 +132,7 @@ def Set_Password(request):
             return redirect(Login)
 
 def Reset_Password(request):
+    # helps user change their password
     if request.method== 'POST':
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
@@ -147,6 +151,7 @@ def Reset_Password(request):
 
 
 def SignUp(request):
+    # signup for taking user credentials
     if request.method=='POST':
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
@@ -179,10 +184,10 @@ def SignUp(request):
             return render(request, "SignUp.html", context={'messages':messages.get_messages(request)})
     else:
         request.session.set_test_cookie()
-        options1=1
-        options2=1
-        options3=1
-        options4=1
+        options1=1          # option 1 stores if a hall manager has already been made
+        options2=1          # option 2 stores if a mess manager has already been made
+        options3=1          # option 3 stores if a canteen manager has already been made
+        options4=1          # option 4 stores if a sports secy has already been made
         if User_class.objects.filter(designation="Hall Manager").exists():
             options1=0
         if User_class.objects.filter(designation="Mess Manager").exists():
@@ -194,6 +199,7 @@ def SignUp(request):
         return render(request, "SignUp.html", context={"options1": options1, "options2":options2, "options3":options3, "options4":options4})
 
 def OTP_Send(request):
+    # sends an otp to the mail
     if request.method=="GET":
         otp = random.randrange(100000,999999)
         request.session['3']=otp
@@ -214,6 +220,7 @@ def OTP_Send(request):
             return redirect(Login)
 
 def OTP(request):
+    # takes the otp and verifies it
     if request.method=="POST":
         otp1=request.POST.get("OTP")
         if otp1=='':
@@ -225,7 +232,7 @@ def OTP(request):
         if otp1==str(otp2):
             return redirect(Set_Password)
         else:
-            messages.error(request, 'incorrect OTP')
+            messages.error(request, 'incorrect OTP')                # if the otps dont match
             return render(request, "OTP.html", context={'messages':messages.get_messages(request)})
     if request.method=="GET":
         if '4' in request.session:
@@ -234,5 +241,6 @@ def OTP(request):
             return redirect(Login)
     
 def Logout(request):
+    # log out the user
     logout(request)
     return redirect(Login)

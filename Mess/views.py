@@ -23,7 +23,7 @@ def Student_Regular_Menu(request):
 
             regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None")
 
-            if request.method == "POST":
+            if request.method == "POST":        # gets rating from the form
 
                 id_list = []
                 average_rating = 0
@@ -40,13 +40,13 @@ def Student_Regular_Menu(request):
                             User_Name=request.user.username,
                         )
 
-                        if rating_objects:
+                        if rating_objects:      #updating previous rating
 
                             rating_obj = rating_objects[0]
                             rating_obj.Rating_Value = value
                             rating_obj.save()
 
-                        else:
+                        else:                   # making a new rating object if not present
 
                             rating_obj = Rating_Regular(
                                 Meal=item.Meal,
@@ -56,7 +56,7 @@ def Student_Regular_Menu(request):
                             rating_obj.Rating_Value = value
                             rating_obj.save()
 
-                        objects = Rating_Regular.objects.filter(
+                        objects = Rating_Regular.objects.filter(        # updating the average rating
                             Meal=item.Meal, Day=item.Day
                         )
                         Review_Count = 0
@@ -114,8 +114,8 @@ def Student_Book_Extras(request):
                     and datetime.now().timestamp() > order.Start_Time.timestamp()
                     and datetime.now().timestamp() < order.End_Time.timestamp()
                 ):
-                    # order is placed if the required number is available and the booking window is open
-                    order.Available_Orders = order.Available_Orders - quantity
+                    # order is placed if the re - quantityquired number is available and the booking window is open
+                    order.Available_Orders = order.Available_Orders
 
                     pending_order = Orders(
                         Meal=order.Meal,
@@ -137,7 +137,7 @@ def Student_Book_Extras(request):
                     )
 
                     if not bill_objects:
-                        # if it is the first order of the user a new instance of Bill is initialised
+                        # if it is the first order of the month from the user a new instance of Bill is initialised
                         bill = Bill(
                             User_Name=pending_order.User_Name,
                             Bill_Month=pending_order.Order_Date_Time.month,
@@ -183,7 +183,7 @@ def Student_Booked_Extras(request):
                 History_Status=False, User_Name=request.user.username
             ).order_by("-Order_Date_Time")
 
-            if request.method == "POST":
+            if request.method == "POST":                            # order is sent to history after validating
                 idt = request.POST.get("order_validation")
                 pending_order = Orders.objects.filter(id=idt)[0]
                 pending_order.History_Status = True
@@ -193,7 +193,7 @@ def Student_Booked_Extras(request):
             for obj in orders:
                 if obj.Meal_Date.timetuple() < datetime.now().date().timetuple():
                     obj.delete()
-                    # order object is deleted after delivery
+                    # order object is deleted if not validated at the meal date
 
             return render(
                 request,
@@ -255,7 +255,7 @@ def Student_Apply_For_Rebate(request):
 
 
 def Student_Order_History(request):
-    # displays orders made by a student on request
+    # displays previous orders made by a student on request
     if request.user.is_authenticated:
 
         if request.user.designation == "Student":
@@ -307,7 +307,7 @@ def Manager_Modify_Menu(request):
                         else:
                             obj.delete()
 
-                if "add_hidden_item" in request.POST:
+                if "add_hidden_item" in request.POST:           # makes a field which mess manager will have to fill
 
                     obj = Regular_menu(Day = "Sunday")
                     obj.save()
@@ -317,7 +317,7 @@ def Manager_Modify_Menu(request):
                         context={"regularmenu": regularmenu, "status_check": 1},
                     )
 
-                elif "submit" in request.POST:
+                elif "submit" in request.POST:                  # the changes were stored hence render message
 
                     messages.success(request, "Changes made successfully.")
                     return render(
@@ -330,16 +330,15 @@ def Manager_Modify_Menu(request):
                         },
                     )
 
-                elif "edit" in request.POST:
+                elif "edit" in request.POST:                    # status_check makes the menu editable
 
-                    idt = request.POST.get("edit")
                     return render(
                         request,
                         "Manager_Modify_Menu.html",
                         context={"regularmenu": regularmenu, "status_check": 1},
                     )
 
-                elif "delete" in request.POST:
+                elif "delete" in request.POST:                  # deletes the item with id as idt
                     idt = request.POST.get(
                         "delete"
                     )
@@ -407,13 +406,13 @@ def Manager_Extra_Items(request):
                             end_time = request.POST.get("end_time" + str(obj.id))
                             end_time = datetime.strptime(str(end_time), "%Y-%m-%dT%H:%M")
                             
-                            if meal_date.date()<end_time.date():
+                            if meal_date.date()<end_time.date():            # checks the time
                                 if flag == 0:
                                     messages.error(request, "Meal date must be greater than end time.")
                                 flag = 1
                                 continue
                             
-                            if start_time > end_time:
+                            if start_time > end_time:                       # checks the time
                                 if flag == 0:
                                     messages.error(request, "Start time must be less than end time.")
                                 flag = 1
@@ -435,7 +434,7 @@ def Manager_Extra_Items(request):
                         else:
                             obj.delete()
 
-                if "add_hidden_item" in request.POST:
+                if "add_hidden_item" in request.POST:               # makes an entry which will be filled by mes manager
 
                     obj = Extras(Meal_Date =  datetime.today(),Start_Time = datetime.now(),End_Time = datetime.now())
                     obj.save()
@@ -468,9 +467,8 @@ def Manager_Extra_Items(request):
                             },
                         )
 
-                elif "edit" in request.POST:
+                elif "edit" in request.POST:                        # status checks make the menu editable
 
-                    idt = request.POST.get("edit")
                     return render(
                         request,
                         "Manager_Extra_Items.html",

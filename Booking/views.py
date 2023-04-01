@@ -14,14 +14,14 @@ from django.conf import settings
 # Create your views here.
 
 
-def guestroom(request):  # student
+def guestroom(request):  # student can book the guestroom
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             context = {
                 "bookings": Guestroom.objects.filter(username=request.user.username),
                 "messages": messages.get_messages(request),
             }
-            # let's keep the booking logs updated
+            # keeps the booking logs updated
             today = datetime.today().date()
             rooms = Guestroom.objects.all()
             for room in rooms:
@@ -154,88 +154,91 @@ def guestroom_pb(request):
     else:
         return render(request, "Error.html")
 
-def sports_equipments(request):  # student\
-    if request.user.designation == "Student":
-        items = sports_equipments_registered.objects.all()
-        if (items.count() == 0):
-            context_error = {"messages": messages.get_messages(request)}
-            messages.error(
-                request,
-                f"No items are available for booking. Please contact your sports secretary.",
-            )
-            return render(request, "booking_error.html", context_error)
-
-        context = {
-            "cricket_item": sports_equipments_registered.objects.get(equipments="CB"),
-            "table_tennis_item": sports_equipments_registered.objects.get(
-                equipments="TT"
-            ),
-            "badminton_item": sports_equipments_registered.objects.get(equipments="BM"),
-            "hockey_item": sports_equipments_registered.objects.get(equipments="HK"),
-            "basketball_item": sports_equipments_registered.objects.get(
-                equipments="BB"
-            ),
-            "football_item": sports_equipments_registered.objects.get(equipments="FB"),
-            "request_querry": sports_equipments_request.objects.filter(
-                username=request.user.username, secy_validation="NO"
-            ),
-            "validated_request_querry": sports_equipments_request.objects.filter(
-                username=request.user.username, secy_validation="YES"
-            ),
-            "messages": messages.get_messages(request),
-        }
-
-        if request.method == "POST":
-
-            action = request.POST.get("submit")
-            if (1 == 2):  #Never true
-                return_equipment = request.POST.get("return_equipment")
-
-                item_of_return = sports_equipments_request.objects.get(
-                    equipment_selected=return_equipment, username=request.user.username
+def sports_equipments(request):  # student can book the equipment
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+            items = sports_equipments_registered.objects.all()
+            if (items.count() == 0):
+                context_error = {"messages": messages.get_messages(request)}
+                messages.error(
+                    request,
+                    f"No items are available for booking. Please contact your sports secretary.",
                 )
+                return render(request, "booking_error.html", context_error)
 
-                if not (item_of_return.student_return_request == "YES"):
-                    item_of_return.student_return_request = "YES"
-                    item_of_return.save()
-                    messages.success(
-                        request,
-                        f"Your request for returning this item has been sent to the secretary.",
+            context = {
+                "cricket_item": sports_equipments_registered.objects.get(equipments="CB"),
+                "table_tennis_item": sports_equipments_registered.objects.get(
+                    equipments="TT"
+                ),
+                "badminton_item": sports_equipments_registered.objects.get(equipments="BM"),
+                "hockey_item": sports_equipments_registered.objects.get(equipments="HK"),
+                "basketball_item": sports_equipments_registered.objects.get(
+                    equipments="BB"
+                ),
+                "football_item": sports_equipments_registered.objects.get(equipments="FB"),
+                "request_querry": sports_equipments_request.objects.filter(
+                    username=request.user.username, secy_validation="NO"
+                ),
+                "validated_request_querry": sports_equipments_request.objects.filter(
+                    username=request.user.username, secy_validation="YES"
+                ),
+                "messages": messages.get_messages(request),
+            }
+
+            if request.method == "POST":
+
+                action = request.POST.get("submit")
+                if (1 == 2):  #Never true
+                    return_equipment = request.POST.get("return_equipment")
+
+                    item_of_return = sports_equipments_request.objects.get(
+                        equipment_selected=return_equipment, username=request.user.username
                     )
+
+                    if not (item_of_return.student_return_request == "YES"):
+                        item_of_return.student_return_request = "YES"
+                        item_of_return.save()
+                        messages.success(
+                            request,
+                            f"Your request for returning this item has been sent to the secretary.",
+                        )
+                    else:
+                        messages.error(
+                            request, f"You have already requested for return of this item."
+                        )
                 else:
-                    messages.error(
-                        request, f"You have already requested for return of this item."
-                    )
-            else:
-                equipment_selected_get = request.POST.get("equipment_selected")
-                check_requested_item = sports_equipments_request.objects.filter(
-                    username=request.user.username,
-                    equipment_selected=equipment_selected_get,
-                )
-                if check_requested_item:
-                    messages.error(
-                        request, f"You have already requested for this item."
-                    )
-                    pass
-                else:
-                    equipment_request = sports_equipments_request(
-                        equipment_selected=equipment_selected_get,
-                        date=datetime.today(),
-                        name=request.user.name,
+                    equipment_selected_get = request.POST.get("equipment_selected")
+                    check_requested_item = sports_equipments_request.objects.filter(
                         username=request.user.username,
-                        argument=equipment_selected_get + "_" + str(request.user.name),
+                        equipment_selected=equipment_selected_get,
                     )
-                    equipment_request.save()
-                    messages.success(
-                        request,
-                        f"Your request for this item has been sent to the secretary.",
-                    )
+                    if check_requested_item:
+                        messages.error(
+                            request, f"You have already requested for this item."
+                        )
+                        pass
+                    else:
+                        equipment_request = sports_equipments_request(
+                            equipment_selected=equipment_selected_get,
+                            date=datetime.today(),
+                            name=request.user.name,
+                            username=request.user.username,
+                            argument=equipment_selected_get + "_" + str(request.user.name),
+                        )
+                        equipment_request.save()
+                        messages.success(
+                            request,
+                            f"Your request for this item has been sent to the secretary.",
+                        )
 
-        return render(request, "sports_equipments.html", context)
+            return render(request, "sports_equipments.html", context)
+        else:
+            return render(request, "Error.html")
     else:
         return render(request, "Error.html")
     
-def sports_equipments_pb(request):  # student
+def sports_equipments_pb(request):  # student can check his bookings of equipment and issue a return request
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             context = {
@@ -254,7 +257,7 @@ def sports_equipments_pb(request):  # student
                     equipment_selected=return_equipment, username=request.user.username
                 )
 
-                if not (item_of_return.student_return_request == "YES"):
+                if not (item_of_return.student_return_request == "YES"):        # if the first time requesting return
                     item_of_return.student_return_request = "YES"
                     item_of_return.save()
                     messages.success(
@@ -272,82 +275,109 @@ def sports_equipments_pb(request):  # student
         return render(request, "Error.html")
 
 
-def courts_book(request):  # student
-    if request.user.designation == "Student":
-        context = {
-            "querry": Courts.objects.filter(username=request.user.username),
-            "today": datetime.today().date(),
-            "var_date": str(datetime.today()),
-            "var_time": str(datetime.now().time()),
-            "messages": messages.get_messages(request),
-        }
-        today = datetime.today().date()
-        court_items = Courts.objects.all().filter(day_of_booking=today)
-        time = datetime.now().time()
-        for court in court_items:
-            out_time = court.time_of_checkout
-            if time > out_time:
-                court.delete()
+def courts_book(request):  # helps student book the court in his hall
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+            context = {
+                "querry": Courts.objects.filter(username=request.user.username),
+                "today": datetime.today().date(),
+                "var_date": str(datetime.today()),
+                "var_time": str(datetime.now().time()),
+                "messages": messages.get_messages(request),
+            }
+            today = datetime.today().date()
+            court_items = Courts.objects.all().filter(day_of_booking=today)
+            time = datetime.now().time()
+            for court in court_items:
+                out_time = court.time_of_checkout
+                if time > out_time:
+                    court.delete()
 
-        if request.method == "POST":
-            sports = request.POST.get("sport")
-            checkin_time = request.POST.get("checkin_time")
-            checkout_time = request.POST.get("checkout_time")
-            date = request.POST.get("date")
+            if request.method == "POST":
+                sports = request.POST.get("sport")
+                checkin_time = request.POST.get("checkin_time")
+                checkout_time = request.POST.get("checkout_time")
+                date = request.POST.get("date")
 
-            request_in_time = datetime.strptime(checkin_time, "%H:%M").time()
-            request_out_time = datetime.strptime(checkout_time, "%H:%M").time()
-            request_date = datetime.strptime(date, "%Y-%m-%d").date()
+                request_in_time = datetime.strptime(checkin_time, "%H:%M").time()
+                request_out_time = datetime.strptime(checkout_time, "%H:%M").time()
+                request_date = datetime.strptime(date, "%Y-%m-%d").date()
 
-            sametime_booking_flag = 0
-            user_earlier_bookings = Courts.objects.filter(
-                username=request.user.username
-            )
-            for booking in user_earlier_bookings:
-                if booking.day_of_booking == request_date:
+                sametime_booking_flag = 0
+                user_earlier_bookings = Courts.objects.filter(
+                    username=request.user.username
+                )
+                for booking in user_earlier_bookings:
+                    if booking.day_of_booking == request_date:
+                        if (
+                            booking.time_of_checkin <= request_in_time
+                            and request_in_time <= booking.time_of_checkout
+                        ) or (
+                            booking.time_of_checkin <= request_out_time
+                            and request_out_time <= booking.time_of_checkout
+                        ):
+                            sametime_booking_flag = 1
+                            break
+                if sametime_booking_flag == 0:
                     if (
-                        booking.time_of_checkin <= request_in_time
-                        and request_in_time <= booking.time_of_checkout
-                    ) or (
-                        booking.time_of_checkin <= request_out_time
-                        and request_out_time <= booking.time_of_checkout
+                        request_in_time <= request_out_time
+                        and request_date >= datetime.today().date()
                     ):
-                        sametime_booking_flag = 1
-                        break
-            if sametime_booking_flag == 0:
-                if (
-                    request_in_time <= request_out_time
-                    and request_date >= datetime.today().date()
-                ):
-                    # This codes will tackle when the request of booking is made
-                    court_items = Courts.objects.filter(sports=sports)
-                    if len(court_items) > 0:
-                        flag = 1
-                        for court_item in court_items:
-                            in_time = court_item.time_of_checkin
-                            out_time = court_item.time_of_checkout
-                            day = court_item.day_of_booking
+                        # This codes will tackle when the request of booking is made
+                        court_items = Courts.objects.filter(sports=sports)
+                        if len(court_items) > 0:
+                            flag = 1
+                            for court_item in court_items:
+                                in_time = court_item.time_of_checkin
+                                out_time = court_item.time_of_checkout
+                                day = court_item.day_of_booking
 
-                            request_in_time = datetime.strptime(
-                                checkin_time, "%H:%M"
-                            ).time()
-                            request_out_time = datetime.strptime(
-                                checkout_time, "%H:%M"
-                            ).time()
-                            request_date = datetime.strptime(date, "%Y-%m-%d").date()
+                                request_in_time = datetime.strptime(
+                                    checkin_time, "%H:%M"
+                                ).time()
+                                request_out_time = datetime.strptime(
+                                    checkout_time, "%H:%M"
+                                ).time()
+                                request_date = datetime.strptime(date, "%Y-%m-%d").date()
 
-                            if request_date == day:
-                                if (
-                                    request_in_time >= in_time
-                                    and request_in_time <= out_time
-                                ) or (
-                                    request_out_time >= in_time
-                                    and request_out_time <= out_time
-                                ):
-                                    flag = 0
+                                if request_date == day:
+                                    if (
+                                        request_in_time >= in_time
+                                        and request_in_time <= out_time
+                                    ) or (
+                                        request_out_time >= in_time
+                                        and request_out_time <= out_time
+                                    ):
+                                        flag = 0
+                                        break
+
+                            if flag == 1:
+                                courts_request = Courts(
+                                    sports=sports,
+                                    time_of_checkin=checkin_time,
+                                    time_of_checkout=checkout_time,
+                                    day_of_booking=date,
+                                    date=datetime.today(),
+                                    name=request.user.name,
+                                    username=request.user.username,
+                                )
+                                courts_request.save()
+                                messages.success(
+                                    request,
+                                    "Your have succesfully booked the court, enjoy your playtime",
+                                )
+                                return render(request, "courts.html", context)
+                            else:
+                                courts = Courts.objects.filter(sports=sports)
+                                for court in courts:
+                                    court_r = court
                                     break
-
-                        if flag == 1:
+                                messages.error(
+                                    request,
+                                    "The court is already booked for the given time, please try again with different time",
+                                )
+                                return render(request, "courts.html", context)
+                        else:
                             courts_request = Courts(
                                 sports=sports,
                                 time_of_checkin=checkin_time,
@@ -360,74 +390,50 @@ def courts_book(request):  # student
                             courts_request.save()
                             messages.success(
                                 request,
-                                "Your have succesfully booked the court, enjoy your playtime :)",
+                                "Your have succesfully booked the court, enjoy your playtime",
                             )
-                            return render(request, "courts.html", context)
-                        else:
-                            courts = Courts.objects.filter(sports=sports)
-                            for court in courts:
-                                court_r = court
-                                break
+                    else:
+                        if request_date >= datetime.now().date():
                             messages.error(
                                 request,
-                                "The court is already booked for the given time, please try again with different time :(",
+                                "The checkin time is greater than or same as checkout time, please try again with different time",
                             )
-                            return render(request, "courts.html", context)
-                    else:
-                        courts_request = Courts(
-                            sports=sports,
-                            time_of_checkin=checkin_time,
-                            time_of_checkout=checkout_time,
-                            day_of_booking=date,
-                            date=datetime.today(),
-                            name=request.user.name,
-                            username=request.user.username,
-                        )
-                        courts_request.save()
-                        messages.success(
-                            request,
-                            "Your have succesfully booked the court, enjoy your playtime :)",
-                        )
+                        else:
+                            messages.error(
+                                request,
+                                "The date is in past, please try again with different date",
+                            )
+                        return render(request, "courts.html", context)
                 else:
-                    if request_date >= datetime.now().date():
-                        messages.error(
-                            request,
-                            "The checkin time is greater than or same as checkout time, please try again with different time :(",
-                        )
-                    else:
-                        messages.error(
-                            request,
-                            "The date is in past, please try again with different date :(",
-                        )
+                    messages.error(
+                        request,
+                        "You have already booked a court at this time, please try again with different time",
+                    )
                     return render(request, "courts.html", context)
-            else:
-                messages.error(
-                    request,
-                    "You have already booked a court at this time, please try again with different time :(",
-                )
-                return render(request, "courts.html", context)
 
-        return render(request, "courts.html", context)
+            return render(request, "courts.html", context)
+        else:
+            return render(request, "Error.html")
     else:
         return render(request, "Error.html")
 
 def courts_ub(request):
+    # helps student look at his previous court bookings
     if request.user.is_authenticated:
         if request.user.designation == "Student":
             context = {
                 "booked_courts": Courts.objects.filter(username=request.user.username),
                 "today": datetime.today().date(),
             }
-            # return HttpResponse("This is it"+str(Courts.objects.filter(username = request.user.username)[1]))
             return render(request, "courts_ub.html", context)
         else:
             return render(request, "Error.html")
-            # return render(request, "Error.html")
     else:
         return render(request, "Error.html")
 
 # sports secy functions
 def secy_request_validation(request):
+    # helps sports secy validate equipment booking request
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
             context = {
@@ -476,6 +482,7 @@ def secy_request_validation(request):
 
 
 def secy_return_validation(request):
+    # helps sports secy validate the return of equipment by student
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
             context = {
@@ -485,7 +492,7 @@ def secy_return_validation(request):
                 "messages": messages.get_messages(request),
             }
 
-            if request.method == "POST":
+            if request.method == "POST":                    # if secy validated the return
                 returner_roll = request.POST.get("returner_roll")
                 item_returning = request.POST.get("item_returning")
 
@@ -507,6 +514,7 @@ def secy_return_validation(request):
 
 
 def secy_add_equipment(request):
+    # helps sports secy add equipment for booking
     if request.user.is_authenticated:
         if request.user.designation == "Sports Secy":
             context = {"message": messages.get_messages(request)}
@@ -524,7 +532,7 @@ def secy_add_equipment(request):
                     )
                     sport_reg.save()
 
-            if request.method == "POST":
+            if request.method == "POST":                    # adds equipment selected
                 sport_selected = request.POST.get("sport")
                 equipment_quantity = request.POST.get("equipment_quantity")
 
