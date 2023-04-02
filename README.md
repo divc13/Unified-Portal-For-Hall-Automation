@@ -126,7 +126,7 @@ Each app mentioned above contains following folders and files-
 - migrations -  It propagates changes we make to our models (adding a field, deleting a model, etc.) into our database schema.
 - templates -  It contains HTML files of web pages of the respective app.
 - static (present only in Home and Login) -  It contains CSS files of web pages and also images related to them of the respective app.
-- __init.py__ -  It is an empty file that tells Python that this directory should be considered a Python package.
+- \_\_init.py\_\_ -  It is an empty file that tells Python that this directory should be considered a Python package.
 - admin.py -  It contains the administration interface for our app. The admin interface is a web-based interface that allows authorized users to manage the data in your app, including creating, editing, and deleting records.
 - apps.py -  It contains the configuration for a specific Django app. It is used to customize various aspects of the app's behavior.
 - models.py -  It contains the structure of our database tables using Python classes. Each class represents a database table, and the attributes of the class define the fields of the table.
