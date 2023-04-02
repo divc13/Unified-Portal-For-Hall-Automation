@@ -34,13 +34,17 @@ The web app is deployed at: https://upha.pythonanywhere.com/
 
 * Make sure you have python and pip installed in your system.
 
-* Now run this command in terminal `pip install requirements.txt`.
-
 Clone the repository-
 ```
 git clone https://github.com/divc13/Unified-Portal-For-Hall-Automation
 ```
 Run following commands to start the backend server-
+```
+cd Unified-Portal-For-Hall-Automation
+```
+```
+pip install requirements.txt
+```
 ```
 cd Unified-Portal-For-Hall-Automation
 ```
@@ -69,25 +73,25 @@ Go on the localhost web address which must have been printed on the terminal.
 
 A software requirements specification (SRS) is a document that describes what the software will do and how it will be expected to perform. It also describes the product's functionality to fulfill all stakeholders needs.
 
-Link to SRS: [UPHA SRS v1.1 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Requirement_Specification%20.pdf)
+Link to SRS: [UPHA SRS v1.0 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Requirement_Specification%20.pdf)
 
 ## Software Design Document
 
 A software design document (SDD) describes software created to facilitate analysis, planning, implementation, and decision-making. This explains how a software product or a feature will be built to meet a set of technical requirements. If the requirements document describes the "what" of your project, the design document focuses on the "how".
 
-Link to SDD: [UPHA SDD v1.1 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Design_Document.pdf)
+Link to SDD: [UPHA SDD v1.0 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Design_Document.pdf)
 
 ## Software Implementation Document
 
 A software implementation document (SID) is a document that describes how a software product is built to meet a set of technical requirements. This document talks about implementation details like integration, CI/CD, hosting, VCS; it provides a surface-level overview of codebases and completeness of the application.
 
-Link to SID: [UPHA SID v1.1 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Implementation_Document.pdf)
+Link to SID: [UPHA SID v1.0 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/b440561306807d7626e09bd68bc8efed32ae3237/Documents/UPHA_Software_Implementation_Document.pdf)
 
 ## Testing Document
 
 Test documentation includes all files that contain information on the testing team's strategy, progress, metrics, and achieved results. The combination of all available data serves to measure the testing effort, control test coverage, and track future project requirements.
 
-Link to Test Doc: [UPHA SRS v1.0 | The Tech Titans]()
+Link to Test Doc: [UPHA SRS v1.0 | The Tech Titans](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/6211934322394b97042cb2a2c798cd71dbd07766/Documents/UPHA_Test_Document.pdf)
 
 ## User Manual Document
 
