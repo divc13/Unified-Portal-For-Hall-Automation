@@ -26,6 +26,10 @@ Broadly, the application will support the following:
 |Rajeev Kumar | 210815 | rajeevks21@iitk.ac.in |
 |Sandeep Nitharwal | 210921 | nsandeep21@iitk.ac.in|
 
+## Deployment
+
+The web app is deployed at: https://upha.pythonanywhere.com/
+
 ## How to run the software locally?
 
 * Make sure you have python and pip installed in your system.
@@ -57,10 +61,6 @@ python manage.py migrate
 python manage.py runserver
 ```
 Go on the localhost web address which must have been printed on the terminal.
-
-## Deployment
-
-The web app is deployed at: https://upha.pythonanywhere.com/
 
 ## Demo run
 ![Screenshot](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/e6049ef7f54690a1fa47d1bcfaf8d0656a4894a6/templates/static/demo_run_screenshot.jpg)
