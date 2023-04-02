@@ -13,18 +13,19 @@ Broadly, the application will support the following:
 * Special permissions have been provided to the Hall Manager, Mess manager, Canteen Owner and the sports secretary to facilitate all these services.
 
 ## Group Details
-| Name | Roll no. | Email Id | 
-| --- | --- | --- |
-|Soham Amit Bharambe | 210264  | sohamb21@iitk.ac.in |
-|Divyansh | 210355 | divyansh21@iitk.ac.in |
-|Divyansh Chhabria  | 210356 | divyanshc21@iitk.ac.in |
-|Jhalak Sharma | 210474 | jhalak21@iitk.ac.in |
-|Kriti | 210534 | kriti21@iitk.ac.in |
-|Kumar Harsh Mohan | 210543 | harshmohan21@iitk.ac.in| 
-|Labajyoti Das | 210552 | labajyoti21@iitk.ac.in| 
-|Pranjal Singh | 210744 | psingh21@iitk.ac.in|
-|Rajeev Kumar | 210815 | rajeevks21@iitk.ac.in |
-|Sandeep Nitharwal | 210921 | nsandeep21@iitk.ac.in|
+
+| Name                | Roll no. | Email Id                |
+| ------------------- | -------- | ----------------------- |
+| Soham Amit Bharambe | 210264   | sohamb21@iitk.ac.in     |
+| Divyansh            | 210355   | divyansh21@iitk.ac.in   |
+| Divyansh Chhabria   | 210356   | divyanshc21@iitk.ac.in  |
+| Jhalak Sharma       | 210474   | jhalak21@iitk.ac.in     |
+| Kriti               | 210534   | kriti21@iitk.ac.in      |
+| Kumar Harsh Mohan   | 210543   | harshmohan21@iitk.ac.in |
+| Labajyoti Das       | 210552   | labajyoti21@iitk.ac.in  |
+| Pranjal Singh       | 210744   | psingh21@iitk.ac.in     |
+| Rajeev Kumar        | 210815   | rajeevks21@iitk.ac.in   |
+| Sandeep Nitharwal   | 210921   | nsandeep21@iitk.ac.in   |
 
 ## Deployment
 
@@ -35,18 +36,19 @@ The web app is deployed at: https://upha.pythonanywhere.com/
 * Make sure you have python and pip installed in your system.
 
 Clone the repository-
+
 ```
 git clone https://github.com/divc13/Unified-Portal-For-Hall-Automation
 ```
+
 Run following commands to start the backend server-
+
 ```
 cd Unified-Portal-For-Hall-Automation
 ```
+
 ```
 pip install requirements.txt
-```
-```
-cd Unified-Portal-For-Hall-Automation
 ```
 
 ```
@@ -64,9 +66,11 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
 Go on the localhost web address which must have been printed on the terminal.
 
 ## Demo run
+
 ![Screenshot](https://github.com/divc13/Unified-Portal-For-Hall-Automation/blob/e6049ef7f54690a1fa47d1bcfaf8d0656a4894a6/templates/static/demo_run_screenshot.jpg)
 
 ## Software Requirement Specification Document
@@ -101,23 +105,23 @@ Link to User Manual: [UPHA SRS v1.0 | The Tech Titans](https://github.com/divc13
 
 ## Code Structure
 
-The project has been divided into following small apps- 
+The project has been divided into following small apps-
 
 - Mess -  It contains implementation of functionalities related to mess, i.e., student can view regular menu, book extras, view order history, and apply for rebate, and owner can modify regular menu and extras, react on rebate requests, view students’ bill, view extras orders, view feedback on regular menu, and modify BDMR.
 - Canteen -  It contains implementation of functionalities related to canteen, i.e., students can place order, view pending order, and view order history, and owner can react to orders, modify menu, and view students’ bill.
 - Booking -  It contains implementation of functionalities related to booking, i.e., guest room booking, sports equipment issue, and sports court booking.
 - Cleaning -  It contains implementation of functionalities related to cleaning, i.e., lodge request and view past requests.
-- Login -  It contains implementation of functionalities related to login, i.e., login old user, new user registration, and reset password. 
+- Login -  It contains implementation of functionalities related to login, i.e., login old user, new user registration, and reset password.
 - My_Account -  It contains implementation of accounts management of the students, i.e., mess bill, canteen bill, and electricity bill.
 - Home -  It contains implementation of the homepage.
 
-Three more folders and two more files are also present in the repository- 
+Three more folders and two more files are also present in the repository-
 
 - templates -  It contains HTML files of base template.
 - UPHA -  It contains files which are necessary to run the web app.
 - manage.py -  A command-line utility that lets us interact with this Django project in various ways such as run server, create new app, etc.
 
-Each app mentioned above contains following folders and files- 
+Each app mentioned above contains following folders and files-
 
 - migrations -  It propagates changes we make to our models (adding a field, deleting a model, etc.) into our database schema.
 - templates -  It contains HTML files of web pages of the respective app.
