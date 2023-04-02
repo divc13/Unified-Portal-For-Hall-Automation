@@ -35,6 +35,7 @@
 
       <tr>
         <th>S. No.</th>
+        <th>Year</th>
         <th>Month</th>
         <th>Basic Amount</th>
         <th>Extra Messing</th>
@@ -45,6 +46,7 @@
       {% for bill in bills %}
       <tr>
         <td>{{ forloop.counter }}</td>
+        <td class="f">{{bill.Year}}</td>
         <td class="a">{{bill.Month_Name}}</td>
         <td class="b">{{bill.Basic_Amount}}</td>
         <td class="c">{{bill.Extras_Amount}}</td>
