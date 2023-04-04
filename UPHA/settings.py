@@ -149,7 +149,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'UnifiedPortalForHallAutomation@gmail.com'
-EMAIL_HOST_PASSWORD = 'mohvnjikjgdcsahk'
+EMAIL_HOST_USER = 'upha1312@gmail.com'
+EMAIL_HOST_PASSWORD = 'femqpzqqmeeohske'
 
 AUTH_USER_MODEL = 'Login.User_class'
