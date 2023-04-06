@@ -150,6 +150,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'unifiedportalforhallautomation@gmail.com'
-EMAIL_HOST_PASSWORD = 'ocikrvfooiwsanzv'
+EMAIL_HOST_PASSWORD = 'xfcamltmurzurwey'
 
 AUTH_USER_MODEL = 'Login.User_class'
