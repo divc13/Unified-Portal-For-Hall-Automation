@@ -16,15 +16,19 @@ class Regular_menu(models.Model):
     Day = models.CharField(
         max_length=9,
         choices=Day_Choices,
-        default="Monday",
+        default="Sunday",
         blank=True, null = True,
     )
+    
+    Day_Number = models.IntegerField(default = 0)
+    Meal_Number = models.IntegerField(default = 0)
     Meal = models.CharField(
         max_length=9,
         choices=Meal_Choices,
         default="Breakfast",
         blank=True, null = True,
     )
+    
     Items = models.CharField(
         max_length=100,
         blank=True, null = True, default=""
