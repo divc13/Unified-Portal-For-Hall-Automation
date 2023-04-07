@@ -145,7 +145,7 @@ def Reset_Password(request):
                 return render(request, "Reset_Password.html", context={'messages':messages.get_messages(request)})
             request.session['5']=username
             request.session['4']=1
-            return redirect(OTP)
+            return redirect(OTP_Send)
     request.session.set_test_cookie()
     return render(request, "Reset_Password.html")
 

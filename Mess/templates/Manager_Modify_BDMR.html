@@ -36,7 +36,7 @@
           <tr>
             <td>Enter BDMR</td>
             <td>
-              <input type="number" step = "any" placeholder="BDMR = Rs. {{amount}}" name="BDMR" required />
+              <input type="number" step = "any" min="0" max="500" placeholder="BDMR = Rs. {{amount}}" name="BDMR" required />
               <button type="submit" name="bdmr_submit" value="{{date|date:"Y-m-d"}}">Submit</button>
             </td>
           </tr>
