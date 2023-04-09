@@ -258,6 +258,15 @@ def Owner_Modify_Menu(request):
                                 obj.delete()
                     extra_items1 = Menu()
                     extra_items1.save()
+                    
+                    for item1 in Menu.objects.all():
+                        for item2 in Menu.objects.all():
+                            if item1.id != item2.id:
+                                if item1.Item_Name == item2.Item_Name:
+                                    if item1:
+                                        item1.delete()
+                                        break
+                                    
                     idt = extra_items1.id
                     return render(
                         request,
@@ -276,6 +285,15 @@ def Owner_Modify_Menu(request):
                             extra_items.save()
                         else:
                             obj.delete()
+                    
+                    for item1 in Menu.objects.all():
+                        for item2 in Menu.objects.all():
+                            if item1.id != item2.id:
+                                if item1.Item_Name == item2.Item_Name:
+                                    if item1:
+                                        item1.delete()
+                                        break
+                            
                     return render(
                         request,
                         "Owner_Modify_Menu.html",
@@ -305,6 +323,15 @@ def Owner_Modify_Menu(request):
                     if Menu.objects.filter(id=idt):
                         extra_items_del = Menu.objects.filter(id=idt)[0]
                         extra_items_del.delete()
+                        
+                    for item1 in Menu.objects.all():
+                        for item2 in Menu.objects.all():
+                            if item1.id != item2.id:
+                                if item1.Item_Name == item2.Item_Name:
+                                    if item1:
+                                        item1.delete()
+                                        break
+                                    
                     return render(
                         request,
                         "Owner_Modify_Menu.html",

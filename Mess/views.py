@@ -278,10 +278,11 @@ def Manager_Modify_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Mess Manager":
 
-            regularmenu = Regular_menu.objects.all()
+            regularmenu = Regular_menu.objects.order_by("Day_Number","Meal_Number")
 
             if request.method == "POST":
-
+                
+                
                 if (
                     ("submit" in request.POST)
                     or (
@@ -291,6 +292,22 @@ def Manager_Modify_Menu(request):
                     or ("delete" in request.POST and "editable_mode" in request.POST)
                 ):
                     # Commits changes to the database
+                    
+                    Day_Choices = {
+                            "Sunday": 0,
+                            "Monday": 1,
+                            "Tuesday": 2,
+                            "Wednesday": 3,
+                            "Thursday": 4,
+                            "Friday": 5,
+                            "Saturday": 6,
+                    }
+                    
+                    Meal_Choices = {
+                            "Breakfast": 0,
+                            "Lunch": 1,
+                            "Dinner": 2,
+                    }
 
                     for obj in Regular_menu.objects.all():  
                         
@@ -301,14 +318,25 @@ def Manager_Modify_Menu(request):
                             if Regular_menu.objects.filter(id=obj.id):
                                 menu = Regular_menu.objects.filter(id=obj.id)[0]
                                 menu.Day = day
+                                menu.Day_Number = Day_Choices[day]
+                                menu.Meal_Number = Meal_Choices[meal]
                                 menu.Items = item
                                 menu.Meal = meal
                                 menu.save()
                         else:
                             obj.delete()
+                            
 
                 if "add_hidden_item" in request.POST:           # makes a field which mess manager will have to fill
 
+                    for item1 in Regular_menu.objects.all():
+                        for item2 in Regular_menu.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Day == item2.Day) and (item1.Meal == item2.Meal) and (item1.Items == item2.Items):
+                                    if item1:
+                                        item1.delete()
+                                        break
+                                    
                     obj = Regular_menu(Day = "Sunday")
                     obj.save()
                     return render(
@@ -318,6 +346,14 @@ def Manager_Modify_Menu(request):
                     )
 
                 elif "submit" in request.POST:                  # the changes were stored hence render message
+                    
+                    for item1 in Regular_menu.objects.all():
+                        for item2 in Regular_menu.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Day == item2.Day) and (item1.Meal == item2.Meal) and (item1.Items == item2.Items):
+                                    if item1:
+                                        item1.delete()
+                                        break
 
                     messages.success(request, "Changes made successfully.")
                     return render(
@@ -345,6 +381,14 @@ def Manager_Modify_Menu(request):
                     if Regular_menu.objects.filter(id=idt):
                         menu_del = Regular_menu.objects.filter(id=idt)[0]
                         menu_del.delete()
+                        
+                    for item1 in Regular_menu.objects.all():
+                        for item2 in Regular_menu.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Day == item2.Day) and (item1.Meal == item2.Meal) and (item1.Items == item2.Items):
+                                    if item1:
+                                        item1.delete()
+                                        break
 
                     messages.success(request, "Deleted Successfully")
                     return render(
@@ -435,6 +479,14 @@ def Manager_Extra_Items(request):
                             obj.delete()
 
                 if "add_hidden_item" in request.POST:               # makes an entry which will be filled by mes manager
+                    
+                    for item1 in Extras.objects.all():
+                        for item2 in Extras.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Meal_Date == item2.Meal_Date) and (item1.Meal == item2.Meal) and (item1.Item_Name == item2.Item_Name):
+                                    if item1:
+                                        item1.delete()
+                                        break
 
                     obj = Extras(Meal_Date =  datetime.today(),Start_Time = datetime.now(),End_Time = datetime.now())
                     obj.save()
@@ -445,6 +497,13 @@ def Manager_Extra_Items(request):
                     )
 
                 elif "submit" in request.POST:
+                    for item1 in Extras.objects.all():
+                        for item2 in Extras.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Meal_Date == item2.Meal_Date) and (item1.Meal == item2.Meal) and (item1.Item_Name == item2.Item_Name):
+                                    if item1:
+                                        item1.delete()
+                                        break
                     if flag:
                         return render(
                             request,
@@ -483,6 +542,14 @@ def Manager_Extra_Items(request):
                     if Extras.objects.filter(id=idt):
                         extra_items_del = Extras.objects.filter(id=idt)[0]
                         extra_items_del.delete()
+                    
+                    for item1 in Extras.objects.all():
+                        for item2 in Extras.objects.all():
+                            if item1.id != item2.id:
+                                if (item1.Meal_Date == item2.Meal_Date) and (item1.Meal == item2.Meal) and (item1.Item_Name == item2.Item_Name):
+                                    if item1:
+                                        item1.delete()
+                                        break
 
                     messages.success(request, "Deleted Successfully")
                     return render(

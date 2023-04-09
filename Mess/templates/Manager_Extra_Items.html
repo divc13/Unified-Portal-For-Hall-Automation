@@ -86,6 +86,7 @@
               <input
                 required
                 type="text"
+                maxlength="100"
                 name="item{{items.id}}"
                 value="{{items.Item_Name}}"
                 placeholder="Enter New Item"
@@ -98,6 +99,7 @@
               <input
                 required
                 type="number"
+                max="1000"
                 name="capacity{{items.id}}"
                 value="{{items.Capacity}}"
                 min="1"
@@ -109,6 +111,7 @@
               <input
                 required
                 type="number"
+                max="500"
                 name="price{{items.id}}"
                 value="{{items.Price}}"
                 min="1"

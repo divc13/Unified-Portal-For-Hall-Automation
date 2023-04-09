@@ -48,12 +48,15 @@ cd Unified-Portal-For-Hall-Automation
 ```
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ```
 python manage.py collectstatic
 ```
+Here you should open the UPHA/settings.py file and add the gmail id and the app password for the same gmail in the lines 152 and 153 respectively.
+
+For App password, one must first make a 2 factor password in from google accounts.
 
 ```
 python manage.py makemigrations
