@@ -559,12 +559,15 @@
 }
 .e1_262 { 
 	transform: rotate(1.3784305949957189e-14deg);
-	width:11vh;
-	height:11vh;
+	width:22.35%;
+	height:91.66666666%;
 	position:absolute;
 	left:10%;
 	top:5%;
-	background-image:url("/static/logo_black_1.png");
+	background-image:url(/static/logo_black_1.png);
 	background-repeat:no-repeat;
-	background-size:cover;
+	background-size:contain;
+	background-position: center center;
+	max-width: 100%;
+	max-height: 100%;
 }
