@@ -36,7 +36,7 @@
       <tr>
         <th>S. No.</th>
         <th>Username</th>
-        <th>Date Requested</th>
+        <th>Date-Time Requested</th>
         <th>Room no.</th>
         <th>Requested Area</th>
         <th>Comments</th>
@@ -47,7 +47,7 @@
           {% csrf_token %}
           <td>{{ forloop.counter }}</td>
           <td class="a">{{i.User_Name}}</td>
-          <td class="b">{{i.Cleaning_DateTime.date}}</td>
+          <td class="b">{{i.Cleaning_DateTime}}</td>
           <td class="c">{{i.Room}}</td>
           <td class="d">{{i.Place}}</td>
           <td class="e">{{i.comments}}</td>

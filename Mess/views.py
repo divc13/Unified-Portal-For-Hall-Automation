@@ -222,17 +222,23 @@ def Student_Apply_For_Rebate(request):
                 
                 if from_date <= to_date:
 
-                    rebate_request = Rebate(
-                        Date_From=from_date,
-                        Date_To=to_date,
-                        User_Name=request.user.username,
-                    )
-                    rebate_request.Rebate_Days = rebate_request.date_diff()
-                    rebate_request.save()
-                    messages.success(
-                        request,
-                        "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
-                    )
+                    if Rebate.objects.filter(Date_From=from_date,Date_To=to_date,User_Name=request.user.username,status = 1) or Rebate.objects.filter(Date_From=from_date,Date_To=to_date,User_Name=request.user.username,status = 0):
+                        messages.error(request,
+                        "You have already applied for rebate for same duration.",)
+                        
+                        
+                    else:
+                        rebate_request = Rebate(
+                            Date_From=from_date,
+                            Date_To=to_date,
+                            User_Name=request.user.username,
+                        )
+                        rebate_request.Rebate_Days = rebate_request.date_diff()
+                        rebate_request.save()
+                        messages.success(
+                            request,
+                            "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
+                        )
                 
                 else :
                     messages.error(

@@ -47,15 +47,18 @@ def Lodge_Request(request):
                 username =request.user.username
                 room = request.POST.get('room')    
                 comments=request.POST.get('comment')
-
-                req_object = Cleaning_Request( 
-                    User_Name=username,
-                    Place=place,
-                    Room=room,
-                    comments=comments,
-                    Cleaning_DateTime=datetime.now() )
-                req_object.save()
-                messages.success(request, "Your request has been sent!")
+                
+                if Cleaning_Request.objects.filter(User_Name=username, Place=place, Room=room, comments=comments, Done = False):
+                    messages.error(request, "You have already applied a similar request. Contact Hall manager directly.")
+                else:
+                    req_object = Cleaning_Request( 
+                        User_Name=username,
+                        Place=place,
+                        Room=room,
+                        comments=comments,
+                        Cleaning_DateTime=datetime.now() )
+                    req_object.save()
+                    messages.success(request, "Your request has been sent!")
                 return render(request, "Lodge_Request.html", context={"messages": messages.get_messages(request)})
             return render(request, "Lodge_Request.html")
         else:
