@@ -4,6 +4,7 @@
 <head>
   <title>UPHA</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{%static 'staff_base.css'%}">
 
   <style>
@@ -115,7 +116,7 @@
         <a href = "/Logout">
         <button class="e1_226 button2">
           <div class="e1_219"></div>
-          <div class="e1_227"></div><span class="e1_228">Log Out</span>
+          <div class="e1_227">Log Out</div>
           <div class="e1_229"></div>
         </button>
       </a>
@@ -149,10 +150,10 @@
             {% elif request.path == "/Cleaning/Cleaning_hall" or request.path == "/Home" %} Cleaning 
             {% endif %}</span>
           <div class="e1_249"
-          {% if request.user.designation == "Mess Manager" %} style="background-image: url(/static/rectangle_5.png);background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Canteen Manager" %} 	style="background-image: url(/static/main_display.png); background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Hall Manager" %} 	style="background-image:url(/static/hostel.png); background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Sports Secy" %} 	style="background-image:url(/static/football.png); background-repeat:no-repeat; background-size:cover;" 
+          {% if request.user.designation == "Mess Manager" %} style="background-image: url(/static/rectangle_5.png);" 
+          {% elif request.user.designation == "Canteen Manager" %} 	style="background-image: url(/static/main_display.png);" 
+          {% elif request.user.designation == "Hall Manager" %} 	style="background-image:url(/static/hostel.png);" 
+          {% elif request.user.designation == "Sports Secy" %} 	style="background-image:url(/static/football.png);" 
           {% endif %}></div>
         </button> {% endcomment %}
 
@@ -163,8 +164,7 @@
           style=" {% if request.path != "/Home"%} background-color:rgb(56, 108, 185); color: white; {% endif %}"</div><span class="e1_248">
             Mess
             </span>
-            <div class="e1_249" style="background-image: url(/static/rectangle_5.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/rectangle_5.png);" >
           </div>
         </button>
           {% endif %}
@@ -176,8 +176,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Canteen
           </span>
-            <div class="e1_249" style="background-image: url(/static/main_display.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/main_display.png);" >
           </div>
         </button>
       </a>
@@ -190,8 +189,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Hall Logistics
           </span>
-            <div class="e1_249" style="background-image: url(/static/hostel.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/hostel.png);" >
           </div>
         </button>
       </a>
@@ -205,8 +203,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Sports Logistics
           </span>
-            <div class="e1_249" style="background-image: url(/static/football.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/football.png);" >
           </div>
         </button>
       </a>
