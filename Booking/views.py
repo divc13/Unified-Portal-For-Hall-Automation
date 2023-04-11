@@ -326,7 +326,7 @@ def courts_book(request):  # helps student book the court in his hall
                         # This codes will tackle when the request of booking is made
                         court_items = Courts.objects.filter(sports=sports)
                         if len(court_items) > 0:
-                            flag = 1
+                            flag = 1 # flag is used to check if the court is available or not at the requested time
                             for court_item in court_items:
                                 in_time = court_item.time_of_checkin
                                 out_time = court_item.time_of_checkout
@@ -343,15 +343,57 @@ def courts_book(request):  # helps student book the court in his hall
                                 if request_date == day:
                                     if (
                                         request_in_time >= in_time
-                                        and request_in_time <= out_time
+                                        and request_in_time < out_time
                                     ) or (
-                                        request_out_time >= in_time
+                                        request_out_time > in_time
                                         and request_out_time <= out_time
                                     ):
                                         flag = 0
                                         break
 
                             if flag == 1:
+                                #now limiting the booking time to 3 hours
+                                if ((request_out_time.hour * 60 + request_out_time.minute) * 60 + request_out_time.second - (request_in_time.hour * 60 + request_in_time.minute) * 60 + request_in_time.second) > 10800:
+                                    messages.error(
+                                        request,
+                                        "The court can only be booked for 3 hours max, please try again with different time",
+                                    )
+                                    return render(request, "courts.html", context)
+                                else:
+                                    courts_request = Courts(
+                                        sports=sports,
+                                        time_of_checkin=checkin_time,
+                                        time_of_checkout=checkout_time,
+                                        day_of_booking=date,
+                                        date=datetime.today(),
+                                        name=request.user.name,
+                                        username=request.user.username,
+                                    )
+                                    courts_request.save()
+                                    messages.success(
+                                        request,
+                                        "Your have succesfully booked the court, enjoy your playtime",
+                                    )
+                                    return render(request, "courts.html", context)
+                            else:
+                                courts = Courts.objects.filter(sports=sports)
+                                for court in courts:
+                                    court_r = court
+                                    break
+                                messages.error(
+                                    request,
+                                    "The court is already booked for the given time, please try again with different time",
+                                )
+                                return render(request, "courts.html", context)
+                        else:
+                            # now limiting the booking time to 3 hours
+                            if ((request_out_time.hour * 60 + request_out_time.minute) * 60 + request_out_time.second - (request_in_time.hour * 60 + request_in_time.minute) * 60 + request_in_time.second) > 10800:
+                                messages.error(
+                                    request,
+                                    "The court can only be booked for 3 hours max, please try again with different time",
+                                )
+                                return render(request, "courts.html", context)
+                            else:
                                 courts_request = Courts(
                                     sports=sports,
                                     time_of_checkin=checkin_time,
@@ -366,32 +408,6 @@ def courts_book(request):  # helps student book the court in his hall
                                     request,
                                     "Your have succesfully booked the court, enjoy your playtime",
                                 )
-                                return render(request, "courts.html", context)
-                            else:
-                                courts = Courts.objects.filter(sports=sports)
-                                for court in courts:
-                                    court_r = court
-                                    break
-                                messages.error(
-                                    request,
-                                    "The court is already booked for the given time, please try again with different time",
-                                )
-                                return render(request, "courts.html", context)
-                        else:
-                            courts_request = Courts(
-                                sports=sports,
-                                time_of_checkin=checkin_time,
-                                time_of_checkout=checkout_time,
-                                day_of_booking=date,
-                                date=datetime.today(),
-                                name=request.user.name,
-                                username=request.user.username,
-                            )
-                            courts_request.save()
-                            messages.success(
-                                request,
-                                "Your have succesfully booked the court, enjoy your playtime",
-                            )
                     else:
                         if request_date >= datetime.now().date():
                             messages.error(
