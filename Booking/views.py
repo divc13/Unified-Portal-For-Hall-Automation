@@ -650,3 +650,16 @@ def booking_manager(request):  # hall manager
             return render(request, "Error.html")
     else:
         return render(request, "Error.html")
+    
+def secy_equipment_log(request):
+# helps sports secy view which student booked which item
+    if request.user.is_authenticated:
+        if request.user.designation == "Sports Secy":
+            context = {"message": messages.get_messages(request),
+                     "querry": sports_equipments_request.objects.filter(secy_validation="YES")}
+            return render(request, "secy_equipment_log.html", context)
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+
