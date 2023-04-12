@@ -30,7 +30,8 @@
           <th>Name</th>
           <th>Username</th>
           <th>Amount</th>
-          <th>Clear Amount</th>
+          <th>Add/Clear Dues</th>
+          <th>Enter Amount</th>
           <th>Submit</th>
         </tr>
         {% for item in billing reversed%}
@@ -41,7 +42,13 @@
             <td class="a">{{item.Name}}</td>
             <td class="b">{{item.User_Name}}</td>
             <td class="c">{{item.Amount}}</td>
-            <td class="d"><input type="number" min="-20000" max="20000" required name="order_validation1"></td>
+            <td>
+              <select name = "choice">
+              <option selected name = "a1" >Clear Dues</option>
+              <option name = "a2">Add Dues</option>
+              </select>
+            </td>
+            <td class="d"><input type="number" min="0" max="20000" required name="order_validation1"></td>
             <td class="e"><button type="submit" name="submit" value="{{item.User_Name}}">Submit</button></td>
             </td>
           </tr>
