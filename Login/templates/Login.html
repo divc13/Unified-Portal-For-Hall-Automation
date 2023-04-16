@@ -36,9 +36,9 @@
                 background-color: beige;
             }
             td{
-                padding:0.4em;
-                padding-left: 0.5em;
-                padding-right: 0.5em;
+                padding:0.5em;
+                /* padding-left: 0.5em;
+                padding-right: 0.5em; */
             }
             .pass{
                 text-align: right;
@@ -57,7 +57,10 @@
         <table frame="box" align="center" class="outer_table"><tr><td>
             <table align="center">
                 <tr>
-                    <td align="center"><img src="{%static 'Login/vector.png' %}" style="max-width: calc(2.6vw + 6.048vh);"></td>
+                    <td align="center" style="
+                    padding-bottom: 0.9em;
+                    padding-top: 0.9em;
+                "><img src="{%static 'Login/vector.png' %}" style="max-width: calc(2.6vw + 6.048vh);"></td>
                 </tr>
                 <tr style="padding-left: 0.8em; padding-right: 0.8em;">
                     <td><img src="{%static 'Login/upha.png' %}" style="max-width:calc(14vw + 30vh);"></td>
