@@ -78,6 +78,24 @@
             }
         }
         @media screen and (max-width:1000px) {
+            .typewriter {
+                font-family: monospace;
+                overflow: hidden;
+                white-space: nowrap;
+                border-right: .15em solid orange;
+                animation: typing 3.5s steps(40) forwards, blink 1s ease-in-out infinite;
+              }
+              
+              @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+              }
+              
+              @keyframes blink {
+                50% {
+                  border-color: transparent;
+                }
+              }
             .input_text{
                 height: 2em;
                 width: 12em;
@@ -135,7 +153,8 @@
         }
         </style>
     </head>
-    <body style="background-image: url('static/Login/OIP.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <body style="background-image: url('static/Login/OIP.jpg'); background-repeat: no-repeat; background-size: cover;display: flex;
+    align-items: center;">
         <table align="center" class="outer_table">
             <tr>
                 <td>
