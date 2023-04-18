@@ -26,16 +26,21 @@
       {% if request.path != "/Home" %}
       <div class="e1_220"></div>
       {% endif %}
-      
+    
 
       {% comment %} Mess begins {% endcomment %}
 
-      {% if request.path == "/Mess/Student_Regular_Menu" or request.path == "/Mess/Student_Book_Extras" or request.path == "/Mess/Student_Booked_Extras" or request.path == "/Mess/Student_Apply_For_Rebate" or request.path == "/Mess/Student_Order_History" %}
-        
-      <a href ="/Mess/Student_Regular_Menu">
+      {% if request.path == "/Mess/Student_Applied_Rebate" or request.path == "/Mess/Student_Regular_Menu" or request.path == "/Mess/Student_Book_Extras" or request.path == "/Mess/Student_Booked_Extras" or request.path == "/Mess/Student_Apply_For_Rebate" or request.path == "/Mess/Student_Order_History" %}
+      
+        <a href ="/Mess/Student_Regular_Menu">
             <button class="e2_3 button3" {% if request.path == "/Mess/Student_Regular_Menu" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
             Regular Menu
             </button>
+        </a>
+        <a href ="/Mess/Student_Applied_Rebate">
+          <button class="e2_31 button3" {% if request.path == "/Mess/Student_Applied_Rebate" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
+          Past Rebate Requests 
+          </button>
         </a>
         <a href ="/Mess/Student_Book_Extras">
         <button class="e2_5 button3" {% if request.path == "/Mess/Student_Book_Extras" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>
