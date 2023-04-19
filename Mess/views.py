@@ -1,4 +1,5 @@
 import calendar
+from django.db.models import Q
 from datetime import datetime
 from django.conf import settings
 from dateutil.rrule import rrule, DAILY
@@ -21,8 +22,7 @@ def Student_Regular_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
 
-            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None")
-
+            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None").order_by("Day_Number","Meal_Number")
             if request.method == "POST":        # gets rating from the form
 
                 id_list = []
@@ -253,6 +253,20 @@ def Student_Apply_For_Rebate(request):
                     "currentdate": datetime.today,
                     "messages": messages.get_messages(request),
                 },
+            )
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+    
+def Student_Applied_Rebate(request):
+    # Used to accept/reject pending rebate requests
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+
+            requests = Rebate.objects.all().order_by("-Date_From", "status")
+            return render(
+                request, "Student_Applied_Rebate.html", context={"req": requests,"messages": messages.get_messages(request)}
             )
         else:
             return render(request, "Error.html")
@@ -671,6 +685,25 @@ def Manager_Rebate_Requests(request):
     else:
         return render(request, "Error.html")
 
+
+def Manager_Past_Rebate(request):
+    # Used to accept/reject pending rebate requests
+    if request.user.is_authenticated:
+        if request.user.designation == "Mess Manager":
+
+            requests = Rebate.objects.filter(
+                Q(status = 1)| Q(status = 1)
+            ) # "rebate" is a QuerySet storing all pending rebate requests
+
+            return render(
+                request, "Manager_Past_Rebate.html", context={"req": requests,"messages": messages.get_messages(request)}
+            )
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+    
+    
 
 def Manager_Students_Bills(request):
     # Used to clear dues from the database when a student pays the mess dues

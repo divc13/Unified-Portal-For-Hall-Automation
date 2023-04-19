@@ -357,9 +357,16 @@ def Owner_Students_Bill(request):
                 username = request.POST.get("submit")
                 req = Bill.objects.filter(User_Name=username)[0]
                 dues = req.Amount
-                unpaid_amount = int(dues) - int(clear_dues_amount)
-                req.Amount = unpaid_amount
-                req.save()                                              # update the bill
+                # update the bill
+                choice = request.POST.get("choice")
+                if choice == "Clear Dues":
+                    unpaid_amount = int(dues) - int(clear_dues_amount)
+                    req.Amount = unpaid_amount
+                    req.save()
+                else:
+                    unpaid_amount = int(dues) + int(clear_dues_amount)
+                    req.Amount = unpaid_amount
+                    req.save()
                 messages.success(request, "Dues Successfully Updated")
                 bill = Bill.objects.exclude(Amount=0)
                 return render(
