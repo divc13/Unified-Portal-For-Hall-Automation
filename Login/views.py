@@ -208,23 +208,6 @@ def SignUp(request):
 def OTP_Send(request):
     # sends an otp to the mail
     if request.method=="GET":
-<<<<<<< HEAD
-        otp = random.randrange(100000,999999)
-        request.session['3']=otp
-        if '4' in request.session:
-            if request.session['4']==0:
-                name=request.session['0']
-                username=request.session['1']
-            if request.session['4']==1:
-                username=request.session['5']
-                name=User_class.objects.filter(username=username)[0].name
-            subject = f'OTP for SignUp - {otp}'
-            message = f'Dear {name}, Your OTP for continuing on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [f'{username}@iitk.ac.in',]
-            send_mail(subject, message, email_from, recipient_list)
-            return redirect(OTP)
-=======
         if '6' not in request.session:
             otp = random.randrange(100000,999999)
             request.session['3']=otp
@@ -236,14 +219,13 @@ def OTP_Send(request):
                     username=request.session['5']
                     name=User_class.objects.filter(username=username)[0].name
                 subject = f'OTP for SignUp - {otp}'
-                message = f'Dear {name}, Your OTP for Registration on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
+                message = f'Dear {name}, Your OTP for continuing on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [f'{username}@iitk.ac.in',]
                 send_mail(subject, message, email_from, recipient_list)
                 return redirect(OTP)
             else:
                 return redirect(Login)
->>>>>>> a0918fccaafd010898da206496d1dc26ab0b11f6
         else:
             return redirect(Set_Password)
 
