@@ -114,8 +114,8 @@ def Student_Book_Extras(request):
                     and datetime.now().timestamp() > order.Start_Time.timestamp()
                     and datetime.now().timestamp() < order.End_Time.timestamp()
                 ):
-                    # order is placed if the re - quantityquired number is available and the booking window is open
-                    order.Available_Orders = order.Available_Orders
+                    # order is placed if the required number is available and the booking window is open
+                    order.Available_Orders = order.Available_Orders - quantity
 
                     pending_order = Orders(
                         Meal=order.Meal,
@@ -746,7 +746,7 @@ def Manager_View_Feedback(request):
     if request.user.is_authenticated:
         if request.user.designation == "Mess Manager":
 
-            regular_menu = Regular_menu.objects.all()
+            regular_menu = Regular_menu.objects.order_by("Day_Number","Meal_Number")
             return render(
                 request,
                 "Manager_View_Feedback.html",
