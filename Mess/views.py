@@ -1,4 +1,5 @@
 import calendar
+from django.db.models import Q
 from datetime import datetime
 from django.conf import settings
 from dateutil.rrule import rrule, DAILY
@@ -21,8 +22,7 @@ def Student_Regular_Menu(request):
     if request.user.is_authenticated:
         if request.user.designation == "Student":
 
-            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None")
-
+            regular_menu = Regular_menu.objects.all().exclude(Items = "").exclude(Items = "None").order_by("Day_Number","Meal_Number")
             if request.method == "POST":        # gets rating from the form
 
                 id_list = []
@@ -222,17 +222,23 @@ def Student_Apply_For_Rebate(request):
                 
                 if from_date <= to_date:
 
-                    rebate_request = Rebate(
-                        Date_From=from_date,
-                        Date_To=to_date,
-                        User_Name=request.user.username,
-                    )
-                    rebate_request.Rebate_Days = rebate_request.date_diff()
-                    rebate_request.save()
-                    messages.success(
-                        request,
-                        "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
-                    )
+                    if Rebate.objects.filter(Date_From=from_date,Date_To=to_date,User_Name=request.user.username,status = 1) or Rebate.objects.filter(Date_From=from_date,Date_To=to_date,User_Name=request.user.username,status = 0):
+                        messages.error(request,
+                        "You have already applied for rebate for same duration.",)
+                        
+                        
+                    else:
+                        rebate_request = Rebate(
+                            Date_From=from_date,
+                            Date_To=to_date,
+                            User_Name=request.user.username,
+                        )
+                        rebate_request.Rebate_Days = rebate_request.date_diff()
+                        rebate_request.save()
+                        messages.success(
+                            request,
+                            "Your rebate request has been sent to the mess manager. You will soon receive a confirmation email.",
+                        )
                 
                 else :
                     messages.error(
@@ -247,6 +253,20 @@ def Student_Apply_For_Rebate(request):
                     "currentdate": datetime.today,
                     "messages": messages.get_messages(request),
                 },
+            )
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+    
+def Student_Applied_Rebate(request):
+    # Used to accept/reject pending rebate requests
+    if request.user.is_authenticated:
+        if request.user.designation == "Student":
+
+            requests = Rebate.objects.all().order_by("-Date_From", "status")
+            return render(
+                request, "Student_Applied_Rebate.html", context={"req": requests,"messages": messages.get_messages(request)}
             )
         else:
             return render(request, "Error.html")
@@ -665,6 +685,25 @@ def Manager_Rebate_Requests(request):
     else:
         return render(request, "Error.html")
 
+
+def Manager_Past_Rebate(request):
+    # Used to accept/reject pending rebate requests
+    if request.user.is_authenticated:
+        if request.user.designation == "Mess Manager":
+
+            requests = Rebate.objects.filter(
+                Q(status = 1)| Q(status = 1)
+            ) # "rebate" is a QuerySet storing all pending rebate requests
+
+            return render(
+                request, "Manager_Past_Rebate.html", context={"req": requests,"messages": messages.get_messages(request)}
+            )
+        else:
+            return render(request, "Error.html")
+    else:
+        return render(request, "Error.html")
+    
+    
 
 def Manager_Students_Bills(request):
     # Used to clear dues from the database when a student pays the mess dues

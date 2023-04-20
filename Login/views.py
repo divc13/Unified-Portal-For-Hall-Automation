@@ -26,6 +26,13 @@ def Login(request):
   
 def Set_Password(request):
     # lets user set password for their account
+    if '6' not in request.session:
+        if '4' not in request.session:
+            return redirect(Login)
+        elif request.session['4'] == 1:
+            return redirect(Reset_Password)
+        else:
+            return redirect(SignUp)
     if request.method=="POST":
         password1=request.POST.get("password1")
         password2=request.POST.get("password2")
@@ -48,7 +55,7 @@ def Set_Password(request):
                     messages.error(request, 'Name was not found. Please try again')
                     return render(request, "Set_Password.html", context={'messages':messages.get_messages(request)})
                 if not username:
-                    messages.error(request, 'Username wasnot found. Please try again')
+                    messages.error(request, 'Username was not found. Please try again')
                     return render(request, "Set_Password.html", context={'messages':messages.get_messages(request)})
                 user=User_class
                 user=user.objects.create_user(
@@ -201,23 +208,26 @@ def SignUp(request):
 def OTP_Send(request):
     # sends an otp to the mail
     if request.method=="GET":
-        otp = random.randrange(100000,999999)
-        request.session['3']=otp
-        if '4' in request.session:
-            if request.session['4']==0:
-                name=request.session['0']
-                username=request.session['1']
-            if request.session['4']==1:
-                username=request.session['5']
-                name=User_class.objects.filter(username=username)[0].name
-            subject = f'OTP for SignUp - {otp}'
-            message = f'Dear {name}, Your OTP for Registration on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [f'{username}@iitk.ac.in',]
-            send_mail(subject, message, email_from, recipient_list)
-            return redirect(OTP)
+        if '6' not in request.session:
+            otp = random.randrange(100000,999999)
+            request.session['3']=otp
+            if '4' in request.session:
+                if request.session['4']==0:
+                    name=request.session['0']
+                    username=request.session['1']
+                if request.session['4']==1:
+                    username=request.session['5']
+                    name=User_class.objects.filter(username=username)[0].name
+                subject = f'OTP for SignUp - {otp}'
+                message = f'Dear {name}, Your OTP for continuing on United Portal for Hall Automation is {otp}. Please be careful to not send it to third party.'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [f'{username}@iitk.ac.in',]
+                send_mail(subject, message, email_from, recipient_list)
+                return redirect(OTP)
+            else:
+                return redirect(Login)
         else:
-            return redirect(Login)
+            return redirect(Set_Password)
 
 def OTP(request):
     # takes the otp and verifies it
@@ -230,6 +240,7 @@ def OTP(request):
             return redirect(SignUp)
         otp2=request.session['3']
         if otp1==str(otp2):
+            request.session['6']=1
             return redirect(Set_Password)
         else:
             messages.error(request, 'incorrect OTP')                # if the otps dont match

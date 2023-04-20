@@ -9,6 +9,7 @@ urlpatterns = [
     path('Student_Booked_Extras', views.Student_Booked_Extras, name='Student_Booked_Extras'),
     path('Student_Apply_For_Rebate', views.Student_Apply_For_Rebate, name='Student_Apply_For_Rebate'),
     path('Student_Order_History', views.Student_Order_History, name='Student_Order_History'),
+    path('Student_Applied_Rebate',views.Student_Applied_Rebate,name = 'Student_Applied_Rebate'),
     
     # manager
     path('Manager_Extra_Items', views.Manager_Extra_Items, name='Manager_Extra_Items'),
@@ -18,4 +19,5 @@ urlpatterns = [
     path('Manager_Students_Bills', views.Manager_Students_Bills, name='Manager_Students_Bills'),
     path('Manager_View_Orders', views.Manager_View_Orders, name='Manager_View_Orders'),
     path('Manager_Modify_BDMR', views.Manager_Modify_BDMR, name='Manager_Modify_BDMR'),
+    path('Manager_Past_Rebate',views.Manager_Past_Rebate,name='Manager_Past_Rebate'),
 ]

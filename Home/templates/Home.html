@@ -1,204 +1,235 @@
-{%if request.user.designation == "Student" %} 
- {% include "student_base.html" %} 
+{%if request.user.designation == "Student" %}
+{% include "student_base.html" %}
 {% else %}
 {% include "staff_base.html" %}
 {% endif %}
-{%load static%} 
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>HomePage</title>
-<style>
+  <title>HomePage</title>
+  <style>
+    .typewriter {
+      font-family: monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid orange;
+      animation: typing 3.5s steps(40) forwards, blink 1s ease-in-out infinite;
+    }
 
-.main_div {
-  width:100%;
-  position: absolute;
-  
-}
+    @keyframes typing {
+      from {
+        width: 0
+      }
 
-.quote-2{
-    color:  rgb(3, 3, 78);
-    font-size: 300%;
-    text-align: center;
-}
+      to {
+        width: 100%
+      }
+    }
 
-body {
-    position: absolute;
-    margin: 0px;
-    padding: 0%;
-    width: 100%;
-    height: 100%;
-  }
-  
-.back {
-    content: "";
-    background-image: url('/static/hall_image.jpg');
-    opacity: 0.25;
-    position: absolute;
-    top: 25%;
-    left: 0; 
-    width: 100%;
-    height: 70%;
-    z-index: 1;
-    background-repeat: no-repeat;
-    margin-right: 0%;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin-top: 0%;
-  }
-  
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
 
-  .base {
-    width: 100%;
-    height: 70%;
-    position: absolute;
-    left: 0px;
-    top: 25%;
-    margin: 0px;
-    bottom: 5%;
-    overflow: hidden;
-    font-family: Inter;
-  }
-  .base_rec { 
-    background-color: rgba(30.628332495689392, 181.93224638700485, 229.71249371767044, 0.75);
-    width: 100%;
-    position: absolute;
-    height: 23%;
-    margin: 0px;
-    top: 100%;
-  }
-  .contact_us { 
-    position: absolute;
-    left: 3%;
-    width: 62%;
-    height: 100%;
-  }
-  .address { 
-    width: 100%;
-    position:absolute;
-    left:0px;
-    margin-bottom: 0%;
-    padding: 0%;
-    height: 100%;
-  }
-  .address_image { 
-    top: 10%;
-    position: absolute;
-  }
-  .phone { 
-    position: absolute;
-    top: 40%;
-    width: 100%;
-    height: 30%;
-  }
-  .email { 
-    position:absolute;
-    top:70%;
-  }
+    .main_div {
+      width: 100%;
+      position: absolute;
 
-  .base_technical { 
-    position: absolute;
-    right: 5%;
-    width: 30%;
-    top: 15%;
-  }
-  .envelope_solid_1 { 
-    width:30px;
-    height:30px;
-    position:absolute;
-    margin-bottom: 0%;
-    padding: 0%;
-    left:4px;
-    top:22px;
-  }
-  .hall { 
-    width:1439px;
-    height:604px;
-    margin-bottom: 0%;
-    padding: 0%;
-    position:absolute;
-    left:1px;
-    top:0px;
-  }
-  .down{
-    color: black;
-    margin-left: 50%;
-    margin-right: 50%;
-    margin-bottom: 0%;
-    padding: 0%;
-    font-size: large;
-    transform: scale(1);
-  }
-  .content{
-    text-align: center;
-    margin-bottom: 0%;
-    padding: 0%;
-  }
-.header{
-    font-size: 240%;
-    margin-bottom: 0%;margin-bottom: 0%;
-    padding: 0%;
-}
-.text{
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 0%;
-    padding: 0%;
-    margin-bottom: 0%;
-    font-size: 130%;
-    z-index: 2;
-}
+    }
 
-.chevron-down svg {
-  font-size: 30px;
-}
+    .quote-2 {
+      color: rgb(3, 3, 78);
+      font-size: calc(4vh + 1.7vw);
+      text-align: center;
+    }
 
-.about {
-  top: 35%;
-  position: relative;
-}
-</style>
+    body {
+      position: absolute;
+      margin: 0px;
+      padding: 0%;
+      width: 100%;
+      height: 100%;
+    }
+
+    .back {
+      content: "";
+      background-image: url('/static/hall_image.jpg');
+      opacity: 0.25;
+      position: absolute;
+      top: 25%;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      z-index: 0;
+      background-repeat: no-repeat;
+      margin-right: 0%;
+      margin-top: 0%;
+      margin-bottom: 0%;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin-top: 0%;
+    }
+
+
+    .base {
+      width: 100%;
+      height: 70%;
+      position: absolute;
+      left: 0px;
+      top: 25%;
+      margin: 0px;
+      bottom: 5%;
+      overflow: auto;
+      font-family: Inter;
+      scrollbar-width: none;
+    }
+
+    .base::-webkit-scrollbar {
+      display: none;
+    }
+
+    .base_rec {
+      background-color: rgba(30.628332495689392, 181.93224638700485, 229.71249371767044, 0.75);
+      width: 100%;
+      position: absolute;
+      height: 23%;
+      margin: 0px;
+      top: 100%;
+    }
+
+    .contact_us {
+      position: absolute;
+      left: 3%;
+      width: 62%;
+      height: 100%;
+    }
+
+    .address {
+      width: 100%;
+      position: absolute;
+      left: 0px;
+      margin-bottom: 0%;
+      padding: 0%;
+      height: 100%;
+    }
+
+    .address_image {
+      top: 10%;
+      position: absolute;
+    }
+
+    .phone {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      height: 30%;
+    }
+
+    .email {
+      position: absolute;
+      top: 70%;
+    }
+
+    .base_technical {
+      position: absolute;
+      right: 5%;
+      width: 30%;
+      top: 15%;
+    }
+
+    .envelope_solid_1 {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      margin-bottom: 0%;
+      padding: 0%;
+      left: 4px;
+      top: 22px;
+    }
+
+    .hall {
+      width: 1439px;
+      height: 604px;
+      margin-bottom: 0%;
+      padding: 0%;
+      position: absolute;
+      left: 1px;
+      top: 0px;
+    }
+
+    .down {
+      color: black;
+      margin-left: 50%;
+      margin-right: 50%;
+      margin-bottom: 0%;
+      padding: 0%;
+      font-size: large;
+      transform: scale(1);
+    }
+
+    .content {
+      text-align: center;
+      margin-bottom: 0%;
+      padding: 0%;
+    }
+
+    .header {
+      font-size: calc(0.8 * (3.2vh + 1.36vw));
+      margin-bottom: 0%;
+      padding: 0%;
+    }
+
+    .text {
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-bottom: 0%;
+      padding: 0%;
+      margin-bottom: 0%;
+      font-size: 1em;
+      z-index: 2;
+    }
+
+    .chevron-down svg {
+      font-size: 30px;
+    }
+
+    .about {
+      top: 20%;
+      position: relative;
+    }
+  </style>
 </head>
 
 <body>
-  
-  <div class = "back">
-  </div>
-    
-    <div class=base>
-      
-      <div class="main_div">
-        <div class="quote-container">
-          <p class="quote-2">
-            Unified Portal for Hall Automation
-          </p>
-        </div>
+  <br>
+  <br>
+
+  <div class="back">
   </div>
 
-  
-  <div class="about" id="about">
-    <div class="content">
-      <div class="header">About</div>
-      <div class="text">
-        <p>
-          Unified Portal for Hall Automation is a merged platform designed for the residents of various halls
-          to access day to day hall functionalities.</p>
+  <div class="base">
+    <div class="about" id="about">
+      <div class="content">
+        <div class="header">About</div>
+        <div class="text">
+          <p>
+            Unified Portal for Hall Automation is a merged platform designed for the residents of various halls
+            to access day to day hall functionalities.</p>
           <p>
             This portal aims to digitalize various services provided by
-            the hall that includes mess, canteen and various other services. Through this portal, you can book your mess extras, order your canteen food, request room cleaning, book various Hall facilities, and many more.
+            the hall that includes mess, canteen and various other services.
+            Through this portal, you can book your mess extras, order your canteen food,
+            request room cleaning, book various Hall facilities, and many more.
             <br><br>
           </p>
         </div>
       </div>
     </div>
-    
-  
-    
-  </body>
-  
-  </html>
-  
+
+  </div>
+</body>
+</html>

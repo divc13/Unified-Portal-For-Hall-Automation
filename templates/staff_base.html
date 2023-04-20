@@ -4,6 +4,7 @@
 <head>
   <title>UPHA</title>
 
+  <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{%static 'staff_base.css'%}">
 
   <style>
@@ -49,17 +50,21 @@
       </button>
     </a> {% endcomment %}
 
-      {% elif request.path == "/Mess/Manager_Modify_Menu" or request.path == "/Mess/Manager_Extra_Items" or request.path == "/Mess/Manager_View_Orders" or request.path == "/Mess/Manager_Students_Bills" or request.path == "/Mess/Manager_Rebate_Requests" or request.path == "/Mess/Manager_Modify_BDMR" or request.path == "/Mess/Manager_View_Feedback" %}
+      {% elif request.path == "/Mess/Manager_Past_Rebate" or request.path == "/Mess/Manager_Modify_Menu" or request.path == "/Mess/Manager_Extra_Items" or request.path == "/Mess/Manager_View_Orders" or request.path == "/Mess/Manager_Students_Bills" or request.path == "/Mess/Manager_Rebate_Requests" or request.path == "/Mess/Manager_Modify_BDMR" or request.path == "/Mess/Manager_View_Feedback" %}
       <a href="/Mess/Manager_Modify_Menu">
         <button class="e2_3 button3"{% if request.path == "/Mess/Manager_Modify_Menu" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Modify Menu
         </button>
       </a>
+      <a href="/Mess/Manager_Past_Rebate">
+        <button class="e2_33 button3"{% if request.path == "/Mess/Manager_Past_Rebate" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Past Rebate
+        </button>
+      </a>
       <a href="/Mess/Manager_Extra_Items">
-        <button class="e2_5 button3"{% if request.path == "/Mess/Manager_Extra_Items" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Extra Items
+        <button class="e2_4 button3"{% if request.path == "/Mess/Manager_Extra_Items" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Extra Items
         </button>
       </a>
       <a href="/Mess/Manager_View_Orders">
-        <button class="e2_4 button3 "{% if request.path == "/Mess/Manager_View_Orders" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>View Orders
+        <button class="e2_31 button3 "{% if request.path == "/Mess/Manager_View_Orders" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>View Orders
         </button>
       </a>
       <a href="/Mess/Manager_Rebate_Requests">
@@ -68,12 +73,12 @@
       </a>
         
         <a href="/Mess/Manager_View_Feedback">
-        <button class="e2_31 button3"{% if request.path == "/Mess/Manager_View_Feedback" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>View Feedback
+        <button class="e2_5 button3"{% if request.path == "/Mess/Manager_View_Feedback" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>View Feedback
         </button>
       </a>
         
         <a href="/Mess/Manager_Students_Bills">
-          <button class="e2_33 button3"{% if request.path == "/Mess/Manager_Students_Bills" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Students' Bills
+          <button class="e2_35 button3"{% if request.path == "/Mess/Manager_Students_Bills" %} 	style="background-color:rgba(16.18099093437195, 71.84358090162277, 155.33750385046005, 1); color: white;" {% endif %}>Students' Bills
           </button>
       </a>
         <a href="/Mess/Manager_Modify_BDMR">
@@ -115,7 +120,7 @@
         <a href = "/Logout">
         <button class="e1_226 button2">
           <div class="e1_219"></div>
-          <div class="e1_227"></div><span class="e1_228">Log Out</span>
+          <div class="e1_227">Log Out</div>
           <div class="e1_229"></div>
         </button>
       </a>
@@ -149,10 +154,10 @@
             {% elif request.path == "/Cleaning/Cleaning_hall" or request.path == "/Home" %} Cleaning 
             {% endif %}</span>
           <div class="e1_249"
-          {% if request.user.designation == "Mess Manager" %} style="background-image: url(/static/rectangle_5.png);background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Canteen Manager" %} 	style="background-image: url(/static/main_display.png); background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Hall Manager" %} 	style="background-image:url(/static/hostel.png); background-repeat:no-repeat; background-size:cover;" 
-          {% elif request.user.designation == "Sports Secy" %} 	style="background-image:url(/static/football.png); background-repeat:no-repeat; background-size:cover;" 
+          {% if request.user.designation == "Mess Manager" %} style="background-image: url(/static/rectangle_5.png);" 
+          {% elif request.user.designation == "Canteen Manager" %} 	style="background-image: url(/static/main_display.png);" 
+          {% elif request.user.designation == "Hall Manager" %} 	style="background-image:url(/static/hostel.png);" 
+          {% elif request.user.designation == "Sports Secy" %} 	style="background-image:url(/static/football.png);" 
           {% endif %}></div>
         </button> {% endcomment %}
 
@@ -163,8 +168,7 @@
           style=" {% if request.path != "/Home"%} background-color:rgb(56, 108, 185); color: white; {% endif %}"</div><span class="e1_248">
             Mess
             </span>
-            <div class="e1_249" style="background-image: url(/static/rectangle_5.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/rectangle_5.png);" >
           </div>
         </button>
           {% endif %}
@@ -176,8 +180,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Canteen
           </span>
-            <div class="e1_249" style="background-image: url(/static/main_display.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/main_display.png);" >
           </div>
         </button>
       </a>
@@ -190,8 +193,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Hall Logistics
           </span>
-            <div class="e1_249" style="background-image: url(/static/hostel.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/hostel.png);" >
           </div>
         </button>
       </a>
@@ -205,8 +207,7 @@
           style="{% if request.path != "/Home"%}background-color:rgb(56, 108, 185); color: white;{% endif %}"</div><span class="e1_248">
             Sports Logistics
           </span>
-            <div class="e1_249" style="background-image: url(/static/football.png);
-            background-repeat:no-repeat; background-size:cover;" >
+            <div class="e1_249" style="background-image: url(/static/football.png);" >
           </div>
         </button>
       </a>

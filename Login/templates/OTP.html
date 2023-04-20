@@ -3,6 +3,30 @@
     <head>
         <title>OTP</title>
         <style>
+        @media screen and (min-width:1000px) {
+            .typewriter {
+                font-family: monospace;
+                overflow: hidden;
+                white-space: nowrap;
+                border-right: .15em solid orange;
+                animation: typing 3.5s steps(40) forwards, blink 1s ease-in-out infinite;
+              }
+              
+              @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+              }
+              
+              @keyframes blink {
+                50% {
+                  border-color: transparent;
+                }
+              }         
+              body{
+                background-image: url('static/Login/OIP.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+              }
             .input_text{
                 height: 2em;
                 width: 13em;
@@ -30,7 +54,9 @@
                 border-color: black;
                 border-width: 0.4em;
                 border-radius: 1em;
-                background-color: beige;
+                background-image: url('static/Login/OIQ.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
             }
             td{
                 padding:0.7em;
@@ -43,32 +69,120 @@
                 color: rgb(248, 6, 6);
                 font-size: 1.2em;
             }
+            .upha_td{
+                width: 100%;text-align: center; font-size: 2.35em;
+            }
+            .iitk_logo{
+                width: 4.3em;
+            }
+            .main_table{
+                font-size: 0.65em;
+            }
+        }
+        @media screen and (max-width:1000px) {
+            .typewriter {
+                font-family: monospace;
+                overflow: hidden;
+                white-space: nowrap;
+                border-right: .15em solid orange;
+                animation: typing 3.5s steps(40) forwards, blink 1s ease-in-out infinite;
+              }
+              
+              @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+              }
+              
+              @keyframes blink {
+                50% {
+                  border-color: transparent;
+                }
+              }    
+            body{
+                background-image: url('static/Login/OIP.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                padding-top: 20%;
+            }
+            .input_text{
+                height: 2em;
+                width: 13em;
+                font-size: 0.7em;
+                border-radius: 0.4em;
+                padding-left: 0.3em;
+            }
+            .input_text:focus{
+                outline:double lightskyblue;
+                border-width: 0.1em;
+                outline-width: 0.2em;
+            }
+            .submit_btn{
+                height: 2em;
+                width: 14em;
+                font-size: 0.9em;
+                border-radius: 0.2em;
+                background-color: lightsalmon;
+            }
+            .submit_btn:hover{
+                background-color: lightgreen;
+            }
+            .outer_table{
+                border-style: double;
+                border-color: black;
+                border-width: 0.4em;
+                border-radius: 1em;
+                background-image: url('static/Login/OIQ.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            td{
+                padding:0.7em;
+                padding-left: 0.3em;
+                padding-right: 0.3em;
+                font-size: 1.5em;
+            }
+            .error{
+                text-align: center;
+                color: rgb(248, 6, 6);
+                font-size: 1.2em;
+            }
+            .upha_td{
+                width: 100%;text-align: center; font-size: 3.35em;
+            }
+            .iitk_logo{
+                width: 8em;
+            }
+            .main_table{
+                font-size: 1em;
+            }
+        }
         </style>
     </head>
-    <body style="background-color: lightblue;">
+    <body>
         <table align="center" class="outer_table">
             <tr>
                 <td colspan="2">
-                    <table>
+                    <table align="center">
                         <tr>
-                            <td align="center"><img src="{%static 'Login/vector.png' %}" width="100em"></td>
+                            <td align="center"><img src="{%static 'Login/vector.png' %}" class="iitk_logo"></td>
                         </tr>
                         <tr>
-                            <td align="center"><img src="{%static 'Login/upha.png' %}" width="500em"></td>
+                            <!-- <td align="center"><img src="{%static 'Login/upha.png' %}" width="500em"></td> -->
+                            <td class="upha_td"><div class="typewriter">Unified Portal For Hall Automation</div></td>
                         </tr>
                     </table>
                 </td>
             </tr>
-            <tr><td>{% if messages %}
+            {% if messages %}<tr><td>
                 {% for message in messages %}
                 <div class="{{message.tags}}">
                   {{message}}
                 </div>
                 {% endfor %}
-                {% endif %}</td></tr>
-            <tr><td>
+                </td></tr>{% endif %}
+            <tr><td style="padding-top: 0em;">
                 <form method="post"> {% csrf_token %}
-                    <table align="center">
+                    <table align="center" class="main_table">
                         <tr align="center">
                             <td><label for="otp">OTP:</label></td>
                             <td><input type="text" name="OTP" class="input_text" maxlength="6" placeholder="Enter OTP" id="otp" required></td>
